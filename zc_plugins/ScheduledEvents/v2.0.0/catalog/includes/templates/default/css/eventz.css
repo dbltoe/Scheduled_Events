@@ -1,0 +1,72 @@
+/* Scheduled Events plugin styles - all selectors are prefixed "eventz" to stay isolated from core Zen Cart styles */
+
+.eventzPage {
+    margin-bottom: 2rem;
+}
+
+.eventzPageTitle {
+    margin-bottom: 0.5rem;
+}
+
+.eventzHr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.eventzHeader {
+    margin-bottom: 0;
+}
+
+.eventzNoEvents {
+    font-weight: normal;
+}
+
+.eventzDetails {
+    margin: 0 0 2rem 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid #ddd;
+}
+
+.eventzField {
+    margin-bottom: 0.5rem;
+}
+
+.eventzField strong {
+    margin-right: 0.35rem;
+}
+
+.eventzEventInformation a,
+.eventzDrivingDirections a {
+    white-space: nowrap;
+}
+
+/* Sidebox: simple link mode */
+.eventzSideboxLink {
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+/* Sidebox: slider mode */
+.eventzCarousel {
+    overflow: hidden;
+}
+
+.eventzCarouselItem {
+    padding: 0.75rem 1rem;
+    text-align: center;
+}
+
+.eventzCarouselLink {
+    text-decoration: none;
+    display: block;
+}
+
+.eventzCarouselName {
+    font-weight: bold;
+}
+
+.eventzCarouselDates {
+    font-size: 0.85em;
+    opacity: 0.8;
+}

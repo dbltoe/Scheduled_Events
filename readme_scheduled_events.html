@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scheduled Events for Zen Cart</title>
+</head>
+<body>
+
+<h1>Scheduled Events for Zen Cart</h1>
+<p>Version 2.0.0 &mdash; requires Zen Cart v2.0.0 or later. Author: dbltoe.</p>
+
+<h2>Overview</h2>
+<p>
+Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos,
+appearances, etc.) and display them on their own storefront page. Each event has a name, place, and
+start/stop dates; comments, booth location, an event information link, and driving directions are
+optional. Events are managed from Catalog &gt; Scheduled Events in the admin.
+</p>
+<p>
+Display can be further promoted via a sidebox &mdash; either as a link added into the current
+template's existing Information sidebox, or as the plugin's own sidebox (a simple link, or a rotating
+slider of currently qualifying events) placed via Design &gt; Layout Boxes Controller like any other
+sidebox. All of this, along with the storefront page heading, field labels, and the display time
+window (how many days before an event's start date it becomes visible), is configurable under
+Configuration &gt; Scheduled Events.
+</p>
+
+<h2>Installing, Upgrading, or Uninstalling</h2>
+
+<h3>Initial Installation or Upgrade</h3>
+<p>
+Copy the contents of the <code>zc_plugins/ScheduledEvents/v2.0.0</code> folder into your Zen Cart
+store's root directory, preserving the folder structure. Then, in the admin, go to
+Tools &gt; Install/Update Plugins, locate Scheduled Events, and click Install (or Update, if
+upgrading from a prior version).
+</p>
+<p>
+This creates the <code>eventz</code> database table (respecting your store's table prefix, if any),
+adds the Configuration &gt; Scheduled Events settings group, and adds the Catalog &gt; Scheduled
+Events admin menu entry.
+</p>
+
+<h3>Uninstalling</h3>
+<p>
+In the admin, go to Tools &gt; Install/Update Plugins, locate Scheduled Events, and click Uninstall.
+This removes the <code>eventz</code> table and all of its data, the plugin's configuration settings,
+the admin menu entry, and any Layout Boxes Controller placement of its sidebox. Removing the plugin's
+files from the server afterward is optional but recommended.
+</p>
+
+<h2>Change History</h2>
+<p>See <a href="zc_plugins/ScheduledEvents/v2.0.0/changelog.txt">changelog.txt</a>.</p>
+
+</body>
+</html>

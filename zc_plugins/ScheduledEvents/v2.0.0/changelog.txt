@@ -1,0 +1,12 @@
+v2.0.0
+- Rebuilt as an encapsulated plugin, replacing the older non-encapsulated
+  version of Scheduled Events. Requires Zen Cart 2.0.0 or later; not
+  compatible with pre-2.0.0 installations.
+- Storefront Scheduled Events page (main_page=events).
+- Sidebox display now supports four modes: none, a link added into the
+  current template's existing Information sidebox, or the plugin's own
+  sidebox (simple link or rotating slider) placeable via the admin
+  Layout Boxes Controller.
+- Admin event management screen (create/edit/delete).
+- Admin configuration group for display options, labels, and the
+  30/60/90-day display window.
