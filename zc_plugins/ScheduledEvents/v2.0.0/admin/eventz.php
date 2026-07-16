@@ -4,6 +4,24 @@
  */
 require('includes/application_top.php');
 
+// Defensive fallback: this page's own lang.eventz.php should auto-load via
+// the per-page convention, but that hasn't reliably happened on every
+// tested store/routing setup. Load it directly if it hasn't already.
+if (!defined('HEADING_TITLE_EVENTZ')) {
+    $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
+    $eventzLangFile = DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.eventz.php';
+    if (is_file($eventzLangFile)) {
+        $eventzDefines = require $eventzLangFile;
+        if (is_array($eventzDefines)) {
+            foreach ($eventzDefines as $eventzDefineKey => $eventzDefineValue) {
+                if (!defined($eventzDefineKey)) {
+                    define($eventzDefineKey, $eventzDefineValue);
+                }
+            }
+        }
+    }
+}
+
 function eventzValidateDate($value)
 {
     $value = trim((string)$value);
