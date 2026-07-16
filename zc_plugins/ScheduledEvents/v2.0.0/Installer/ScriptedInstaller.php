@@ -82,6 +82,9 @@ class ScriptedInstaller extends ScriptedInstallBase
             'visible' => 1,
         ]);
 
+        // Without this, the group has no clickable link under Admin > Configuration.
+        zen_register_admin_page('configScheduledEvents', 'BOX_CONFIGURATION_SCHEDULED_EVENTS', 'FILENAME_CONFIGURATION', "gID=$groupId", 'configuration', 'Y');
+
         $this->addConfigurationKey('SCHEDULED_EVENTS_PAGE_TITLE', [
             'configuration_title' => 'Page Heading',
             'configuration_value' => 'Scheduled Events',
@@ -197,22 +200,15 @@ class ScriptedInstaller extends ScriptedInstallBase
 
     protected function installAdminPage(): void
     {
-        $sql = "INSERT INTO " . TABLE_ADMIN_PAGES . "
-                (page_key, language_key, main_page, page_params, menu_key, display_on_menu, sort_order)
-                SELECT 'eventzList', 'BOX_CATALOG_EVENTZ', 'FILENAME_EVENTZ', '', 'catalog', 'Y', 90
-                FROM DUAL
-                WHERE NOT EXISTS (
-                    SELECT 1 FROM " . TABLE_ADMIN_PAGES . " WHERE page_key = 'eventzList'
-                )";
-
-        $this->executeInstallerSql($sql);
+        zen_register_admin_page('eventzList', 'BOX_CATALOG_EVENTZ', 'FILENAME_EVENTZ', '', 'catalog', 'Y');
     }
 
     protected function uninstallAdminPage(): void
     {
-        $this->executeInstallerSql(
-            "DELETE FROM " . TABLE_ADMIN_PAGES . " WHERE page_key = 'eventzList'"
-        );
+        zen_deregister_admin_pages([
+            'eventzList',
+            'configScheduledEvents',
+        ]);
     }
 
     protected function uninstallLayoutBox(): void
