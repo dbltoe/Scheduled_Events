@@ -7,9 +7,13 @@ require('includes/application_top.php');
 // Defensive fallback: this page's own lang.eventz.php should auto-load via
 // the per-page convention, but that hasn't reliably happened on every
 // tested store/routing setup. Load it directly if it hasn't already.
+// Plugin files stay inside zc_plugins/... permanently (never copied into
+// admin/includes/languages/), so __DIR__ - a known-fixed path relative to
+// this file's own real location - is used instead of any of Zen Cart's
+// DIR_FS_*/DIR_WS_* constants, which proved unreliable on the catalog side.
 if (!defined('HEADING_TITLE_EVENTZ')) {
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
-    $eventzLangFile = DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.eventz.php';
+    $eventzLangFile = __DIR__ . '/includes/languages/' . $eventzLanguageDir . '/lang.eventz.php';
     if (is_file($eventzLangFile)) {
         $eventzDefines = require $eventzLangFile;
         if (is_array($eventzDefines)) {

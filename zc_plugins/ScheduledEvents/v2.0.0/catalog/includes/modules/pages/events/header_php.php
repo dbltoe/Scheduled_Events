@@ -6,31 +6,16 @@ global $breadcrumb, $zco_notifier, $eventzEvents, $eventzWindowRange, $eventzWin
 // Defensive fallback: this page's own lang.events.php should auto-load via
 // the main_page=events convention, but that hasn't reliably happened on
 // every tested store/routing setup. Load it directly if it hasn't already.
+// Plugin files stay inside zc_plugins/... permanently (never copied into
+// includes/languages/), so __DIR__ - a known-fixed path relative to this
+// file's own real location - is used instead of any of Zen Cart's
+// DIR_FS_*/DIR_WS_* constants, which proved unreliable here.
 if (!defined('NAVBAR_TITLE')) {
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
-    $eventzLangFile = DIR_FS_CATALOG . DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.events.php';
-    $eventzLangFileExists = is_file($eventzLangFile);
+    $eventzLangFile = __DIR__ . '/../../../languages/' . $eventzLanguageDir . '/lang.events.php';
 
-    // TEMPORARY diagnostic - remove once the root cause is confirmed.
-    trigger_error(
-        'Scheduled Events debug: DIR_FS_CATALOG=' . var_export(defined('DIR_FS_CATALOG') ? DIR_FS_CATALOG : null, true)
-        . ' DIR_WS_LANGUAGES=' . var_export(defined('DIR_WS_LANGUAGES') ? DIR_WS_LANGUAGES : null, true)
-        . ' lang dir=' . var_export($eventzLanguageDir, true)
-        . ' computed path=' . var_export($eventzLangFile, true)
-        . ' is_file=' . var_export($eventzLangFileExists, true),
-        E_USER_WARNING
-    );
-
-    if ($eventzLangFileExists) {
+    if (is_file($eventzLangFile)) {
         $eventzDefines = require $eventzLangFile;
-
-        // TEMPORARY diagnostic - remove once the root cause is confirmed.
-        trigger_error(
-            'Scheduled Events debug: require returned ' . gettype($eventzDefines)
-            . ', count=' . (is_array($eventzDefines) ? count($eventzDefines) : 'n/a'),
-            E_USER_WARNING
-        );
-
         if (is_array($eventzDefines)) {
             foreach ($eventzDefines as $eventzDefineKey => $eventzDefineValue) {
                 if (!defined($eventzDefineKey)) {
