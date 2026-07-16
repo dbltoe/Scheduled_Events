@@ -63,6 +63,9 @@ switch ($action) {
         if ($eventzData['place'] === '') {
             $errors[] = ERROR_EVENTZ_PLACE_REQUIRED;
         }
+        if ($eventzData['boothLocation'] === '') {
+            $errors[] = ERROR_EVENTZ_BOOTH_LOCATION_REQUIRED;
+        }
 
         $startDate = eventzValidateDate($eventzData['startDate']);
         if ($startDate === null) {
@@ -184,7 +187,7 @@ if ($action === 'new') {
 
   <div class="form-group">
     <label for="boothLocation"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?></label>
-    <?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255"'); ?>
+    <?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255" required'); ?>
     <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_HELP; ?></small>
   </div>
 

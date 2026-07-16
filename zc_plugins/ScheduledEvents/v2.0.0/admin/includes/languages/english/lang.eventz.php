@@ -44,6 +44,7 @@ return [
     'SUCCESS_EVENTZ_DELETED' => 'Success: Event has been deleted.',
     'ERROR_EVENTZ_NAME_REQUIRED' => 'Error: Name is required.',
     'ERROR_EVENTZ_PLACE_REQUIRED' => 'Error: Place is required.',
+    'ERROR_EVENTZ_BOOTH_LOCATION_REQUIRED' => 'Error: Booth Location is required.',
     'ERROR_EVENTZ_START_DATE_INVALID' => 'Error: Start Date is required and must be a valid date (YYYY-MM-DD).',
     'ERROR_EVENTZ_STOP_DATE_INVALID' => 'Error: Stop Date is required and must be a valid date (YYYY-MM-DD).',
     'ERROR_EVENTZ_STOP_BEFORE_START' => 'Error: Stop Date cannot be before Start Date.',
