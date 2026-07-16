@@ -23,6 +23,9 @@ Highlights:
   lazy-loaded and never fetched unless the pop-up is actually opened.
 - A master "Enable Scheduled Events Display" switch fully hides the storefront page and sidebox link
   without uninstalling.
+- The Information sidebox link is styled to match `responsive_classic` and ZCA Bootstrap out of the
+  box. Using any other template may require adjusting its styling to match that template's own
+  conventions.
 
 Author: dbltoe
 
