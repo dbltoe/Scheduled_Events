@@ -35,7 +35,7 @@ return [
     'ENTRY_EVENTZ_DRIVING_DIRECTIONS' => 'Driving Directions (address or URL):',
 
     'TEXT_EVENTZ_BOOTH_LOCATION_HELP' => 'Plain text describing the booth location (e.g. "Space #16"). This text becomes a link if a Map URL is also given below.',
-    'TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP' => 'Optional. A URL to a map/floor plan. If valid, the Booth Location text above becomes a link to it (opens in a new tab); otherwise it's ignored and the text displays as-is.',
+    'TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP' => 'Optional. A URL to a map/floor plan. If valid, the Booth Location text above becomes a link to it (opens in a new tab); otherwise it\'s ignored and the text displays as-is.',
     'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_DELETE_INTRO' => 'Are you sure you want to delete the following event?',
     'TEXT_EVENTZ_REQUIRED_INFORMATION' => 'Required Information',
