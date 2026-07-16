@@ -13,7 +13,8 @@ global $eventzEvents, $eventzWindowRange;
   </h2>
   <h3 class="eventzNoEventsSubtext"><?php echo SCHEDULED_EVENTS_NO_EVENTS_SUBTEXT; ?></h3>
 <?php } else { ?>
-  <?php foreach ($eventzEvents as $eventzEvent) { ?>
+  <?php $eventzLastKey = array_key_last($eventzEvents); ?>
+  <?php foreach ($eventzEvents as $eventzKey => $eventzEvent) { ?>
   <?php $eventzMapEmbedUrl = !empty($eventzEvent['drivingDirections']) ? EventzService::extractMapEmbedUrl($eventzEvent['drivingDirections']) : null; ?>
   <h2 id="eventz-event-<?php echo (int)$eventzEvent['id']; ?>" class="eventzHeader"><?php echo zen_output_string_protected($eventzEvent['name']); ?></h2>
   <hr class="eventzHr">
@@ -61,6 +62,9 @@ global $eventzEvents, $eventzWindowRange;
       <iframe data-eventz-src="<?php echo zen_output_string_protected($eventzMapEmbedUrl); ?>" class="eventzModalIframe" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </div>
+<?php } ?>
+<?php if ($eventzKey !== $eventzLastKey) { ?>
+  <hr class="eventzHr eventzHrBetween">
 <?php } ?>
   <?php } ?>
 <?php } ?>
