@@ -9,8 +9,28 @@ global $breadcrumb, $zco_notifier, $eventzEvents, $eventzWindowRange, $eventzWin
 if (!defined('NAVBAR_TITLE')) {
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
     $eventzLangFile = DIR_FS_CATALOG . DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.events.php';
-    if (is_file($eventzLangFile)) {
+    $eventzLangFileExists = is_file($eventzLangFile);
+
+    // TEMPORARY diagnostic - remove once the root cause is confirmed.
+    trigger_error(
+        'Scheduled Events debug: DIR_FS_CATALOG=' . var_export(defined('DIR_FS_CATALOG') ? DIR_FS_CATALOG : null, true)
+        . ' DIR_WS_LANGUAGES=' . var_export(defined('DIR_WS_LANGUAGES') ? DIR_WS_LANGUAGES : null, true)
+        . ' lang dir=' . var_export($eventzLanguageDir, true)
+        . ' computed path=' . var_export($eventzLangFile, true)
+        . ' is_file=' . var_export($eventzLangFileExists, true),
+        E_USER_WARNING
+    );
+
+    if ($eventzLangFileExists) {
         $eventzDefines = require $eventzLangFile;
+
+        // TEMPORARY diagnostic - remove once the root cause is confirmed.
+        trigger_error(
+            'Scheduled Events debug: require returned ' . gettype($eventzDefines)
+            . ', count=' . (is_array($eventzDefines) ? count($eventzDefines) : 'n/a'),
+            E_USER_WARNING
+        );
+
         if (is_array($eventzDefines)) {
             foreach ($eventzDefines as $eventzDefineKey => $eventzDefineValue) {
                 if (!defined($eventzDefineKey)) {
