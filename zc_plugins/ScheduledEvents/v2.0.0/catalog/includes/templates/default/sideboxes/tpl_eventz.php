@@ -14,13 +14,14 @@ global $eventzSideboxEvents, $title_link;
   <?php echo defined('SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT') ? SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT : 'No events scheduled right now.'; ?>
 </div>
 <?php } else { ?>
-<div id="eventzCarousel" class="eventzCarousel carousel slide" data-bs-ride="carousel" data-ride="carousel">
+<div id="eventzCarousel" class="eventzCarousel carousel slide" data-bs-ride="carousel" data-ride="carousel" data-bs-interval="7000" data-interval="7000">
   <div class="eventzCarouselInner carousel-inner">
 <?php foreach ($eventzSideboxEvents as $eventzIndex => $eventzEvent) { ?>
     <div class="eventzCarouselItem carousel-item<?php echo ($eventzIndex === 0) ? ' active' : ''; ?>">
       <a class="eventzCarouselLink" href="<?php echo zen_output_string_protected($title_link . '#eventz-event-' . (int)$eventzEvent['id']); ?>">
         <div class="eventzCarouselName"><?php echo zen_output_string_protected($eventzEvent['name']); ?></div>
-        <div class="eventzCarouselDates"><?php echo zen_date_long($eventzEvent['startDate']); ?> &ndash; <?php echo zen_date_long($eventzEvent['stopDate']); ?></div>
+        <div class="eventzCarouselStartDate"><?php echo zen_date_long($eventzEvent['startDate']); ?></div>
+        <div class="eventzCarouselStopDate"><?php echo zen_date_long($eventzEvent['stopDate']); ?></div>
       </a>
     </div>
 <?php } ?>
