@@ -58,7 +58,7 @@ global $eventzEvents, $eventzWindowRange;
   <div id="eventz-directions-modal-<?php echo (int)$eventzEvent['id']; ?>" class="eventzModalOverlay">
     <div class="eventzModalContent">
       <button type="button" class="eventzModalClose" aria-label="Close">&times;</button>
-      <iframe src="<?php echo zen_output_string_protected($eventzMapEmbedUrl); ?>" class="eventzModalIframe" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <iframe data-eventz-src="<?php echo zen_output_string_protected($eventzMapEmbedUrl); ?>" class="eventzModalIframe" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </div>
 <?php } ?>
@@ -74,6 +74,10 @@ document.addEventListener('click', function (e) {
         e.preventDefault();
         var modal = document.getElementById(trigger.getAttribute('data-eventz-modal'));
         if (modal) {
+            var iframe = modal.querySelector('.eventzModalIframe');
+            if (iframe && !iframe.getAttribute('src') && iframe.dataset.eventzSrc) {
+                iframe.setAttribute('src', iframe.dataset.eventzSrc);
+            }
             modal.classList.add('eventzModalOpen');
         }
         return;
