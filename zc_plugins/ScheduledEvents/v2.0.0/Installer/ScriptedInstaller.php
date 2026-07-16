@@ -37,7 +37,9 @@ class ScriptedInstaller extends ScriptedInstallBase
     {
         global $sniffer;
 
-        define('TABLE_EVENTZ', DB_PREFIX . 'eventz');
+        if (!defined('TABLE_EVENTZ')) {
+            define('TABLE_EVENTZ', DB_PREFIX . 'eventz');
+        }
 
         if ($sniffer->table_exists(TABLE_EVENTZ) !== true) {
             $sql = "CREATE TABLE IF NOT EXISTS " . TABLE_EVENTZ . " (
@@ -68,7 +70,9 @@ class ScriptedInstaller extends ScriptedInstallBase
 
     protected function uninstallEventzTable(): void
     {
-        define('TABLE_EVENTZ', DB_PREFIX . 'eventz');
+        if (!defined('TABLE_EVENTZ')) {
+            define('TABLE_EVENTZ', DB_PREFIX . 'eventz');
+        }
 
         $this->executeInstallerSql("DROP TABLE IF EXISTS " . TABLE_EVENTZ);
     }
