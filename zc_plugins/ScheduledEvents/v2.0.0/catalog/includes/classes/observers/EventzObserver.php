@@ -9,12 +9,10 @@
  */
 
 /**
- * Injects a Scheduled Events link into the core Information sidebox.
- *
- * The plugin's own standalone sidebox (simple link / slider, placed via
- * Layout Boxes Controller) is on hold for now - see catalog/includes/
- * modules/sideboxes/eventz.php.disabled and tpl_eventz.php.disabled for the
- * removed implementation, kept for when those options come back.
+ * Injects a Scheduled Events link into the core Information sidebox when
+ * SCHEDULED_EVENTS_SIDEBOX_MODE is 'information'. Mode 'sidebox' instead
+ * shows the plugin's own scrolling carousel box - see catalog/includes/
+ * modules/sideboxes/eventz.php.
  */
 class EventzObserver extends base
 {
@@ -30,6 +28,11 @@ class EventzObserver extends base
         }
 
         if (defined('SCHEDULED_EVENTS_STATUS') && SCHEDULED_EVENTS_STATUS === 'False') {
+            return;
+        }
+
+        $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'information';
+        if ($eventzSideboxMode !== 'information') {
             return;
         }
 

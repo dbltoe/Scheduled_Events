@@ -132,13 +132,7 @@
     }
 }
 
-/* Sidebox: simple link mode */
-.eventzSideboxLink {
-    padding: 0.5rem 0;
-    text-align: center;
-}
-
-/* Sidebox: slider mode */
+/* Sidebox: scrolling mode (requires a Bootstrap-based template) */
 .eventzCarousel {
     overflow: hidden;
 }
