@@ -4,11 +4,13 @@ use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 global $template, $current_page_base;
 
 $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'none';
+$eventzStatusEnabled = !defined('SCHEDULED_EVENTS_STATUS') || SCHEDULED_EVENTS_STATUS !== 'False';
 
 // This box only renders itself for 'link'/'slider'. Mode 'information' is
 // handled separately by eventzObserver, which injects a link into the core
-// Information sidebox instead; 'none' displays nothing anywhere.
-if ($eventzSideboxMode === 'link' || $eventzSideboxMode === 'slider') {
+// Information sidebox instead; 'none' displays nothing anywhere. The master
+// SCHEDULED_EVENTS_STATUS switch overrides all of that when set to False.
+if ($eventzStatusEnabled && ($eventzSideboxMode === 'link' || $eventzSideboxMode === 'slider')) {
     $eventzSideboxEvents = [];
 
     if ($eventzSideboxMode === 'slider') {

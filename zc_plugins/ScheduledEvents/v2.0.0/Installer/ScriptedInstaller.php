@@ -89,6 +89,15 @@ class ScriptedInstaller extends ScriptedInstallBase
         // Without this, the group has no clickable link under Admin > Configuration.
         zen_register_admin_page('configScheduledEvents', 'BOX_CONFIGURATION_SCHEDULED_EVENTS', 'FILENAME_CONFIGURATION', "gID=$groupId", 'configuration', 'Y');
 
+        $this->addConfigurationKey('SCHEDULED_EVENTS_STATUS', [
+            'configuration_title' => 'Enable Scheduled Events Display',
+            'configuration_value' => 'True',
+            'configuration_description' => 'Master switch for the storefront Scheduled Events page and sidebox. When False, the page redirects to the store home page and the sidebox never displays, regardless of the Sidebox Display Mode setting below. Admin management of events is unaffected either way.',
+            'configuration_group_id' => $groupId,
+            'sort_order' => 5,
+            'set_function' => 'zen_cfg_select_option(array(\'True\', \'False\'), ',
+        ]);
+
         $this->addConfigurationKey('SCHEDULED_EVENTS_PAGE_TITLE', [
             'configuration_title' => 'Page Heading',
             'configuration_value' => 'Scheduled Events',
@@ -140,7 +149,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->addConfigurationKey('SCHEDULED_EVENTS_EVENT_INFO_LABEL', [
             'configuration_title' => 'Event Information Label',
             'configuration_value' => 'Event Information:',
-            'configuration_description' => 'Label shown before an event\'s Event Information link, when present.',
+            'configuration_description' => 'Label shown before the link to the event\'s website (displayed as "More Information").',
             'configuration_group_id' => $groupId,
             'sort_order' => 70,
         ]);
@@ -148,7 +157,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->addConfigurationKey('SCHEDULED_EVENTS_DRIVING_DIRECTIONS_LABEL', [
             'configuration_title' => 'Driving Directions Label',
             'configuration_value' => 'Driving Directions:',
-            'configuration_description' => 'Label shown before an event\'s Driving Directions link, when present.',
+            'configuration_description' => 'Label shown before the link to Google Maps driving directions for the event.',
             'configuration_group_id' => $groupId,
             'sort_order' => 80,
         ]);

@@ -20,6 +20,10 @@ class EventzObserver extends base
             return;
         }
 
+        if (defined('SCHEDULED_EVENTS_STATUS') && SCHEDULED_EVENTS_STATUS === 'False') {
+            return;
+        }
+
         // $p2 is the $information array, passed by reference from information.php
         $information = &$p2;
 
