@@ -16,7 +16,7 @@ class EventzService
         global $db;
 
         $sql = "SELECT id, name, place, startDate, stopDate, comments, boothLocation,
-                       eventInformation, drivingDirections
+                       boothLocationUrl, eventInformation, eventInformationUrl, drivingDirections
                 FROM " . TABLE_EVENTZ . "
                 WHERE DATE_SUB(startDate, INTERVAL " . (int)$windowDays . " DAY) <= CURDATE()
                   AND stopDate >= CURDATE()
@@ -55,37 +55,37 @@ class EventzService
     }
 
     /**
-     * boothLocation is plain text by default; if it's a URL, it's rendered
-     * as a link (opened in a new tab) instead - no HTML authoring needed.
+     * Shared display logic for boothLocation/eventInformation: each is a
+     * plain-text description with a separate, optional URL. The description
+     * becomes the link text, but only if the URL actually validates -
+     * otherwise the description is shown as plain text and the URL is
+     * silently ignored, so the store owner never has to author HTML or
+     * worry about a bad link breaking the page.
      */
-    public static function buildBoothLocationDisplay(string $boothLocation): string
+    public static function buildLinkedText(string $text, ?string $url): string
     {
-        $value = trim(html_entity_decode($boothLocation, ENT_QUOTES, 'UTF-8'));
+        $text = trim(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
+        $url = trim(html_entity_decode((string)$url, ENT_QUOTES, 'UTF-8'));
 
-        if (preg_match('#^(https?:)?//#i', $value) === 1) {
-            return '<a href="' . zen_output_string_protected($value) . '" target="_blank" rel="noopener">'
-                . TEXT_EVENTZ_BOOTH_LOCATION_LINK . '</a>';
+        if ($text === '') {
+            return '';
         }
 
-        return zen_output_string_protected($value);
+        if ($url !== '' && self::isValidUrl($url)) {
+            return '<a href="' . zen_output_string_protected($url) . '" target="_blank" rel="noopener">'
+                . zen_output_string_protected($text) . '</a>';
+        }
+
+        return zen_output_string_protected($text);
     }
 
-    /**
-     * eventInformation may already contain a full URL entered by the admin,
-     * or (rarely) a hand-authored <a> tag. Normalize to a plain href.
-     */
-    public static function buildEventInfoUrl(string $eventInformation): string
+    private static function isValidUrl(string $url): bool
     {
-        // Normalizes accidentally-escaped HTML (e.g. "&lt;a href=..." typed or
-        // pasted as literal escaped text) back to real markup so the <a>
-        // detection below can find it either way; a no-op on plain text/URLs.
-        $value = trim(html_entity_decode($eventInformation, ENT_QUOTES, 'UTF-8'));
+        // filter_var() doesn't accept protocol-relative URLs (//example.com/x)
+        // on their own, so give it a scheme to validate against first.
+        $candidate = (stripos($url, '//') === 0) ? 'https:' . $url : $url;
 
-        if (stripos($value, '<a ') !== false && preg_match('/href\s*=\s*"([^"]+)"/i', $value, $matches)) {
-            return $matches[1];
-        }
-
-        return $value;
+        return filter_var($candidate, FILTER_VALIDATE_URL) !== false;
     }
 
     /**

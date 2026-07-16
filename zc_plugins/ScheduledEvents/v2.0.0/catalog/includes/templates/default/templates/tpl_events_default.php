@@ -33,13 +33,13 @@ global $eventzEvents, $eventzWindowRange;
 <?php } ?>
 <?php if (!empty($eventzEvent['boothLocation'])) { ?>
     <div class="eventzField eventzBoothLocation">
-      <strong><?php echo SCHEDULED_EVENTS_BOOTH_LOCATION_LABEL; ?></strong> <?php echo EventzService::buildBoothLocationDisplay($eventzEvent['boothLocation']); ?>
+      <strong><?php echo SCHEDULED_EVENTS_BOOTH_LOCATION_LABEL; ?></strong> <?php echo EventzService::buildLinkedText($eventzEvent['boothLocation'], $eventzEvent['boothLocationUrl'] ?? null); ?>
     </div>
 <?php } ?>
 <?php if (!empty($eventzEvent['eventInformation'])) { ?>
     <div class="eventzField eventzEventInformation">
       <strong><?php echo SCHEDULED_EVENTS_EVENT_INFO_LABEL; ?></strong>
-      <a href="<?php echo zen_output_string_protected(EventzService::buildEventInfoUrl($eventzEvent['eventInformation'])); ?>" target="_blank" rel="noopener"><?php echo TEXT_EVENTZ_MORE_INFO_LINK; ?></a>
+      <?php echo EventzService::buildLinkedText($eventzEvent['eventInformation'], $eventzEvent['eventInformationUrl'] ?? null); ?>
     </div>
 <?php } ?>
 <?php if (!empty($eventzEvent['drivingDirections'])) { ?>

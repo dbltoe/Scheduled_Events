@@ -9,7 +9,5 @@
 return [
     'NAVBAR_TITLE' => 'Scheduled Events',
     'TITLE_EVENTS' => 'Scheduled Events',
-    'TEXT_EVENTZ_MORE_INFO_LINK' => 'More Information',
     'TEXT_EVENTZ_DIRECTIONS_LINK' => 'Get Directions',
-    'TEXT_EVENTZ_BOOTH_LOCATION_LINK' => 'View Map',
 ];

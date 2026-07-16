@@ -50,7 +50,9 @@ class ScriptedInstaller extends ScriptedInstallBase
                 stopDate date NOT NULL,
                 comments mediumtext,
                 boothLocation varchar(255),
+                boothLocationUrl varchar(500),
                 eventInformation mediumtext,
+                eventInformationUrl varchar(500),
                 drivingDirections mediumtext,
                 PRIMARY KEY (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8";

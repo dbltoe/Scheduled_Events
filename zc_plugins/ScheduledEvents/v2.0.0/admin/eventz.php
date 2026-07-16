@@ -51,7 +51,9 @@ switch ($action) {
             'stopDate' => zen_db_prepare_input($_POST['stopDate'] ?? ''),
             'comments' => zen_db_prepare_input($_POST['comments'] ?? ''),
             'boothLocation' => zen_db_prepare_input($_POST['boothLocation'] ?? ''),
+            'boothLocationUrl' => zen_db_prepare_input($_POST['boothLocationUrl'] ?? ''),
             'eventInformation' => zen_db_prepare_input($_POST['eventInformation'] ?? ''),
+            'eventInformationUrl' => zen_db_prepare_input($_POST['eventInformationUrl'] ?? ''),
             'drivingDirections' => zen_db_prepare_input($_POST['drivingDirections'] ?? ''),
         ];
 
@@ -96,7 +98,9 @@ switch ($action) {
             'stopDate' => $stopDate,
             'comments' => $eventzData['comments'],
             'boothLocation' => $eventzData['boothLocation'],
+            'boothLocationUrl' => $eventzData['boothLocationUrl'],
             'eventInformation' => $eventzData['eventInformation'],
+            'eventInformationUrl' => $eventzData['eventInformationUrl'],
             'drivingDirections' => $eventzData['drivingDirections'],
         ];
 
@@ -194,9 +198,21 @@ if ($action === 'new') {
   </div>
 
   <div class="form-group">
+    <label for="boothLocationUrl"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION_URL; ?></label>
+    <?php echo zen_draw_input_field('boothLocationUrl', $eventzEditing['boothLocationUrl'] ?? '', 'id="boothLocationUrl" class="form-control" maxlength="500"'); ?>
+    <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP; ?></small>
+  </div>
+
+  <div class="form-group">
     <label for="eventInformation"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION; ?></label>
     <?php echo zen_draw_input_field('eventInformation', $eventzEditing['eventInformation'] ?? '', 'id="eventInformation" class="form-control"'); ?>
     <small><?php echo TEXT_EVENTZ_EVENT_INFO_HELP; ?></small>
+  </div>
+
+  <div class="form-group">
+    <label for="eventInformationUrl"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION_URL; ?></label>
+    <?php echo zen_draw_input_field('eventInformationUrl', $eventzEditing['eventInformationUrl'] ?? '', 'id="eventInformationUrl" class="form-control" maxlength="500"'); ?>
+    <small><?php echo TEXT_EVENTZ_EVENT_INFO_URL_HELP; ?></small>
   </div>
 
   <div class="form-group">
