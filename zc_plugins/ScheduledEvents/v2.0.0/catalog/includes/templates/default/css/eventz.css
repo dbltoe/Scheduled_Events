@@ -142,6 +142,10 @@
     margin-bottom: 0.5rem;
 }
 
+.eventzSideboxContent {
+    text-align: center;
+}
+
 .eventzCarouselEmpty {
     padding: 0.75rem 1rem;
     text-align: center;
