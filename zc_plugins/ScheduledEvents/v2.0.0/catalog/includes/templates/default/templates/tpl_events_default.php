@@ -3,6 +3,7 @@ use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 
 global $eventzEvents, $eventzWindowRange;
 ?>
+<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.0/catalog/includes/templates/default/css/eventz.css">
 <div id="eventzPage" class="eventzPage">
   <h1 class="eventzPageTitle"><?php echo SCHEDULED_EVENTS_PAGE_TITLE; ?></h1>
   <hr class="eventzHr eventzHrTop">
