@@ -49,8 +49,8 @@ class EventzService
         $to = (new \DateTime())->modify('+' . (int)$windowDays . ' days');
 
         return [
-            'from' => $from->format('m/d/Y'),
-            'to' => $to->format('m/d/Y'),
+            'from' => $from->format('F j, Y'),
+            'to' => $to->format('F j, Y'),
         ];
     }
 

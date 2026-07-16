@@ -164,8 +164,8 @@ class ScriptedInstaller extends ScriptedInstallBase
 
         $this->addConfigurationKey('SCHEDULED_EVENTS_NO_EVENTS_TEXT', [
             'configuration_title' => 'No Events Scheduled Message',
-            'configuration_value' => 'No events are scheduled from {from} to {to}. Please check back later.',
-            'configuration_description' => 'Shown (as an H2) in place of any event listing when nothing qualifies for display. The {from} and {to} tokens are replaced with the start/end dates of the current display window.',
+            'configuration_value' => 'No events are scheduled from {from} to {to}.<br>Please check back later.',
+            'configuration_description' => 'Shown (as an H2) in place of any event listing when nothing qualifies for display. The {from} and {to} tokens are replaced with the start/end dates of the current display window. HTML (e.g. <br>) is allowed and rendered as-is.',
             'configuration_group_id' => $groupId,
             'sort_order' => 90,
         ]);
