@@ -36,6 +36,12 @@ class EventzObserver extends base
             return;
         }
 
+        global $current_page_base;
+        if ($current_page_base === 'events') {
+            // Pointless to promote the events page while already viewing it.
+            return;
+        }
+
         // $p2 is the $information array, passed by reference from information.php
         $information = &$p2;
 

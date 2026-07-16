@@ -9,6 +9,8 @@
  */
 use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 
+global $current_page_base;
+
 $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'information';
 $eventzStatusEnabled = !defined('SCHEDULED_EVENTS_STATUS') || SCHEDULED_EVENTS_STATUS !== 'False';
 
@@ -16,8 +18,10 @@ $eventzStatusEnabled = !defined('SCHEDULED_EVENTS_STATUS') || SCHEDULED_EVENTS_S
 // requires a Bootstrap-based template, e.g. ZCA Bootstrap or a clone). Mode
 // 'information' is handled separately by EventzObserver, which injects a
 // link into the core Information sidebox instead. The master
-// SCHEDULED_EVENTS_STATUS switch overrides both when set to False.
-if ($eventzStatusEnabled && $eventzSideboxMode === 'sidebox') {
+// SCHEDULED_EVENTS_STATUS switch overrides both when set to False. Also
+// suppressed on the events page itself - pointless to promote a page while
+// already viewing it.
+if ($eventzStatusEnabled && $eventzSideboxMode === 'sidebox' && $current_page_base !== 'events') {
     $eventzWindowDays = defined('SCHEDULED_EVENTS_WINDOW_DAYS') ? (int)SCHEDULED_EVENTS_WINDOW_DAYS : 30;
     $eventzMaxItems = defined('SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS') ? (int)SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS : 5;
     $eventzSideboxEvents = EventzService::getQualifyingEvents($eventzWindowDays, $eventzMaxItems);
