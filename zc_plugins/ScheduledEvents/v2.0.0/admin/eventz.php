@@ -185,6 +185,7 @@ if ($action === 'new') {
   <div class="form-group">
     <label for="boothLocation"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?></label>
     <?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255"'); ?>
+    <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_HELP; ?></small>
   </div>
 
   <div class="form-group">
