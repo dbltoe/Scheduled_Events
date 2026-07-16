@@ -22,7 +22,7 @@ if ($eventzStatusEnabled && ($eventzSideboxMode === 'link' || $eventzSideboxMode
     // 'link' mode always shows; 'slider' mode only shows when there's something to slide
     if ($eventzSideboxMode === 'link' || !empty($eventzSideboxEvents)) {
         $title = defined('SCHEDULED_EVENTS_SIDEBOX_TITLE') ? SCHEDULED_EVENTS_SIDEBOX_TITLE : 'Upcoming Events';
-        $title_link = zen_href_link(FILENAME_DEFAULT, 'main_page=events');
+        $title_link = zen_href_link('events');
 
         ob_start();
         require($template->get_template_dir('tpl_eventz.php', DIR_WS_TEMPLATE, $current_page_base, 'sideboxes') . '/tpl_eventz.php');

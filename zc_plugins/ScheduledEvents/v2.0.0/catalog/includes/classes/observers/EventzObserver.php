@@ -29,6 +29,6 @@ class EventzObserver extends base
 
         $linkText = defined('SCHEDULED_EVENTS_SIDEBOX_TITLE') ? SCHEDULED_EVENTS_SIDEBOX_TITLE : 'Scheduled Events';
 
-        $information[] = '<a href="' . zen_href_link(FILENAME_DEFAULT, 'main_page=events') . '">' . zen_output_string_protected($linkText) . '</a>';
+        $information[] = '<a href="' . zen_href_link('events') . '">' . zen_output_string_protected($linkText) . '</a>';
     }
 }
