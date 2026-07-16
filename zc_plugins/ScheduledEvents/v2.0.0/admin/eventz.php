@@ -142,12 +142,13 @@ if ($action === 'new') {
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <?php require(DIR_WS_INCLUDES . 'admin_html_head.php'); ?>
+<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.0/admin/includes/css/eventz.css">
 <title><?php echo TITLE; ?></title>
 </head>
 <body>
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 
-<div class="content-area">
+<div class="content-area eventzContent">
   <h1><?php echo $eventzPageTitle; ?></h1>
 
 <?php if ($action === 'new' || $action === 'edit') { ?>
@@ -225,7 +226,7 @@ if ($action === 'new') {
   ?>
 
   <?php if ($eventzListResult->EOF) { ?>
-    <p><?php echo TEXT_EVENTZ_NO_EVENTS; ?></p>
+    <h2 class="eventzNoEventsAdmin"><?php echo TEXT_EVENTZ_NO_EVENTS; ?></h2>
   <?php } else { ?>
   <table class="table table-striped">
     <thead>

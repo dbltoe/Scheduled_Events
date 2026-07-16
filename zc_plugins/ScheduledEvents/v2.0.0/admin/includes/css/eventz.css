@@ -1,0 +1,29 @@
+/* Scheduled Events plugin - admin eventz.php styles */
+
+.eventzContent {
+    text-align: center;
+}
+
+.eventzContent table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.eventzContent .form-group {
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.eventzNoEventsAdmin {
+    font-weight: normal;
+}
+
+.eventzContent .btn.btn-primary,
+.eventzContent .btn.btn-secondary,
+.eventzContent .btn.btn-danger {
+    font-size: 130%;
+    padding: 12px 20px;
+}

@@ -32,7 +32,7 @@ return [
     'ENTRY_EVENTZ_EVENT_INFORMATION' => 'Event Information (URL):',
     'ENTRY_EVENTZ_DRIVING_DIRECTIONS' => 'Driving Directions (address or URL):',
 
-    'TEXT_EVENTZ_NO_EVENTS' => 'No events have been added yet.',
+    'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_DELETE_INTRO' => 'Are you sure you want to delete the following event?',
     'TEXT_EVENTZ_DATE_FORMAT_HELP' => 'Format: YYYY-MM-DD',
     'TEXT_EVENTZ_EVENT_INFO_HELP' => 'Full URL to the event\'s website. Displayed on the storefront as a "More Information" link.',
