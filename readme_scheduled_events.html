@@ -7,22 +7,45 @@
 <body>
 
 <h1>Scheduled Events for Zen Cart</h1>
-<p>Version 2.0.0 &mdash; requires Zen Cart v2.0.0 or later. Author: dbltoe.</p>
+<p>Version 2.0.0 &mdash; requires Zen Cart v2.0.0 or later (developed and tested against v2.2.2/v2.2.3). Author: dbltoe.</p>
 
 <h2>Overview</h2>
 <p>
 Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos,
-appearances, etc.) and display them on their own storefront page. Each event has a name, place, and
-start/stop dates; comments, booth location, an event information link, and driving directions are
-optional. Events are managed from Catalog &gt; Scheduled Events in the admin.
+appearances, etc.) and display them on their own storefront page. Events are managed from Catalog
+&gt; Scheduled Events in the admin, and a link to the events page is added into the current
+template's existing Information sidebox.
 </p>
 <p>
-Display can be further promoted via a sidebox &mdash; either as a link added into the current
-template's existing Information sidebox, or as the plugin's own sidebox (a simple link, or a rotating
-slider of currently qualifying events) placed via Design &gt; Layout Boxes Controller like any other
-sidebox. All of this, along with the storefront page heading, field labels, and the display time
-window (how many days before an event's start date it becomes visible), is configurable under
-Configuration &gt; Scheduled Events.
+The storefront page heading, all field labels, the "no events scheduled" message, the display time
+window (how many days before an event's start date it becomes visible), and the sidebox link text are
+all configurable under Configuration &gt; Scheduled Events. A master "Enable Scheduled Events
+Display" switch there can fully hide the storefront page and sidebox link at any time, without
+uninstalling the plugin.
+</p>
+
+<h2>Event Fields</h2>
+<p>Each event has the following fields, set from Catalog &gt; Scheduled Events:</p>
+<ul>
+<li><strong>Name, Place, Start Date, Stop Date</strong> &mdash; required for every event.</li>
+<li><strong>Comments</strong> &mdash; optional free text.</li>
+<li><strong>Booth Location</strong> (required) <strong>and Event Information</strong> (optional)
+&mdash; each is a plain-text description with a separate, optional URL field. If a valid URL is
+given, the description becomes a link (opened in a new tab); if the URL is missing or doesn't
+validate, it's silently ignored and the description just displays as plain text. The store owner
+never has to author HTML.</li>
+<li><strong>Driving Directions</strong> &mdash; accepts either a plain address or URL (the
+storefront link opens Google Maps in a new tab), or a Google Maps "Embed a map" <code>&lt;iframe&gt;</code>
+code (the storefront link instead opens the map as a self-contained pop-up over the page &mdash; no
+page navigation, full-screen automatically on phones/tablets, closed via its X button, clicking
+outside the pop-up, or the Escape key). The embedded map is lazy-loaded: it is never fetched unless a
+visitor actually opens the pop-up.</li>
+</ul>
+<p>
+On the storefront, events are listed in order, each as its name (as an H2) followed by its details in
+a blockquote; a horizontal rule separates consecutive events (none appears with zero or one event
+listed). When no events currently qualify for display, the page instead shows a configurable message
+naming the current date window, followed by a "check back later" line.
 </p>
 
 <h2>Installing, Upgrading, or Uninstalling</h2>
@@ -44,8 +67,8 @@ Events admin menu entry.
 <p>
 In the admin, go to Tools &gt; Install/Update Plugins, locate Scheduled Events, and click Uninstall.
 This removes the <code>eventz</code> table and all of its data, the plugin's configuration settings,
-the admin menu entry, and any Layout Boxes Controller placement of its sidebox. Removing the plugin's
-files from the server afterward is optional but recommended.
+and the admin menu entry. Removing the plugin's files from the server afterward is optional but
+recommended.
 </p>
 
 <h2>Change History</h2>

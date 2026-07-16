@@ -1,12 +1,34 @@
 v2.0.0
-- Rebuilt as an encapsulated plugin, replacing the older non-encapsulated
-  version of Scheduled Events. Requires Zen Cart 2.0.0 or later; not
-  compatible with pre-2.0.0 installations.
-- Storefront Scheduled Events page (main_page=events).
-- Sidebox display now supports four modes: none, a link added into the
-  current template's existing Information sidebox, or the plugin's own
-  sidebox (simple link or rotating slider) placeable via the admin
-  Layout Boxes Controller.
-- Admin event management screen (create/edit/delete).
-- Admin configuration group for display options, labels, and the
-  30/60/90-day display window.
+- Rebuilt as an encapsulated plugin, replacing the older non-encapsulated version
+  of Scheduled Events. Requires Zen Cart 2.0.0 or later; not compatible with
+  pre-2.0.0 installations. Developed and tested against Zen Cart v2.2.2/v2.2.3.
+- Storefront Scheduled Events page (main_page=events): lists every event whose
+  display window currently qualifies, each as a name (H2) followed by place,
+  start/stop dates, and optional comments, booth location, event information,
+  and driving directions in a blockquote. A separator <hr> appears between
+  consecutive events (none shows with zero or one event listed). Shows a
+  configurable "no events scheduled" message, naming the current date window,
+  when nothing qualifies.
+- Booth Location (required) and Event Information (optional) are each a
+  plain-text description with a separate, optional URL; the description
+  becomes a link only when a valid URL is given, otherwise it displays as
+  plain text - no HTML authoring required from the store owner.
+- Driving Directions accepts a plain address/URL (opens Google Maps in a new
+  tab) or a Google Maps "Embed a map" <iframe> code (opens as a self-contained,
+  on-page pop-up map instead - no page navigation, full-screen on phones/
+  tablets, closed via an X button, clicking outside, or Escape). The embedded
+  map is lazy-loaded and never fetched unless the pop-up is actually opened.
+- A link to the events page is added into the current template's existing
+  Information sidebox. A master "Enable Scheduled Events Display"
+  configuration switch can fully hide the storefront page and this link at
+  any time, without uninstalling. (A standalone sidebox with its own simple-
+  link/slider display modes, placeable via Design > Layout Boxes Controller,
+  was built but is disabled for now, pending further design - see
+  catalog/includes/modules/sideboxes/eventz.php.disabled.)
+- Admin event management screen (Catalog > Scheduled Events): add/edit/delete
+  events, with required-field markers and a Help button linking to this
+  plugin's GitHub repository.
+- Admin configuration group (Configuration > Scheduled Events) for the page
+  heading, all field labels, the no-events message (and its follow-up line),
+  the 30/60/90-day display window, the sidebox link text, and the master
+  enable/disable switch.
