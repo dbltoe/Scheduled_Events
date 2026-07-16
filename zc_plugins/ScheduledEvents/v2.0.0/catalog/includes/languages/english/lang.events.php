@@ -1,8 +1,14 @@
 <?php
 /**
  * Scheduled Events - storefront page language file (main_page=events)
+ *
+ * ZC 2.2.x's ArraysLanguageLoader requires this file to `return` a flat
+ * CONSTANT_NAME => value array (it calls define() on each pair itself),
+ * not call define() directly.
  */
-define('NAVBAR_TITLE', 'Scheduled Events');
-define('TITLE_EVENTS', 'Scheduled Events');
-define('TEXT_EVENTZ_MORE_INFO_LINK', 'More Information');
-define('TEXT_EVENTZ_DIRECTIONS_LINK', 'Get Directions');
+return [
+    'NAVBAR_TITLE' => 'Scheduled Events',
+    'TITLE_EVENTS' => 'Scheduled Events',
+    'TEXT_EVENTZ_MORE_INFO_LINK' => 'More Information',
+    'TEXT_EVENTZ_DIRECTIONS_LINK' => 'Get Directions',
+];
