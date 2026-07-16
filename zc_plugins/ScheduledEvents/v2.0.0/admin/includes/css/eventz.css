@@ -21,6 +21,17 @@
     font-weight: normal;
 }
 
+.eventzRequiredNotice {
+    color: #8b0000;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.eventzRequired {
+    color: #8b0000;
+    margin-left: 0.25rem;
+}
+
 .eventzContent .btn.btn-primary,
 .eventzContent .btn.btn-secondary,
 .eventzContent .btn.btn-danger {

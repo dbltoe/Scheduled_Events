@@ -35,6 +35,7 @@ return [
     'TEXT_EVENTZ_BOOTH_LOCATION_HELP' => 'Plain text, or a full HTML link, e.g. &lt;a href="https://example.com/map" target="_blank"&gt;Space #16&lt;/a&gt;. Rendered as-is on the storefront.',
     'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_DELETE_INTRO' => 'Are you sure you want to delete the following event?',
+    'TEXT_EVENTZ_REQUIRED_INFORMATION' => 'Required Information',
     'TEXT_EVENTZ_DATE_FORMAT_HELP' => 'Format: YYYY-MM-DD',
     'TEXT_EVENTZ_EVENT_INFO_HELP' => 'Full URL to the event\'s website. Displayed on the storefront as a "More Information" link.',
     'TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP' => 'Either a full address (a Google Maps directions link will be built automatically) or a complete URL.',

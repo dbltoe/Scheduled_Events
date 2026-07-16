@@ -156,26 +156,28 @@ if ($action === 'new') {
 
 <?php if ($action === 'new' || $action === 'edit') { ?>
 
+  <p class="eventzRequiredNotice">* <?php echo TEXT_EVENTZ_REQUIRED_INFORMATION; ?></p>
+
   <?php echo zen_draw_form('eventz', FILENAME_EVENTZ, 'action=' . ($action === 'new' ? 'insert' : 'update') . ($eventzEditing ? '&id=' . (int)$eventzEditing['id'] : ''), 'post'); ?>
 
   <div class="form-group">
-    <label for="name"><?php echo ENTRY_EVENTZ_NAME; ?></label>
+    <label for="name"><?php echo ENTRY_EVENTZ_NAME; ?><span class="eventzRequired">*</span></label>
     <?php echo zen_draw_input_field('name', $eventzEditing['name'] ?? '', 'id="name" class="form-control" maxlength="255" required'); ?>
   </div>
 
   <div class="form-group">
-    <label for="place"><?php echo ENTRY_EVENTZ_PLACE; ?></label>
+    <label for="place"><?php echo ENTRY_EVENTZ_PLACE; ?><span class="eventzRequired">*</span></label>
     <?php echo zen_draw_input_field('place', $eventzEditing['place'] ?? '', 'id="place" class="form-control" maxlength="255" required'); ?>
   </div>
 
   <div class="form-group">
-    <label for="startDate"><?php echo ENTRY_EVENTZ_START_DATE; ?></label>
+    <label for="startDate"><?php echo ENTRY_EVENTZ_START_DATE; ?><span class="eventzRequired">*</span></label>
     <?php echo zen_draw_input_field('startDate', $eventzEditing['startDate'] ?? '', 'id="startDate" class="form-control" required', false, 'date'); ?>
     <small><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></small>
   </div>
 
   <div class="form-group">
-    <label for="stopDate"><?php echo ENTRY_EVENTZ_STOP_DATE; ?></label>
+    <label for="stopDate"><?php echo ENTRY_EVENTZ_STOP_DATE; ?><span class="eventzRequired">*</span></label>
     <?php echo zen_draw_input_field('stopDate', $eventzEditing['stopDate'] ?? '', 'id="stopDate" class="form-control" required', false, 'date'); ?>
     <small><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></small>
   </div>
@@ -186,7 +188,7 @@ if ($action === 'new') {
   </div>
 
   <div class="form-group">
-    <label for="boothLocation"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?></label>
+    <label for="boothLocation"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?><span class="eventzRequired">*</span></label>
     <?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255" required'); ?>
     <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_HELP; ?></small>
   </div>
