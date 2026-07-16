@@ -179,29 +179,12 @@ class ScriptedInstaller extends ScriptedInstallBase
             'set_function' => 'zen_cfg_select_option(array(\'30\', \'60\', \'90\'), ',
         ]);
 
-        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_MODE', [
-            'configuration_title' => 'Sidebox Display Mode',
-            'configuration_value' => 'slider',
-            'configuration_description' => 'How (or whether) upcoming events are promoted: none (do not display); information (adds a link into the current template\'s existing Information sidebox); link (the plugin\'s own sidebox showing a single simple link); slider (the plugin\'s own sidebox with a rotating slider of qualifying events). The "link" and "slider" boxes are placed/enabled via Design > Layout Boxes Controller, same as any other sidebox.',
+        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_TITLE', [
+            'configuration_title' => 'Sidebox Link Text',
+            'configuration_value' => 'Upcoming Events',
+            'configuration_description' => 'Text for the link added into the current template\'s Information sidebox.',
             'configuration_group_id' => $groupId,
             'sort_order' => 110,
-            'set_function' => 'zen_cfg_select_option(array(\'none\', \'information\', \'link\', \'slider\'), ',
-        ]);
-
-        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_TITLE', [
-            'configuration_title' => 'Sidebox Title',
-            'configuration_value' => 'Upcoming Events',
-            'configuration_description' => 'Heading shown at the top of the Scheduled Events sidebox (link or slider mode).',
-            'configuration_group_id' => $groupId,
-            'sort_order' => 120,
-        ]);
-
-        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS', [
-            'configuration_title' => 'Slider Maximum Items',
-            'configuration_value' => '5',
-            'configuration_description' => 'Maximum number of qualifying events to include in the sidebox slider.',
-            'configuration_group_id' => $groupId,
-            'sort_order' => 130,
         ]);
     }
 
