@@ -42,7 +42,7 @@ return [
     'TEXT_EVENTZ_DATE_FORMAT_HELP' => 'Format: YYYY-MM-DD',
     'TEXT_EVENTZ_EVENT_INFO_HELP' => 'Plain text describing the event information (e.g. "Visit the official show website"). This text becomes a link if an Information URL is also given below.',
     'TEXT_EVENTZ_EVENT_INFO_URL_HELP' => 'Optional. A URL to the event\'s website. If valid, the Event Information text above becomes a link to it (opens in a new tab); otherwise it\'s ignored and the text displays as-is.',
-    'TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP' => 'A full address or URL opens Google Maps in a new tab. Pasting a Google Maps "Embed a map" &lt;iframe&gt; code instead opens the map in an on-page popup (full-screen on phones/tablets) without leaving the site.',
+    'TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP' => 'A plain address or Google Maps link opens Google Maps in a new tab (no map shown here). A Google Maps "Embed a map" &lt;iframe&gt; code instead opens as an on-page pop-up map.',
 
     'SUCCESS_EVENTZ_INSERTED' => 'Success: Event has been added.',
     'SUCCESS_EVENTZ_UPDATED' => 'Success: Event has been updated.',
