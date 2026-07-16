@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package scheduled events
+ * @subpackage plugins
+ * @copyright Copyright 2003-2026 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://zen-cart.com GNU Public License V2.0
+ * @version $Id: header_php.php 2026-07-16 05:30:22Z dbltoe $
+ */
 use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 
 global $breadcrumb, $zco_notifier, $eventzEvents, $eventzWindowRange, $eventzWindowDays, $language;

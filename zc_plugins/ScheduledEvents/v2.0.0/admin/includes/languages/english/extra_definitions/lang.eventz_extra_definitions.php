@@ -1,5 +1,14 @@
 <?php
 /**
+ * @package scheduled events
+ * @subpackage plugins
+ * @copyright Copyright 2003-2026 Zen Cart Development Team
+ * @copyright Portions Copyright 2003 osCommerce
+ * @license http://zen-cart.com GNU Public License V2.0
+ * @version $Id: lang.eventz_extra_definitions.php 2026-07-16 05:30:22Z dbltoe $
+ */
+
+/**
  * Loaded on every admin page via Zen Cart's ArraysLanguageLoader, which
  * requires an extra_definitions file to `return` a flat CONSTANT_NAME =>
  * value array - it calls define() on each pair itself. A file with no
