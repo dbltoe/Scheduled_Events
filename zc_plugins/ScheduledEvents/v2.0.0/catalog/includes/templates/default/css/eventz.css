@@ -133,6 +133,15 @@
 }
 
 /* Sidebox: scrolling mode (requires a Bootstrap-based template) */
+.eventzSideboxContainer {
+    margin-bottom: 1.5rem;
+}
+
+.eventzSideboxHeading {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
 .eventzCarouselEmpty {
     padding: 0.75rem 1rem;
     text-align: center;

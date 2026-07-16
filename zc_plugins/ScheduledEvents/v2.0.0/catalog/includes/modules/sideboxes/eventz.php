@@ -9,8 +9,6 @@
  */
 use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 
-global $template, $current_page_base;
-
 $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'information';
 $eventzStatusEnabled = !defined('SCHEDULED_EVENTS_STATUS') || SCHEDULED_EVENTS_STATUS !== 'False';
 
@@ -30,8 +28,16 @@ if ($eventzStatusEnabled && $eventzSideboxMode === 'sidebox') {
     $title_link = zen_href_link('events');
 
     ob_start();
-    require($template->get_template_dir('tpl_eventz.php', DIR_WS_TEMPLATE, $current_page_base, 'sideboxes') . '/tpl_eventz.php');
+    require __DIR__ . '/../../templates/default/sideboxes/tpl_eventz.php';
     $content = ob_get_clean();
 
-    require($template->get_template_dir('tpl_box.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_box.php');
+    // Deliberately not requiring core's tpl_box.php generic box wrapper: on
+    // this store, its fallback path (a "template_default" directory) doesn't
+    // exist for the active Bootstrap-based template, causing a fatal error.
+    // Building the box shell directly here, styled by our own eventz.css,
+    // sidesteps that entirely and works on any template.
+    echo '<div class="eventzSideboxContainer">';
+    echo '<h3 class="eventzSideboxHeading">' . zen_output_string_protected($title) . '</h3>';
+    echo '<div class="eventzSideboxContent">' . $content . '</div>';
+    echo '</div>';
 }
