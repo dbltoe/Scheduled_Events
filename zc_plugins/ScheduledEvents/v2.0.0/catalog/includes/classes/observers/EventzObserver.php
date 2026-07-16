@@ -38,6 +38,10 @@ class EventzObserver extends base
 
         $linkText = defined('SCHEDULED_EVENTS_SIDEBOX_TITLE') ? SCHEDULED_EVENTS_SIDEBOX_TITLE : 'Scheduled Events';
 
-        $information[] = '<a href="' . zen_href_link('events') . '">' . zen_output_string_protected($linkText) . '</a>';
+        // list-group-item/list-group-item-action match the other Information
+        // sidebox links on Bootstrap-based templates (e.g. ZCA Bootstrap); on
+        // non-Bootstrap templates (e.g. responsive_classic) these classes have
+        // no matching CSS and are simply ignored, so this is safe either way.
+        $information[] = '<a class="list-group-item list-group-item-action" href="' . zen_href_link('events') . '">' . zen_output_string_protected($linkText) . '</a>';
     }
 }
