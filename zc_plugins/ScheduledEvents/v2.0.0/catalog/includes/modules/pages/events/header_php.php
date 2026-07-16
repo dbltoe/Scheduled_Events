@@ -8,7 +8,7 @@ global $breadcrumb, $zco_notifier, $eventzEvents, $eventzWindowRange, $eventzWin
 // every tested store/routing setup. Load it directly if it hasn't already.
 if (!defined('NAVBAR_TITLE')) {
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
-    $eventzLangFile = DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.events.php';
+    $eventzLangFile = DIR_FS_CATALOG . DIR_WS_LANGUAGES . $eventzLanguageDir . '/lang.events.php';
     if (is_file($eventzLangFile)) {
         $eventzDefines = require $eventzLangFile;
         if (is_array($eventzDefines)) {
