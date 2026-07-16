@@ -60,7 +60,10 @@ class EventzService
      */
     public static function buildEventInfoUrl(string $eventInformation): string
     {
-        $value = trim($eventInformation);
+        // Normalizes accidentally-escaped HTML (e.g. "&lt;a href=..." typed or
+        // pasted as literal escaped text) back to real markup so the <a>
+        // detection below can find it either way; a no-op on plain text/URLs.
+        $value = trim(html_entity_decode($eventInformation, ENT_QUOTES, 'UTF-8'));
 
         if (stripos($value, '<a ') !== false && preg_match('/href\s*=\s*"([^"]+)"/i', $value, $matches)) {
             return $matches[1];
@@ -75,7 +78,7 @@ class EventzService
      */
     public static function buildDrivingDirectionsUrl(string $drivingDirections): string
     {
-        $value = trim($drivingDirections);
+        $value = trim(html_entity_decode($drivingDirections, ENT_QUOTES, 'UTF-8'));
 
         if (stripos($value, 'http://') === 0 || stripos($value, 'https://') === 0) {
             return $value;

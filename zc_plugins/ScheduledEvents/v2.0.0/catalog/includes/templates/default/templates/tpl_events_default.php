@@ -33,7 +33,7 @@ global $eventzEvents, $eventzWindowRange;
 <?php } ?>
 <?php if (!empty($eventzEvent['boothLocation'])) { ?>
     <div class="eventzField eventzBoothLocation">
-      <strong><?php echo SCHEDULED_EVENTS_BOOTH_LOCATION_LABEL; ?></strong> <?php echo $eventzEvent['boothLocation']; ?>
+      <strong><?php echo SCHEDULED_EVENTS_BOOTH_LOCATION_LABEL; ?></strong> <?php echo html_entity_decode($eventzEvent['boothLocation'], ENT_QUOTES, 'UTF-8'); ?>
     </div>
 <?php } ?>
 <?php if (!empty($eventzEvent['eventInformation'])) { ?>
