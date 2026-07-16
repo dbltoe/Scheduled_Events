@@ -146,7 +146,6 @@ if ($action === 'new') {
 </head>
 <body>
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<?php require(DIR_WS_INCLUDES . 'sideMenu.php'); ?>
 
 <div class="content-area">
   <h1><?php echo $eventzPageTitle; ?></h1>
