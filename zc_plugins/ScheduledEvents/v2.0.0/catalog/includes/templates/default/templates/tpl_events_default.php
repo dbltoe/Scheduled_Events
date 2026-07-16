@@ -50,7 +50,7 @@ global $eventzEvents, $eventzWindowRange;
 <?php if ($eventzMapEmbedUrl !== null) { ?>
       <button type="button" class="eventzDirectionsTrigger" data-eventz-modal="eventz-directions-modal-<?php echo (int)$eventzEvent['id']; ?>"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></button>
 <?php } else { ?>
-      <a href="<?php echo zen_output_string_protected(EventzService::buildDrivingDirectionsUrl($eventzEvent['drivingDirections'])); ?>" target="_blank" rel="noopener"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></a>
+      <a href="<?php echo zen_output_string_protected(EventzService::buildDrivingDirectionsUrl($eventzEvent['drivingDirections'])); ?>" target="_blank" rel="noopener noreferrer"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></a>
 <?php } ?>
     </div>
 <?php } ?>

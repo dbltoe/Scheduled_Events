@@ -72,7 +72,7 @@ class EventzService
         }
 
         if ($url !== '' && self::isValidUrl($url)) {
-            return '<a href="' . zen_output_string_protected($url) . '" target="_blank" rel="noopener">'
+            return '<a href="' . zen_output_string_protected($url) . '" target="_blank" rel="noopener noreferrer">'
                 . zen_output_string_protected($text) . '</a>';
         }
 
