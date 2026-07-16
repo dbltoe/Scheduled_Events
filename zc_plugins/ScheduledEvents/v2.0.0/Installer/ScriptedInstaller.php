@@ -204,6 +204,16 @@ class ScriptedInstaller extends ScriptedInstallBase
 
     protected function installAdminPage(): void
     {
+        // filenames.php only auto-loads admin-wide since ZC 2.2.0; guard here
+        // too so registration resolves correctly on the 2.0.0/2.1.0 installs
+        // this plugin also declares support for.
+        if (!defined('FILENAME_EVENTZ')) {
+            define('FILENAME_EVENTZ', 'eventz.php');
+        }
+        if (!defined('BOX_CATALOG_EVENTZ')) {
+            define('BOX_CATALOG_EVENTZ', 'Scheduled Events');
+        }
+
         zen_register_admin_page('eventzList', 'BOX_CATALOG_EVENTZ', 'FILENAME_EVENTZ', '', 'catalog', 'Y');
     }
 

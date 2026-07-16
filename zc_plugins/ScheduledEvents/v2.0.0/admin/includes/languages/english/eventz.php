@@ -1,10 +1,11 @@
 <?php
 /**
  * Scheduled Events - admin language file
+ *
+ * FILENAME_EVENTZ lives in the plugin's root filenames.php and
+ * BOX_CATALOG_EVENTZ in extra_definitions/eventz.php - both need to be
+ * available admin-wide, not just while this page itself is loaded.
  */
-define('FILENAME_EVENTZ', 'eventz.php');
-define('BOX_CATALOG_EVENTZ', 'Scheduled Events');
-
 define('HEADING_TITLE_EVENTZ', 'Scheduled Events');
 define('HEADING_TITLE_EVENTZ_NEW', 'Add Event');
 define('HEADING_TITLE_EVENTZ_EDIT', 'Edit Event');
