@@ -11,6 +11,7 @@ global $eventzEvents, $eventzWindowRange;
   <h2 class="eventzNoEvents">
     <?php echo strtr(SCHEDULED_EVENTS_NO_EVENTS_TEXT, ['{from}' => $eventzWindowRange['from'], '{to}' => $eventzWindowRange['to']]); ?>
   </h2>
+  <p class="eventzNoEventsSubtext"><?php echo SCHEDULED_EVENTS_NO_EVENTS_SUBTEXT; ?></p>
 <?php } else { ?>
   <?php foreach ($eventzEvents as $eventzEvent) { ?>
   <h2 id="eventz-event-<?php echo (int)$eventzEvent['id']; ?>" class="eventzHeader"><?php echo zen_output_string_protected($eventzEvent['name']); ?></h2>

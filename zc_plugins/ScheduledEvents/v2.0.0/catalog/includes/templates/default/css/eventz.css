@@ -20,6 +20,11 @@
 
 .eventzNoEvents {
     font-weight: normal;
+    margin-bottom: 0;
+}
+
+.eventzNoEventsSubtext {
+    margin-top: 0.75rem;
 }
 
 .eventzDetails {
