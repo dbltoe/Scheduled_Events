@@ -24,15 +24,14 @@ if ($eventzStatusEnabled && $eventzSideboxMode === 'sidebox') {
     $eventzMaxItems = defined('SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS') ? (int)SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS : 5;
     $eventzSideboxEvents = EventzService::getQualifyingEvents($eventzWindowDays, $eventzMaxItems);
 
-    // Nothing to show, so don't render an empty box.
-    if (!empty($eventzSideboxEvents)) {
-        $title = defined('SCHEDULED_EVENTS_SIDEBOX_TITLE') ? SCHEDULED_EVENTS_SIDEBOX_TITLE : 'Upcoming Events';
-        $title_link = zen_href_link('events');
+    // Always show the box (with a "no events" notice when empty), rather
+    // than disappearing entirely - consistent with the main events page.
+    $title = defined('SCHEDULED_EVENTS_SIDEBOX_TITLE') ? SCHEDULED_EVENTS_SIDEBOX_TITLE : 'Upcoming Events';
+    $title_link = zen_href_link('events');
 
-        ob_start();
-        require($template->get_template_dir('tpl_eventz.php', DIR_WS_TEMPLATE, $current_page_base, 'sideboxes') . '/tpl_eventz.php');
-        $content = ob_get_clean();
+    ob_start();
+    require($template->get_template_dir('tpl_eventz.php', DIR_WS_TEMPLATE, $current_page_base, 'sideboxes') . '/tpl_eventz.php');
+    $content = ob_get_clean();
 
-        require($template->get_template_dir('tpl_box.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_box.php');
-    }
+    require($template->get_template_dir('tpl_box.php', DIR_WS_TEMPLATE, $current_page_base, 'templates') . '/tpl_box.php');
 }

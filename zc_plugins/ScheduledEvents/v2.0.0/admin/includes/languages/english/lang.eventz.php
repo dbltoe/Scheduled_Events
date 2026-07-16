@@ -48,6 +48,7 @@ return [
     'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_DELETE_INTRO' => 'Are you sure you want to delete the following event?',
     'TEXT_EVENTZ_REQUIRED_INFORMATION' => 'Required Information',
+    'TEXT_EVENTZ_SORT_BY' => 'Sort By:',
     'TEXT_EVENTZ_DATE_FORMAT_HELP' => 'Format: YYYY-MM-DD',
     'TEXT_EVENTZ_EVENT_INFO_HELP' => 'Plain text describing the event information (e.g. "Visit the official show website"). This text becomes a link if an Information URL is also given below.',
     'TEXT_EVENTZ_EVENT_INFO_URL_HELP' => 'Optional. A URL to the event\'s website. If valid, the Event Information text above becomes a link to it (opens in a new tab); otherwise it\'s ignored and the text displays as-is.',

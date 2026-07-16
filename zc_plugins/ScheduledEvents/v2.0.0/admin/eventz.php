@@ -50,6 +50,20 @@ function eventzValidateDate($value)
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
+// Whitelisted column/direction pairs only - never build ORDER BY from raw
+// user input.
+$eventzSortOptions = [
+    'startDate_desc' => ['column' => 'startDate', 'direction' => 'DESC', 'label' => 'Start Date (Newest First)'],
+    'startDate_asc' => ['column' => 'startDate', 'direction' => 'ASC', 'label' => 'Start Date (Oldest First)'],
+    'stopDate_desc' => ['column' => 'stopDate', 'direction' => 'DESC', 'label' => 'Stop Date (Newest First)'],
+    'stopDate_asc' => ['column' => 'stopDate', 'direction' => 'ASC', 'label' => 'Stop Date (Oldest First)'],
+    'name_asc' => ['column' => 'name', 'direction' => 'ASC', 'label' => 'Name (A-Z)'],
+    'name_desc' => ['column' => 'name', 'direction' => 'DESC', 'label' => 'Name (Z-A)'],
+    'place_asc' => ['column' => 'place', 'direction' => 'ASC', 'label' => 'Place (A-Z)'],
+    'place_desc' => ['column' => 'place', 'direction' => 'DESC', 'label' => 'Place (Z-A)'],
+];
+$eventzSelectedSort = isset($_GET['sort']) && isset($eventzSortOptions[$_GET['sort']]) ? $_GET['sort'] : 'startDate_desc';
+
 switch ($action) {
     case 'insert':
     case 'update':
@@ -252,8 +266,19 @@ if ($action === 'new') {
     <a class="btn btn-primary" href="<?php echo zen_href_link(FILENAME_EVENTZ, 'action=new'); ?>"><?php echo IMAGE_EVENTZ_NEW_EVENT; ?></a>
   </p>
 
+  <?php echo zen_draw_form('eventzSort', FILENAME_EVENTZ, '', 'get'); ?>
+    <label for="eventzSort"><?php echo TEXT_EVENTZ_SORT_BY; ?></label>
+    <select name="sort" id="eventzSort" class="form-control" onchange="this.form.submit()">
+    <?php foreach ($eventzSortOptions as $eventzSortKey => $eventzSortOption) { ?>
+      <option value="<?php echo $eventzSortKey; ?>"<?php echo ($eventzSortKey === $eventzSelectedSort) ? ' selected' : ''; ?>><?php echo $eventzSortOption['label']; ?></option>
+    <?php } ?>
+    </select>
+  </form>
+
   <?php
-  $eventzListResult = $db->Execute("SELECT id, name, place, startDate, stopDate FROM " . TABLE_EVENTZ . " ORDER BY startDate DESC");
+  $eventzSortColumn = $eventzSortOptions[$eventzSelectedSort]['column'];
+  $eventzSortDirection = $eventzSortOptions[$eventzSelectedSort]['direction'];
+  $eventzListResult = $db->Execute("SELECT id, name, place, startDate, stopDate FROM " . TABLE_EVENTZ . " ORDER BY " . $eventzSortColumn . " " . $eventzSortDirection);
   ?>
 
   <?php if ($eventzListResult->EOF) { ?>

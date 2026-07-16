@@ -9,6 +9,11 @@
  */
 global $eventzSideboxEvents, $title_link;
 ?>
+<?php if (empty($eventzSideboxEvents)) { ?>
+<div class="eventzCarouselEmpty">
+  <?php echo defined('SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT') ? SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT : 'No events scheduled right now.'; ?>
+</div>
+<?php } else { ?>
 <div id="eventzCarousel" class="eventzCarousel carousel slide" data-bs-ride="carousel" data-ride="carousel">
   <div class="eventzCarouselInner carousel-inner">
 <?php foreach ($eventzSideboxEvents as $eventzIndex => $eventzEvent) { ?>
@@ -31,3 +36,4 @@ global $eventzSideboxEvents, $title_link;
   </button>
 <?php } ?>
 </div>
+<?php } ?>

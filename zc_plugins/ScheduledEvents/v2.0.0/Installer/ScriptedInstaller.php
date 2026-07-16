@@ -221,6 +221,14 @@ class ScriptedInstaller extends ScriptedInstallBase
             'configuration_group_id' => $groupId,
             'sort_order' => 115,
         ]);
+
+        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT', [
+            'configuration_title' => 'Sidebox No Events Text',
+            'configuration_value' => 'No events scheduled right now.',
+            'configuration_description' => 'Shown in the "sidebox" mode\'s box in place of the carousel when no events currently qualify for display.',
+            'configuration_group_id' => $groupId,
+            'sort_order' => 116,
+        ]);
     }
 
     protected function uninstallConfiguration(): void
