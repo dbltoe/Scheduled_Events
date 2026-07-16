@@ -11,7 +11,16 @@ class EventzAdminObserver extends base
 
     protected function update(&$class, $eventID, $page, &$help_page)
     {
-        if ($eventID !== 'NOTIFIER_PLUGIN_HELP_PAGE_URL_LOOKUP' || $page !== FILENAME_EVENTZ) {
+        if ($eventID !== 'NOTIFIER_PLUGIN_HELP_PAGE_URL_LOOKUP') {
+            return;
+        }
+
+        // FILENAME_EVENTZ is only defined while the eventz.php page itself is
+        // loaded (it comes from that page's own language file), so this must
+        // be checked before use - this observer's update() fires on every
+        // admin page, not just ours. $page arrives as basename($PHP_SELF,
+        // '.php'), i.e. without the ".php" extension.
+        if (!defined('FILENAME_EVENTZ') || $page !== basename(FILENAME_EVENTZ, '.php')) {
             return;
         }
 
