@@ -163,10 +163,12 @@
 
 .eventzCarouselName {
     font-weight: bold;
+    text-align: center;
 }
 
 .eventzCarouselStartDate,
 .eventzCarouselStopDate {
     font-size: 0.85em;
     opacity: 0.8;
+    text-align: center;
 }
