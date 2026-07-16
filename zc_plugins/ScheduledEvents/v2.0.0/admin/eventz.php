@@ -150,10 +150,6 @@ if ($action === 'new') {
 <div class="content-area">
   <h1><?php echo $eventzPageTitle; ?></h1>
 
-  <?php if ($messageStack->size('header') > 0) { ?>
-    <?php echo $messageStack->output('header'); ?>
-  <?php } ?>
-
 <?php if ($action === 'new' || $action === 'edit') { ?>
 
   <?php echo zen_draw_form('eventz', FILENAME_EVENTZ, 'action=' . ($action === 'new' ? 'insert' : 'update') . ($eventzEditing ? '&id=' . (int)$eventzEditing['id'] : ''), 'post'); ?>
