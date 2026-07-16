@@ -55,6 +55,22 @@ class EventzService
     }
 
     /**
+     * boothLocation is plain text by default; if it's a URL, it's rendered
+     * as a link (opened in a new tab) instead - no HTML authoring needed.
+     */
+    public static function buildBoothLocationDisplay(string $boothLocation): string
+    {
+        $value = trim(html_entity_decode($boothLocation, ENT_QUOTES, 'UTF-8'));
+
+        if (preg_match('#^(https?:)?//#i', $value) === 1) {
+            return '<a href="' . zen_output_string_protected($value) . '" target="_blank" rel="noopener">'
+                . TEXT_EVENTZ_BOOTH_LOCATION_LINK . '</a>';
+        }
+
+        return zen_output_string_protected($value);
+    }
+
+    /**
      * eventInformation may already contain a full URL entered by the admin,
      * or (rarely) a hand-authored <a> tag. Normalize to a plain href.
      */

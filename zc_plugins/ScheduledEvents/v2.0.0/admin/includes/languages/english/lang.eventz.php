@@ -32,7 +32,7 @@ return [
     'ENTRY_EVENTZ_EVENT_INFORMATION' => 'Event Information (URL):',
     'ENTRY_EVENTZ_DRIVING_DIRECTIONS' => 'Driving Directions (address or URL):',
 
-    'TEXT_EVENTZ_BOOTH_LOCATION_HELP' => 'Plain text, or a full HTML link, e.g. &lt;a href="https://example.com/map" target="_blank"&gt;Space #16&lt;/a&gt;. Rendered as-is on the storefront.',
+    'TEXT_EVENTZ_BOOTH_LOCATION_HELP' => 'Plain text (e.g. "Space #16"), or a URL to a map/floor plan - shown on the storefront as a "View Map" link that opens in a new tab.',
     'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_DELETE_INTRO' => 'Are you sure you want to delete the following event?',
     'TEXT_EVENTZ_REQUIRED_INFORMATION' => 'Required Information',
