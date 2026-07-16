@@ -102,4 +102,26 @@ class EventzService
 
         return 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode($value);
     }
+
+    /**
+     * If drivingDirections holds a Google Maps <iframe> embed code (or a bare
+     * embed URL), extract the URL to display in an in-page popup instead of
+     * the plain "open in a new tab" link. Returns null for a plain address
+     * or a non-embed URL, so the caller can fall back to
+     * buildDrivingDirectionsUrl() in that case.
+     */
+    public static function extractMapEmbedUrl(string $drivingDirections): ?string
+    {
+        $value = trim(html_entity_decode($drivingDirections, ENT_QUOTES, 'UTF-8'));
+
+        if (preg_match('/<iframe\b[^>]*\ssrc\s*=\s*"([^"]+)"/i', $value, $matches) === 1) {
+            $value = trim($matches[1]);
+        }
+
+        if ($value !== '' && self::isValidUrl($value) && stripos($value, '/maps/embed') !== false) {
+            return $value;
+        }
+
+        return null;
+    }
 }

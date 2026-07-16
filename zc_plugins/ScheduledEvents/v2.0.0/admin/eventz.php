@@ -217,7 +217,7 @@ if ($action === 'new') {
 
   <div class="form-group">
     <label for="drivingDirections"><?php echo ENTRY_EVENTZ_DRIVING_DIRECTIONS; ?></label>
-    <?php echo zen_draw_input_field('drivingDirections', $eventzEditing['drivingDirections'] ?? '', 'id="drivingDirections" class="form-control"'); ?>
+    <?php echo zen_draw_textarea_field('drivingDirections', 'soft', 60, 4, $eventzEditing['drivingDirections'] ?? '', 'id="drivingDirections" class="form-control"'); ?>
     <small><?php echo TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP; ?></small>
   </div>
 
