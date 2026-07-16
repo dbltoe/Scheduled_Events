@@ -1,21 +1,22 @@
 <?php
 /**
- * Loaded on every admin page (not just eventz.php) so the "eventz" sidebox
- * has a friendly name wherever admin lists boxes by their language key,
- * e.g. Design > Layout Boxes Controller.
+ * Loaded on every admin page via Zen Cart's ArraysLanguageLoader, which
+ * requires an extra_definitions file to `return` a flat CONSTANT_NAME =>
+ * value array - it calls define() on each pair itself. A file with no
+ * return statement (e.g. one using define() directly, as this used to)
+ * implicitly returns int(1) here, which is a fatal TypeError.
+ *
+ * - BOX_HEADING_EVENTZ: friendly name for the "eventz" sidebox wherever
+ *   admin lists boxes by language key, e.g. Design > Layout Boxes Controller.
+ * - BOX_CATALOG_EVENTZ: menu text for the Catalog > Scheduled Events
+ *   admin_pages entry (the events list page).
+ * - BOX_CONFIGURATION_SCHEDULED_EVENTS: menu text for the
+ *   Configuration > Scheduled Events admin_pages entry.
+ * All three must be defined admin-wide, not just on their own page, since
+ * the sidebar menu (and Layout Boxes Controller) render on every page.
  */
-define('BOX_HEADING_EVENTZ', 'Scheduled Events');
-
-/**
- * Menu text for the Catalog > Scheduled Events admin_pages entry (the events
- * list page). Needed admin-wide, same reasoning as BOX_HEADING_EVENTZ above.
- */
-if (!defined('BOX_CATALOG_EVENTZ')) {
-    define('BOX_CATALOG_EVENTZ', 'Scheduled Events');
-}
-
-/**
- * Menu text for the Configuration > Scheduled Events admin_pages entry.
- * Needed admin-wide since the Configuration menu renders on every admin page.
- */
-define('BOX_CONFIGURATION_SCHEDULED_EVENTS', 'Scheduled Events');
+return [
+    'BOX_HEADING_EVENTZ' => 'Scheduled Events',
+    'BOX_CATALOG_EVENTZ' => 'Scheduled Events',
+    'BOX_CONFIGURATION_SCHEDULED_EVENTS' => 'Scheduled Events',
+];
