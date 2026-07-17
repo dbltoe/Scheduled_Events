@@ -16,7 +16,7 @@
  * not call define() directly.
  *
  * FILENAME_EVENTZ lives in the plugin's root filenames.php and
- * BOX_CATALOG_EVENTZ in extra_definitions/lang.eventz_extra_definitions.php -
+ * BOX_EXTRAS_EVENTZ in extra_definitions/lang.eventz_extra_definitions.php -
  * both need to be available admin-wide, not just while this page itself is
  * loaded.
  */

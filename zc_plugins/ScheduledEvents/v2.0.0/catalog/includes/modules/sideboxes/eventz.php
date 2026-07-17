@@ -44,11 +44,19 @@ if ($eventzStatusEnabled && $eventzAdditionalSideboxEnabled && $current_page_bas
     // Deliberately not requiring core's tpl_box.php generic box wrapper: on
     // this store, its fallback path (a "template_default" directory) doesn't
     // exist for the active Bootstrap-based template, causing a fatal error.
-    // Building the box shell directly here, styled by our own eventz.css,
-    // sidesteps that entirely and works on any template.
-    echo '<div class="eventzSideboxContainer">';
-    echo '<h3 class="eventzSideboxHeading">' . zen_output_string_protected($title) . '</h3>';
-    echo '<div class="eventzSideboxContent">' . $content . '</div>';
+    // Building the box shell directly here instead - but using the exact
+    // same classes as core sideboxes (e.g. Information, Bestsellers): "card
+    // mb-3" plus "leftBoxCard"/"rightBoxCard" on the container, and
+    // "card-header" plus "leftBoxHeading"/"rightBoxHeading" on the heading.
+    // The latter pair is what this template's own stylesheet_zca_colors.css
+    // actually themes (via CSS custom properties like
+    // --zca_sidebox_header_background_color) - "card"/"card-header" alone
+    // only gets Bootstrap's generic default styling, not this store's theme
+    // colors. Both leftBox*/rightBox* variants are included since this box
+    // may be placed in either column and they're styled identically.
+    echo '<div class="eventzSideboxContainer leftBoxCard rightBoxCard card mb-3">';
+    echo '<h4 class="eventzSideboxHeading leftBoxHeading rightBoxHeading card-header">' . zen_output_string_protected($title) . '</h4>';
+    echo '<div class="eventzSideboxContent sideBoxContent">' . $content . '</div>';
     echo '</div>';
 
     // The column this box lives in (placed via Layout Boxes Controller) is

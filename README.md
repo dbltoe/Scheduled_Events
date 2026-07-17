@@ -5,7 +5,7 @@ v2.2.2/v2.2.3).
 
 Displays upcoming scheduled events (shows, fairs, expos, appearances, etc.) on their own storefront
 page, with a link added into the current template's Information sidebox. Events are managed from a
-dedicated admin screen (Catalog > Scheduled Events), with display options, labels, and the display
+dedicated admin screen (Extras > Scheduled Events), with display options, labels, and the display
 time window configurable under Configuration > Scheduled Events.
 
 Highlights:
@@ -14,6 +14,10 @@ Highlights:
   current date window) when none qualify.
 - Each event has a name, place, and start/stop dates (required), plus optional comments, booth
   location, event information, and driving directions.
+- Name, Booth Location, and Event Information display best when kept as brief as possible while still
+  conveying the required information — Name doubles as the carousel sidebox's only event label (no
+  room for long text there), and Booth Location/Event Information become clickable link text on the
+  events page, so a short, clear phrase reads better than a long sentence.
 - Booth Location and Event Information are each a plain-text description with a separate, optional
   URL — the description becomes a clickable link only when a valid URL is given, so the store owner
   never has to write HTML or worry about a bad link breaking the page. The URL may be a full external
@@ -30,7 +34,7 @@ Highlights:
   without uninstalling.
 - Each event has an Active checkbox (checked by default) so a store owner can pause/hide an event —
   e.g. a scheduling conflict — without deleting it or changing its dates. Inactive events never appear
-  on the storefront page or in any sidebox. The admin Catalog list shows active events only by
+  on the storefront page or in any sidebox. The admin events list shows active events only by
   default, with a "Show All" link to reveal paused events (shown dimmed with a Status column) for
   editing or reactivation.
 - A link to the events page is always added into the current template's Information sidebox, styled

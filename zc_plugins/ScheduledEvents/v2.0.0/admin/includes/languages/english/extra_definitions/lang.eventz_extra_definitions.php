@@ -17,7 +17,7 @@
  *
  * - BOX_HEADING_EVENTZ: friendly name for the "eventz" sidebox wherever
  *   admin lists boxes by language key, e.g. Design > Layout Boxes Controller.
- * - BOX_CATALOG_EVENTZ: menu text for the Catalog > Scheduled Events
+ * - BOX_EXTRAS_EVENTZ: menu text for the Extras > Scheduled Events
  *   admin_pages entry (the events list page).
  * - BOX_CONFIGURATION_SCHEDULED_EVENTS: menu text for the
  *   Configuration > Scheduled Events admin_pages entry.
@@ -26,6 +26,6 @@
  */
 return [
     'BOX_HEADING_EVENTZ' => 'Scheduled Events',
-    'BOX_CATALOG_EVENTZ' => 'Scheduled Events',
+    'BOX_EXTRAS_EVENTZ' => 'Scheduled Events',
     'BOX_CONFIGURATION_SCHEDULED_EVENTS' => 'Scheduled Events',
 ];

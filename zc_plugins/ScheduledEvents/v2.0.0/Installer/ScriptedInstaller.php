@@ -246,11 +246,11 @@ class ScriptedInstaller extends ScriptedInstallBase
         if (!defined('FILENAME_EVENTZ')) {
             define('FILENAME_EVENTZ', 'eventz.php');
         }
-        if (!defined('BOX_CATALOG_EVENTZ')) {
-            define('BOX_CATALOG_EVENTZ', 'Scheduled Events');
+        if (!defined('BOX_EXTRAS_EVENTZ')) {
+            define('BOX_EXTRAS_EVENTZ', 'Scheduled Events');
         }
 
-        zen_register_admin_page('eventzList', 'BOX_CATALOG_EVENTZ', 'FILENAME_EVENTZ', '', 'catalog', 'Y');
+        zen_register_admin_page('eventzList', 'BOX_EXTRAS_EVENTZ', 'FILENAME_EVENTZ', '', 'extras', 'Y');
     }
 
     protected function uninstallAdminPage(): void

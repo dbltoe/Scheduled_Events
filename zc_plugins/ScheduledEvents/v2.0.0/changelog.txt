@@ -35,12 +35,12 @@ v2.0.0
   needed. A master "Enable Scheduled Events Display" configuration switch can
   fully hide the storefront page and all of its promotion at any time,
   without uninstalling.
-- Admin event management screen (Catalog > Scheduled Events): add/edit/delete
+- Admin event management screen (Extras > Scheduled Events): add/edit/delete
   events, with required-field markers, a sort-order dropdown for the event
   list, and a Help button linking to this plugin's GitHub repository.
 - Active field: each event can be paused (unchecked) without deleting it or
   changing its dates, hiding it from the storefront page and every sidebox.
-  The admin Catalog list shows active events only by default, with a
+  The admin events list shows active events only by default, with a
   "Show All" link to reveal paused events (shown dimmed, with a Status
   column) for editing or reactivation.
 - Admin configuration group (Configuration > Scheduled Events) for the page

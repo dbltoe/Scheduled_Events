@@ -132,10 +132,11 @@
     }
 }
 
-/* Sidebox: scrolling mode (requires a Bootstrap-based template) */
-.eventzSideboxContainer {
-    margin-bottom: 1.5rem;
-}
+/* Sidebox: scrolling mode (requires a Bootstrap-based template). Spacing and
+   header theming are left to Bootstrap's own "mb-3"/"card-header" classes
+   and this template's stylesheet_zca_colors.css (see sideboxes/eventz.php)
+   rather than set here, so the box matches core sideboxes (e.g. Information,
+   Bestsellers) and reacts the same way to this store's color theme. */
 
 /* Applied by the relocation script (sideboxes/eventz.php) when the box is
    moved out of its normally-hidden-on-mobile column into the main content
@@ -144,43 +145,27 @@
     margin-top: 1rem;
 }
 
-.eventzSideboxHeading {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
 .eventzCarouselEmpty {
     padding: 0.75rem 1rem;
 }
 
-.eventzCarousel {
-    clear: both;
-}
-
 .eventzCarouselItem {
-    clear: both;
     padding: 0.75rem 1rem;
 }
 
 .eventzCarouselLink {
-    clear: both;
-    float: none;
     width: 100%;
     text-decoration: none;
     display: block;
 }
 
 .eventzCarouselName {
-    clear: both;
-    float: none;
     width: 100%;
     font-weight: bold;
 }
 
 .eventzCarouselStartDate,
 .eventzCarouselStopDate {
-    clear: both;
-    float: none;
     width: 100%;
     font-size: 0.85em;
     opacity: 0.8;

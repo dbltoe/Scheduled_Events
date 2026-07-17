@@ -12,7 +12,7 @@
 <h2>Overview</h2>
 <p>
 Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos,
-appearances, etc.) and display them on their own storefront page. Events are managed from Catalog
+appearances, etc.) and display them on their own storefront page. Events are managed from Extras
 &gt; Scheduled Events in the admin. A link to the events page is always added into the current
 template's existing Information sidebox, styled to match <code>responsive_classic</code> and ZCA
 Bootstrap out of the box (using any other template may require adjusting its styling to match that
@@ -40,20 +40,23 @@ uninstalling the plugin.
 </p>
 
 <h2>Event Fields</h2>
-<p>Each event has the following fields, set from Catalog &gt; Scheduled Events:</p>
+<p>Each event has the following fields, set from Extras &gt; Scheduled Events:</p>
 <ul>
-<li><strong>Name, Place, Start Date, Stop Date</strong> &mdash; required for every event.</li>
+<li><strong>Name, Place, Start Date, Stop Date</strong> &mdash; required for every event. Name doubles
+as the carousel sidebox's only event label (there's no room for long text there), so a short, clear
+name reads best.</li>
 <li><strong>Comments</strong> &mdash; optional free text.</li>
 <li><strong>Booth Location</strong> (required) <strong>and Event Information</strong> (optional)
 &mdash; each is a plain-text description with a separate, optional URL field. If a valid URL is
 given, the description becomes a link (opened in a new tab); if the URL is missing or doesn't
 validate, it's silently ignored and the description just displays as plain text. The store owner
-never has to author HTML. The URL field accepts either a full external address or a root-relative
-path to an asset already on the store &mdash; handy for a Booth Location map image hosted locally
-rather than linked externally (Event Information is meant for an external event website, so this is
-unlikely to come up there in practice, though the field works the same way). Use
-<code>/images/mapName.jpg</code> if the image was uploaded via the admin Image Manager (the site
-root's <code>images</code> folder), or
+never has to author HTML. Since the description becomes the visible link text, a brief phrase (e.g.
+"Space #16" or "Visit the official show website") reads better than a long sentence. The URL field
+accepts either a full external address or a root-relative path to an asset already on the store
+&mdash; handy for a Booth Location map image hosted locally rather than linked externally (Event
+Information is meant for an external event website, so this is unlikely to come up there in
+practice, though the field works the same way). Use <code>/images/mapName.jpg</code> if the image
+was uploaded via the admin Image Manager (the site root's <code>images</code> folder), or
 <code>/includes/templates/your_template/images/mapName.jpg</code> if it was placed directly in the
 current template's own images folder instead. Since a bad path is silently ignored rather than shown
 as an error, test it first by opening the path directly in a browser (e.g.
@@ -66,7 +69,7 @@ outside the pop-up, or the Escape key). The embedded map is lazy-loaded: it is n
 visitor actually opens the pop-up.</li>
 <li><strong>Active</strong> (checked by default) &mdash; uncheck to pause an event, hiding it from the
 storefront page and every sidebox without deleting it or changing its dates. Useful when an event is
-on hiatus (e.g. a scheduling conflict) but may run again later. The admin Catalog list shows active
+on hiatus (e.g. a scheduling conflict) but may run again later. The admin events list shows active
 events only by default; a "Show All" link reveals paused events (shown dimmed, with a Status column)
 so they can be edited or reactivated.</li>
 </ul>
@@ -88,7 +91,7 @@ upgrading from a prior version).
 </p>
 <p>
 This creates the <code>eventz</code> database table (respecting your store's table prefix, if any),
-adds the Configuration &gt; Scheduled Events settings group, and adds the Catalog &gt; Scheduled
+adds the Configuration &gt; Scheduled Events settings group, and adds the Extras &gt; Scheduled
 Events admin menu entry.
 </p>
 <p>
