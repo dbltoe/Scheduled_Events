@@ -38,3 +38,8 @@
     font-size: 130%;
     padding: 12px 20px;
 }
+
+.eventzInactiveRow {
+    opacity: 0.6;
+    font-style: italic;
+}

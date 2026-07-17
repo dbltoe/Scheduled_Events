@@ -23,6 +23,11 @@ Highlights:
   lazy-loaded and never fetched unless the pop-up is actually opened.
 - A master "Enable Scheduled Events Display" switch fully hides the storefront page and sidebox link
   without uninstalling.
+- Each event has an Active checkbox (checked by default) so a store owner can pause/hide an event —
+  e.g. a scheduling conflict — without deleting it or changing its dates. Inactive events never appear
+  on the storefront page or in any sidebox. The admin Catalog list shows active events only by
+  default, with a "Show All" link to reveal paused events (shown dimmed with a Status column) for
+  editing or reactivation.
 - The Information sidebox link is styled to match `responsive_classic` and ZCA Bootstrap out of the
   box. Using any other template may require adjusting its styling to match that template's own
   conventions.

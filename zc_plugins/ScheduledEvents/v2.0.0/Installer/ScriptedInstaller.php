@@ -62,6 +62,7 @@ class ScriptedInstaller extends ScriptedInstallBase
                 eventInformation mediumtext,
                 eventInformationUrl varchar(500),
                 drivingDirections mediumtext,
+                active tinyint(1) NOT NULL DEFAULT 1,
                 PRIMARY KEY (id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 

@@ -15,7 +15,9 @@ namespace Zencart\Plugins\Catalog\ScheduledEvents;
 class EventzService
 {
     /**
-     * Events qualify once today falls within [startDate - windowDays, stopDate].
+     * Events qualify once today falls within [startDate - windowDays, stopDate]
+     * AND the event is marked active - a store owner can pause an event
+     * (e.g. a scheduling conflict) without deleting it or touching its dates.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -26,7 +28,8 @@ class EventzService
         $sql = "SELECT id, name, place, startDate, stopDate, comments, boothLocation,
                        boothLocationUrl, eventInformation, eventInformationUrl, drivingDirections
                 FROM " . TABLE_EVENTZ . "
-                WHERE DATE_SUB(startDate, INTERVAL " . (int)$windowDays . " DAY) <= CURDATE()
+                WHERE active = 1
+                  AND DATE_SUB(startDate, INTERVAL " . (int)$windowDays . " DAY) <= CURDATE()
                   AND stopDate >= CURDATE()
                 ORDER BY startDate ASC";
 

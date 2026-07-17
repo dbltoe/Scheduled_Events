@@ -63,6 +63,7 @@ $eventzSortOptions = [
     'place_desc' => ['column' => 'place', 'direction' => 'DESC', 'label' => 'Place (Z-A)'],
 ];
 $eventzSelectedSort = isset($_GET['sort']) && isset($eventzSortOptions[$_GET['sort']]) ? $_GET['sort'] : 'startDate_desc';
+$eventzShowAll = isset($_GET['showAll']) && $_GET['showAll'] === '1';
 
 switch ($action) {
     case 'insert':
@@ -78,6 +79,7 @@ switch ($action) {
             'eventInformation' => zen_db_prepare_input($_POST['eventInformation'] ?? ''),
             'eventInformationUrl' => zen_db_prepare_input($_POST['eventInformationUrl'] ?? ''),
             'drivingDirections' => zen_db_prepare_input($_POST['drivingDirections'] ?? ''),
+            'active' => isset($_POST['active']) ? 1 : 0,
         ];
 
         $errors = [];
@@ -125,6 +127,7 @@ switch ($action) {
             'eventInformation' => $eventzData['eventInformation'],
             'eventInformationUrl' => $eventzData['eventInformationUrl'],
             'drivingDirections' => $eventzData['drivingDirections'],
+            'active' => $eventzData['active'],
         ];
 
         if ($action === 'insert') {
@@ -244,6 +247,12 @@ if ($action === 'new') {
     <small><?php echo TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP; ?></small>
   </div>
 
+  <div class="form-group form-check">
+    <?php echo zen_draw_checkbox_field('active', '1', !isset($eventzEditing['active']) || (int)$eventzEditing['active'] === 1, 'id="active" class="form-check-input"'); ?>
+    <label for="active" class="form-check-label"><?php echo ENTRY_EVENTZ_ACTIVE; ?></label>
+    <small><?php echo TEXT_EVENTZ_ACTIVE_HELP; ?></small>
+  </div>
+
   <div class="form-group">
     <button type="submit" class="btn btn-primary"><?php echo IMAGE_SAVE; ?></button>
     <a class="btn btn-secondary" href="<?php echo zen_href_link(FILENAME_EVENTZ); ?>"><?php echo IMAGE_CANCEL; ?></a>
@@ -273,16 +282,32 @@ if ($action === 'new') {
       <option value="<?php echo $eventzSortKey; ?>"<?php echo ($eventzSortKey === $eventzSelectedSort) ? ' selected' : ''; ?>><?php echo $eventzSortOption['label']; ?></option>
     <?php } ?>
     </select>
+    <?php if ($eventzShowAll) { ?>
+    <input type="hidden" name="showAll" value="1">
+    <?php } ?>
   </form>
+
+  <p>
+  <?php if ($eventzShowAll) { ?>
+    <a href="<?php echo zen_href_link(FILENAME_EVENTZ, 'sort=' . $eventzSelectedSort); ?>"><?php echo TEXT_EVENTZ_SHOW_ACTIVE_ONLY; ?></a>
+  <?php } else { ?>
+    <a href="<?php echo zen_href_link(FILENAME_EVENTZ, 'sort=' . $eventzSelectedSort . '&showAll=1'); ?>"><?php echo TEXT_EVENTZ_SHOW_ALL; ?></a>
+  <?php } ?>
+  </p>
 
   <?php
   $eventzSortColumn = $eventzSortOptions[$eventzSelectedSort]['column'];
   $eventzSortDirection = $eventzSortOptions[$eventzSelectedSort]['direction'];
-  $eventzListResult = $db->Execute("SELECT id, name, place, startDate, stopDate FROM " . TABLE_EVENTZ . " ORDER BY " . $eventzSortColumn . " " . $eventzSortDirection);
+  $eventzListSql = "SELECT id, name, place, startDate, stopDate, active FROM " . TABLE_EVENTZ;
+  if (!$eventzShowAll) {
+      $eventzListSql .= " WHERE active = 1";
+  }
+  $eventzListSql .= " ORDER BY " . $eventzSortColumn . " " . $eventzSortDirection;
+  $eventzListResult = $db->Execute($eventzListSql);
   ?>
 
   <?php if ($eventzListResult->EOF) { ?>
-    <h2 class="eventzNoEventsAdmin"><?php echo TEXT_EVENTZ_NO_EVENTS; ?></h2>
+    <h2 class="eventzNoEventsAdmin"><?php echo $eventzShowAll ? TEXT_EVENTZ_NO_EVENTS : TEXT_EVENTZ_NO_ACTIVE_EVENTS; ?></h2>
   <?php } else { ?>
   <table class="table table-striped">
     <thead>
@@ -291,16 +316,22 @@ if ($action === 'new') {
         <th><?php echo TABLE_HEADING_EVENTZ_PLACE; ?></th>
         <th><?php echo TABLE_HEADING_EVENTZ_START_DATE; ?></th>
         <th><?php echo TABLE_HEADING_EVENTZ_STOP_DATE; ?></th>
+        <?php if ($eventzShowAll) { ?>
+        <th><?php echo TABLE_HEADING_EVENTZ_STATUS; ?></th>
+        <?php } ?>
         <th><?php echo TABLE_HEADING_EVENTZ_ACTION; ?></th>
       </tr>
     </thead>
     <tbody>
     <?php while (!$eventzListResult->EOF) { ?>
-      <tr>
+      <tr<?php echo ((int)$eventzListResult->fields['active'] !== 1) ? ' class="eventzInactiveRow"' : ''; ?>>
         <td><?php echo zen_output_string_protected($eventzListResult->fields['name']); ?></td>
         <td><?php echo zen_output_string_protected($eventzListResult->fields['place']); ?></td>
         <td><?php echo $eventzListResult->fields['startDate']; ?></td>
         <td><?php echo $eventzListResult->fields['stopDate']; ?></td>
+        <?php if ($eventzShowAll) { ?>
+        <td><?php echo ((int)$eventzListResult->fields['active'] === 1) ? TEXT_EVENTZ_STATUS_ACTIVE : TEXT_EVENTZ_STATUS_INACTIVE; ?></td>
+        <?php } ?>
         <td>
           <a href="<?php echo zen_href_link(FILENAME_EVENTZ, 'action=edit&id=' . (int)$eventzListResult->fields['id']); ?>"><?php echo IMAGE_EDIT; ?></a>
           &nbsp;|&nbsp;
