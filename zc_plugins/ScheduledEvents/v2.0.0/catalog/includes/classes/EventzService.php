@@ -90,6 +90,20 @@ class EventzService
         return zen_output_string_protected($text);
     }
 
+    /**
+     * Browsers treat a bare hyphen as a valid line-break point even with no
+     * surrounding whitespace, so a compound term like "4-H" can wrap
+     * awkwardly on narrow screens. Swap only "tight" hyphens - no
+     * whitespace on either side - for a non-breaking hyphen (U+2011); a
+     * spaced dash used to separate phrases (e.g. "Milwaukee - Summerfest")
+     * is left untouched, since it already wraps at the surrounding space
+     * rather than at the hyphen itself.
+     */
+    public static function preventTightHyphenWrap(string $text): string
+    {
+        return preg_replace('/(?<=\S)-(?=\S)/u', "\u{2011}", $text);
+    }
+
     private static function isValidUrl(string $url): bool
     {
         // A root-relative path (e.g. /images/foo.jpg) always resolves against

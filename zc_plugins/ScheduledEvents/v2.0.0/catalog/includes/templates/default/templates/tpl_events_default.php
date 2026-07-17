@@ -25,7 +25,7 @@ global $eventzEvents, $eventzWindowRange;
   <?php $eventzLastKey = array_key_last($eventzEvents); ?>
   <?php foreach ($eventzEvents as $eventzKey => $eventzEvent) { ?>
   <?php $eventzMapEmbedUrl = !empty($eventzEvent['drivingDirections']) ? EventzService::extractMapEmbedUrl($eventzEvent['drivingDirections']) : null; ?>
-  <h2 id="eventz-event-<?php echo (int)$eventzEvent['id']; ?>" class="eventzHeader"><?php echo zen_output_string_protected($eventzEvent['name']); ?></h2>
+  <h2 id="eventz-event-<?php echo (int)$eventzEvent['id']; ?>" class="eventzHeader"><?php echo zen_output_string_protected(EventzService::preventTightHyphenWrap($eventzEvent['name'])); ?></h2>
   <hr class="eventzHr">
   <blockquote class="eventzDetails">
     <div class="eventzField eventzPlace">

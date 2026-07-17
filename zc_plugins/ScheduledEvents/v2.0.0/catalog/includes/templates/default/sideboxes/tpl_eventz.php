@@ -7,6 +7,8 @@
  * @license http://zen-cart.com GNU Public License V2.0
  * @version $Id: tpl_eventz.php 2026-07-16 05:30:22Z dbltoe $
  */
+use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
+
 global $eventzSideboxEvents, $title_link;
 ?>
 <?php if (empty($eventzSideboxEvents)) { ?>
@@ -19,7 +21,7 @@ global $eventzSideboxEvents, $title_link;
 <?php foreach ($eventzSideboxEvents as $eventzIndex => $eventzEvent) { ?>
     <div class="eventzCarouselItem carousel-item<?php echo ($eventzIndex === 0) ? ' active' : ''; ?>">
       <a class="eventzCarouselLink" href="<?php echo zen_output_string_protected($title_link . '#eventz-event-' . (int)$eventzEvent['id']); ?>">
-        <div class="eventzCarouselName"><?php echo zen_output_string_protected($eventzEvent['name']); ?></div>
+        <div class="eventzCarouselName"><?php echo zen_output_string_protected(EventzService::preventTightHyphenWrap($eventzEvent['name'])); ?></div>
         <div class="eventzCarouselStartDate"><?php echo zen_date_long($eventzEvent['startDate']); ?></div>
         <div class="eventzCarouselStopDate"><?php echo zen_date_long($eventzEvent['stopDate']); ?></div>
       </a>
