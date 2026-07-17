@@ -17,6 +17,5 @@
  */
 return [
     'NAVBAR_TITLE' => 'Scheduled Events',
-    'TITLE_EVENTS' => 'Scheduled Events',
     'TEXT_EVENTZ_DIRECTIONS_LINK' => 'Get Directions',
 ];
