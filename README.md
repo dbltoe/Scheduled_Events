@@ -25,7 +25,10 @@ Highlights:
   map image doesn't require an absolute URL — use `/images/mapName.jpg` if it was uploaded via the
   admin Image Manager, or `/includes/templates/your_template/images/mapName.jpg` if it was placed
   directly in the current template's own images folder. Test any such path by opening it in a browser
-  first, since a bad path is silently ignored rather than shown as an error.
+  first, since a bad path is silently ignored rather than shown as an error. Some hosts also block
+  direct access to non-image files like PDFs even when the path is correct (a "403 Forbidden"),
+  regardless of what this plugin does — if that happens, try a folder your host does allow direct
+  access to rather than the images folder.
 - Driving Directions accepts either a plain address/URL (opens Google Maps in a new tab) or a Google
   Maps "Embed a map" `<iframe>` code (opens as a self-contained on-page pop-up map instead — no page
   navigation, full-screen on phones/tablets, closed via an X, clicking outside, or Escape). The map is

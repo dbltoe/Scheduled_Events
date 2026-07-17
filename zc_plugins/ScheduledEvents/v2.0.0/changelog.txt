@@ -37,7 +37,10 @@ v2.0.0
   without uninstalling.
 - Admin event management screen (Extras > Scheduled Events): add/edit/delete
   events, with required-field markers, a sort-order dropdown for the event
-  list, and a Help button linking to this plugin's GitHub repository.
+  list, and a Help button linking to this plugin's GitHub repository. The
+  add/edit form's field/value/description layout matches core's own
+  Configuration screen (field label, input, and a shaded description box side
+  by side), reading larger and clearer than the previous stacked layout.
 - Active field: each event can be paused (unchecked) without deleting it or
   changing its dates, hiding it from the storefront page and every sidebox.
   The admin events list shows active events only by default, with a

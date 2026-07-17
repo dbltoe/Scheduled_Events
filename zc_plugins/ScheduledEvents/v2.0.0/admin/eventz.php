@@ -188,74 +188,97 @@ if ($action === 'new') {
 
   <p class="eventzRequiredNotice">* <?php echo TEXT_EVENTZ_REQUIRED_INFORMATION; ?></p>
 
-  <?php echo zen_draw_form('eventz', FILENAME_EVENTZ, 'action=' . ($action === 'new' ? 'insert' : 'update') . ($eventzEditing ? '&id=' . (int)$eventzEditing['id'] : ''), 'post'); ?>
+  <?php echo zen_draw_form('eventz', FILENAME_EVENTZ, 'action=' . ($action === 'new' ? 'insert' : 'update') . ($eventzEditing ? '&id=' . (int)$eventzEditing['id'] : ''), 'post', 'class="form-horizontal"'); ?>
 
-  <div class="form-group">
-    <label for="name"><?php echo ENTRY_EVENTZ_NAME; ?><span class="eventzRequired">*</span></label>
-    <?php echo zen_draw_input_field('name', $eventzEditing['name'] ?? '', 'id="name" class="form-control" maxlength="255" required'); ?>
+  <div class="row font-weight-bold bg-primary py-3">
+    <div class="col-md-3"><?php echo TABLE_HEADING_EVENTZ_FIELD; ?></div>
+    <div class="col-md-3"><?php echo TABLE_HEADING_EVENTZ_VALUE; ?></div>
+    <div class="col-md-6"></div>
   </div>
 
-  <div class="form-group">
-    <label for="place"><?php echo ENTRY_EVENTZ_PLACE; ?><span class="eventzRequired">*</span></label>
-    <?php echo zen_draw_input_field('place', $eventzEditing['place'] ?? '', 'id="place" class="form-control" maxlength="255" required'); ?>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="name"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_NAME; ?></strong><span class="eventzRequired">*</span></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('name', $eventzEditing['name'] ?? '', 'id="name" class="form-control" maxlength="255" required'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_NAME_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="startDate"><?php echo ENTRY_EVENTZ_START_DATE; ?><span class="eventzRequired">*</span></label>
-    <?php echo zen_draw_input_field('startDate', $eventzEditing['startDate'] ?? '', 'id="startDate" class="form-control" required', false, 'date'); ?>
-    <small><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="place"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_PLACE; ?></strong><span class="eventzRequired">*</span></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('place', $eventzEditing['place'] ?? '', 'id="place" class="form-control" maxlength="255" required'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_PLACE_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="stopDate"><?php echo ENTRY_EVENTZ_STOP_DATE; ?><span class="eventzRequired">*</span></label>
-    <?php echo zen_draw_input_field('stopDate', $eventzEditing['stopDate'] ?? '', 'id="stopDate" class="form-control" required', false, 'date'); ?>
-    <small><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="startDate"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_START_DATE; ?></strong><span class="eventzRequired">*</span></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('startDate', $eventzEditing['startDate'] ?? '', 'id="startDate" class="form-control" required', false, 'date'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="comments"><?php echo ENTRY_EVENTZ_COMMENTS; ?></label>
-    <?php echo zen_draw_textarea_field('comments', 'soft', 60, 4, $eventzEditing['comments'] ?? '', 'id="comments" class="form-control"'); ?>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="stopDate"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_STOP_DATE; ?></strong><span class="eventzRequired">*</span></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('stopDate', $eventzEditing['stopDate'] ?? '', 'id="stopDate" class="form-control" required', false, 'date'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_DATE_FORMAT_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="boothLocation"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?><span class="eventzRequired">*</span></label>
-    <?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255" required'); ?>
-    <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="comments"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_COMMENTS; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_textarea_field('comments', 'soft', 60, 4, $eventzEditing['comments'] ?? '', 'id="comments" class="form-control"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_COMMENTS_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="boothLocationUrl"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION_URL; ?></label>
-    <?php echo zen_draw_input_field('boothLocationUrl', $eventzEditing['boothLocationUrl'] ?? '', 'id="boothLocationUrl" class="form-control" maxlength="500"'); ?>
-    <small><?php echo TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="boothLocation"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION; ?></strong><span class="eventzRequired">*</span></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('boothLocation', $eventzEditing['boothLocation'] ?? '', 'id="boothLocation" class="form-control" maxlength="255" required'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_BOOTH_LOCATION_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="eventInformation"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION; ?></label>
-    <?php echo zen_draw_input_field('eventInformation', $eventzEditing['eventInformation'] ?? '', 'id="eventInformation" class="form-control"'); ?>
-    <small><?php echo TEXT_EVENTZ_EVENT_INFO_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="boothLocationUrl"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_BOOTH_LOCATION_URL; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('boothLocationUrl', $eventzEditing['boothLocationUrl'] ?? '', 'id="boothLocationUrl" class="form-control" maxlength="500"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="eventInformationUrl"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION_URL; ?></label>
-    <?php echo zen_draw_input_field('eventInformationUrl', $eventzEditing['eventInformationUrl'] ?? '', 'id="eventInformationUrl" class="form-control" maxlength="500"'); ?>
-    <small><?php echo TEXT_EVENTZ_EVENT_INFO_URL_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="eventInformation"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('eventInformation', $eventzEditing['eventInformation'] ?? '', 'id="eventInformation" class="form-control"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_EVENT_INFO_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="drivingDirections"><?php echo ENTRY_EVENTZ_DRIVING_DIRECTIONS; ?></label>
-    <?php echo zen_draw_textarea_field('drivingDirections', 'soft', 60, 4, $eventzEditing['drivingDirections'] ?? '', 'id="drivingDirections" class="form-control"'); ?>
-    <small><?php echo TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="eventInformationUrl"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_EVENT_INFORMATION_URL; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_input_field('eventInformationUrl', $eventzEditing['eventInformationUrl'] ?? '', 'id="eventInformationUrl" class="form-control" maxlength="500"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_EVENT_INFO_URL_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group form-check">
-    <?php echo zen_draw_checkbox_field('active', '1', !isset($eventzEditing['active']) || (int)$eventzEditing['active'] === 1, 'id="active" class="form-check-input"'); ?>
-    <label for="active" class="form-check-label"><?php echo ENTRY_EVENTZ_ACTIVE; ?></label>
-    <small><?php echo TEXT_EVENTZ_ACTIVE_HELP; ?></small>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="drivingDirections"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_DRIVING_DIRECTIONS; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_textarea_field('drivingDirections', 'soft', 60, 4, $eventzEditing['drivingDirections'] ?? '', 'id="drivingDirections" class="form-control"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_DRIVING_DIRECTIONS_HELP; ?></div>
   </div>
+  <hr>
 
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary"><?php echo IMAGE_SAVE; ?></button>
-    <a class="btn btn-secondary" href="<?php echo zen_href_link(FILENAME_EVENTZ); ?>"><?php echo IMAGE_CANCEL; ?></a>
+  <div class="row row-hover align-items-center py-2">
+    <div class="col-md-3"><label for="active"><strong class="eventzFieldLabel"><?php echo ENTRY_EVENTZ_ACTIVE; ?></strong></label></div>
+    <div class="col-md-3"><?php echo zen_draw_checkbox_field('active', '1', !isset($eventzEditing['active']) || (int)$eventzEditing['active'] === 1, 'id="active" class="form-check-input"'); ?></div>
+    <div class="col-md-6 bg-info p-3"><?php echo TEXT_EVENTZ_ACTIVE_HELP; ?></div>
+  </div>
+  <hr>
+
+  <div class="row py-2">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <button type="submit" class="btn btn-primary"><?php echo IMAGE_SAVE; ?></button>
+      <a class="btn btn-secondary" href="<?php echo zen_href_link(FILENAME_EVENTZ); ?>"><?php echo IMAGE_CANCEL; ?></a>
+    </div>
   </div>
   </form>
 

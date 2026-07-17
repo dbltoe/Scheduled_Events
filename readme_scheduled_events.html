@@ -60,7 +60,10 @@ was uploaded via the admin Image Manager (the site root's <code>images</code> fo
 <code>/includes/templates/your_template/images/mapName.jpg</code> if it was placed directly in the
 current template's own images folder instead. Since a bad path is silently ignored rather than shown
 as an error, test it first by opening the path directly in a browser (e.g.
-<code>yourdomain.com/images/mapName.jpg</code>).</li>
+<code>yourdomain.com/images/mapName.jpg</code>). Some hosts also block direct access to non-image
+files like PDFs even when the path is correct (a "403 Forbidden"), regardless of what this plugin
+does &mdash; if that happens, try a folder your host does allow direct access to rather than the
+images folder.</li>
 <li><strong>Driving Directions</strong> &mdash; accepts either a plain address or URL (the
 storefront link opens Google Maps in a new tab), or a Google Maps "Embed a map" <code>&lt;iframe&gt;</code>
 code (the storefront link instead opens the map as a self-contained pop-up over the page &mdash; no
