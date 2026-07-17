@@ -10,9 +10,9 @@
 
 /**
  * Injects a Scheduled Events link into the core Information sidebox when
- * SCHEDULED_EVENTS_SIDEBOX_MODE is 'information'. Mode 'sidebox' instead
- * shows the plugin's own scrolling carousel box - see catalog/includes/
- * modules/sideboxes/eventz.php.
+ * SCHEDULED_EVENTS_SIDEBOX_MODE is 'Information Listing'. Mode 'Bootstrap
+ * Sidebox' instead shows the plugin's own scrolling carousel box - see
+ * catalog/includes/modules/sideboxes/eventz.php.
  */
 class EventzObserver extends base
 {
@@ -31,8 +31,8 @@ class EventzObserver extends base
             return;
         }
 
-        $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'information';
-        if ($eventzSideboxMode !== 'information') {
+        $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'Information Listing';
+        if ($eventzSideboxMode !== 'Information Listing') {
             return;
         }
 

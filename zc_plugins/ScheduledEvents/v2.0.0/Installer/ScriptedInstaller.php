@@ -199,11 +199,11 @@ class ScriptedInstaller extends ScriptedInstallBase
 
         $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_MODE', [
             'configuration_title' => 'Sidebox Display Mode',
-            'configuration_value' => 'sidebox',
-            'configuration_description' => 'How upcoming events are promoted: "information" adds a link into the current template\'s existing Information sidebox; "sidebox" instead shows the plugin\'s own scrolling sidebox, placed via Design > Layout Boxes Controller. NOTE: "sidebox" requires a Bootstrap-based template (e.g. ZCA Bootstrap or a clone) - on other templates (e.g. responsive_classic), use "information" instead.',
+            'configuration_value' => 'Bootstrap Sidebox',
+            'configuration_description' => 'How upcoming events are promoted: "Information Listing" adds a link into the current template\'s existing Information sidebox; "Bootstrap Sidebox" instead shows the plugin\'s own scrolling sidebox, placed via Design > Layout Boxes Controller. <strong>NOTE: "Bootstrap Sidebox" requires a Bootstrap-based template (e.g. ZCA Bootstrap or a clone) - on other templates (e.g. responsive_classic), use "Information Listing" instead.</strong>',
             'configuration_group_id' => $groupId,
             'sort_order' => 105,
-            'set_function' => 'zen_cfg_select_option(array(\'information\', \'sidebox\'), ',
+            'set_function' => 'zen_cfg_select_option(array(\'Information Listing\', \'Bootstrap Sidebox\'), ',
         ]);
 
         $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_TITLE', [
