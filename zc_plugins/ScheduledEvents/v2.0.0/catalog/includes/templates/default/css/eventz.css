@@ -6,6 +6,7 @@
 
 .eventzPageTitle {
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .eventzHr {
@@ -16,6 +17,7 @@
 
 .eventzHeader {
     margin-bottom: 0;
+    margin-left: 1rem;
 }
 
 .eventzNoEvents {
