@@ -64,13 +64,20 @@ This creates the <code>eventz</code> database table (respecting your store's tab
 adds the Configuration &gt; Scheduled Events settings group, and adds the Catalog &gt; Scheduled
 Events admin menu entry.
 </p>
+<p>
+If Sidebox Display Mode (Configuration &gt; Scheduled Events) is set to "Bootstrap Sidebox", the box
+will need to be (re-)placed in a column via Design &gt; Layout Boxes Controller after installing -
+its placement does not survive an uninstall (see below), so this is also needed again after any
+uninstall/reinstall cycle.
+</p>
 
 <h3>Uninstalling</h3>
 <p>
 In the admin, go to Tools &gt; Install/Update Plugins, locate Scheduled Events, and click Uninstall.
 This removes the <code>eventz</code> table and all of its data, the plugin's configuration settings,
-and the admin menu entry. Removing the plugin's files from the server afterward is optional but
-recommended.
+the admin menu entry, <strong>and the "Bootstrap Sidebox" box's placement/position in Design &gt;
+Layout Boxes Controller, if it had been placed in a column</strong>. Removing the plugin's files from
+the server afterward is optional but recommended.
 </p>
 
 <h2>Change History</h2>
