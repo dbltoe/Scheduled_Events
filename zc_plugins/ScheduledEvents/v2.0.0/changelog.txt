@@ -21,23 +21,29 @@ v2.0.0
   on-page pop-up map instead - no page navigation, full-screen on phones/
   tablets, closed via an X button, clicking outside, or Escape). The embedded
   map is lazy-loaded and never fetched unless the pop-up is actually opened.
-- Sidebox Display Mode (Configuration > Scheduled Events) chooses how upcoming
-  events are promoted: "Information Listing" adds a link into the current
-  template's existing Information sidebox (styled to match responsive_classic
-  and ZCA Bootstrap out of the box); "Bootstrap Sidebox" instead shows the
-  plugin's own auto-scrolling carousel box, placed via Design > Layout Boxes
-  Controller (requires a Bootstrap-based template). A master "Enable
-  Scheduled Events Display" configuration switch can fully hide the
-  storefront page and both sidebox modes at any time, without uninstalling.
+- A link to the events page is always added into the current template's
+  existing Information sidebox (styled to match responsive_classic and ZCA
+  Bootstrap out of the box). "Enable Additional Bootstrap Sidebox"
+  (Configuration > Scheduled Events, off by default) adds a second, separate
+  promotional listing alongside that link: the plugin's own auto-scrolling
+  carousel box, placed via Design > Layout Boxes Controller - intended only
+  for Bootstrap-based templates, and has no effect on others. Since
+  Bootstrap-based templates typically hide the entire sidebar column on
+  phones/tablets, this additional sidebox automatically relocates itself into
+  the main content area as a full-width block below that breakpoint instead
+  of disappearing, then moves back to the sidebar above it - no configuration
+  needed. A master "Enable Scheduled Events Display" configuration switch can
+  fully hide the storefront page and all of its promotion at any time,
+  without uninstalling.
 - Admin event management screen (Catalog > Scheduled Events): add/edit/delete
   events, with required-field markers, a sort-order dropdown for the event
   list, and a Help button linking to this plugin's GitHub repository.
 - Active field: each event can be paused (unchecked) without deleting it or
-  changing its dates, hiding it from the storefront page and both sidebox
-  modes. The admin Catalog list shows active events only by default, with a
+  changing its dates, hiding it from the storefront page and every sidebox.
+  The admin Catalog list shows active events only by default, with a
   "Show All" link to reveal paused events (shown dimmed, with a Status
   column) for editing or reactivation.
 - Admin configuration group (Configuration > Scheduled Events) for the page
   heading, all field labels, the no-events message (and its follow-up line),
-  the 30/60/90-day display window, the sidebox display mode/title/max items,
-  and the master enable/disable switch.
+  the 30/60/90-day display window, the Additional Bootstrap Sidebox
+  toggle/title/max items, and the master enable/disable switch.

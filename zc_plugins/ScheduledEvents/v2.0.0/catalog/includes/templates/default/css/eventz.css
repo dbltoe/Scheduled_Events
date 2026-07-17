@@ -137,6 +137,13 @@
     margin-bottom: 1.5rem;
 }
 
+/* Applied by the relocation script (sideboxes/eventz.php) when the box is
+   moved out of its normally-hidden-on-mobile column into the main content
+   row as a full-width column. */
+.eventzSideboxMobile {
+    margin-top: 1rem;
+}
+
 .eventzSideboxHeading {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;

@@ -33,13 +33,17 @@ Highlights:
   on the storefront page or in any sidebox. The admin Catalog list shows active events only by
   default, with a "Show All" link to reveal paused events (shown dimmed with a Status column) for
   editing or reactivation.
-- The Information sidebox link is styled to match `responsive_classic` and ZCA Bootstrap out of the
-  box. Using any other template may require adjusting its styling to match that template's own
-  conventions.
-- Sidebox Display Mode (Configuration > Scheduled Events) chooses between "Information Listing" (the
-  link above) and "Bootstrap Sidebox" (the plugin's own scrolling box, placed via Design > Layout
-  Boxes Controller — requires a Bootstrap-based template). That box's placement doesn't survive an
+- A link to the events page is always added into the current template's Information sidebox, styled
+  to match `responsive_classic` and ZCA Bootstrap out of the box. Using any other template may require
+  adjusting its styling to match that template's own conventions.
+- "Enable Additional Bootstrap Sidebox" (Configuration > Scheduled Events, off by default) adds a
+  second, separate promotional listing alongside the Information sidebox link above: the plugin's own
+  auto-scrolling box, placed via Design > Layout Boxes Controller — requires a Bootstrap-based
+  template, and is meant to be left off on any other template. That box's placement doesn't survive an
   uninstall, so it needs to be re-placed via Layout Boxes Controller after any uninstall/reinstall.
+  Bootstrap-based templates typically hide the entire sidebar column on phones/tablets; this sidebox
+  automatically relocates itself into the main content area as a full-width block below that breakpoint
+  instead of disappearing, then moves back to the sidebar on larger screens.
 - Reinstalling after an uninstall resets every Configuration > Scheduled Events setting back to its
   default value — that's separate from the event data itself, which a SQL dump/restore of the
   `eventz` table preserves independently.

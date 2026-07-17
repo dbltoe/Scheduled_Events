@@ -103,7 +103,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->addConfigurationKey('SCHEDULED_EVENTS_STATUS', [
             'configuration_title' => 'Enable Scheduled Events Display',
             'configuration_value' => 'True',
-            'configuration_description' => 'Master switch for the storefront Scheduled Events page and sidebox. When False, the page redirects to the store home page and the sidebox never displays, regardless of the Sidebox Display Mode setting below. Admin management of events is unaffected either way.',
+            'configuration_description' => 'Master switch for the storefront Scheduled Events page and its promotion. When False, the page redirects to the store home page and no promotional listing displays, regardless of the Additional Bootstrap Sidebox setting below. Admin management of events is unaffected either way.',
             'configuration_group_id' => $groupId,
             'sort_order' => 5,
             'set_function' => 'zen_cfg_select_option(array(\'True\', \'False\'), ',
@@ -198,19 +198,19 @@ class ScriptedInstaller extends ScriptedInstallBase
             'set_function' => 'zen_cfg_select_option(array(\'30\', \'60\', \'90\'), ',
         ]);
 
-        $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_MODE', [
-            'configuration_title' => 'Sidebox Display Mode',
-            'configuration_value' => 'Bootstrap Sidebox',
-            'configuration_description' => 'How upcoming events are promoted: "Information Listing" adds a link into the current template\'s existing Information sidebox; "Bootstrap Sidebox" instead shows the plugin\'s own scrolling sidebox, placed via Design > Layout Boxes Controller. <strong>NOTE: "Bootstrap Sidebox" requires a Bootstrap-based template (e.g. ZCA Bootstrap or a clone) - on other templates (e.g. responsive_classic), use "Information Listing" instead.</strong>',
+        $this->addConfigurationKey('SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX', [
+            'configuration_title' => 'Enable Additional Bootstrap Sidebox',
+            'configuration_value' => 'False',
+            'configuration_description' => 'A link to the Scheduled Events page is always added into the current template\'s existing Information sidebox. Enabling this adds a second, separate promotional listing: the plugin\'s own auto-scrolling sidebox, placed via Design > Layout Boxes Controller. <strong>NOTE: Only enable this if your template is Bootstrap-based (e.g. ZCA Bootstrap or a clone) and you want a second listing location - it has no effect on other templates (e.g. responsive_classic).</strong>',
             'configuration_group_id' => $groupId,
             'sort_order' => 105,
-            'set_function' => 'zen_cfg_select_option(array(\'Information Listing\', \'Bootstrap Sidebox\'), ',
+            'set_function' => 'zen_cfg_select_option(array(\'True\', \'False\'), ',
         ]);
 
         $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_TITLE', [
             'configuration_title' => 'Sidebox Title/Link Text',
             'configuration_value' => 'Upcoming Events',
-            'configuration_description' => 'Heading for the "sidebox" mode\'s scrolling box, or link text for "information" mode.',
+            'configuration_description' => 'Link text for the Information sidebox listing, and also the heading for the additional Bootstrap sidebox if that\'s enabled above.',
             'configuration_group_id' => $groupId,
             'sort_order' => 110,
         ]);
@@ -218,7 +218,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS', [
             'configuration_title' => 'Sidebox Maximum Items',
             'configuration_value' => '5',
-            'configuration_description' => 'Maximum number of qualifying events to include in the "sidebox" mode\'s scrolling box.',
+            'configuration_description' => 'Maximum number of qualifying events to include in the additional Bootstrap sidebox\'s scrolling box, if enabled.',
             'configuration_group_id' => $groupId,
             'sort_order' => 115,
         ]);
@@ -226,7 +226,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->addConfigurationKey('SCHEDULED_EVENTS_SIDEBOX_NO_EVENTS_TEXT', [
             'configuration_title' => 'Sidebox No Events Text',
             'configuration_value' => 'No events scheduled right now.',
-            'configuration_description' => 'Shown in the "sidebox" mode\'s box in place of the carousel when no events currently qualify for display.',
+            'configuration_description' => 'Shown in the additional Bootstrap sidebox in place of the carousel when no events currently qualify for display.',
             'configuration_group_id' => $groupId,
             'sort_order' => 116,
         ]);

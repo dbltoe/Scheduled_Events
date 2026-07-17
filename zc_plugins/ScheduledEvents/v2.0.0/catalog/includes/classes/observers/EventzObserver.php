@@ -9,10 +9,11 @@
  */
 
 /**
- * Injects a Scheduled Events link into the core Information sidebox when
- * SCHEDULED_EVENTS_SIDEBOX_MODE is 'Information Listing'. Mode 'Bootstrap
- * Sidebox' instead shows the plugin's own scrolling carousel box - see
- * catalog/includes/modules/sideboxes/eventz.php.
+ * Always injects a Scheduled Events link into the core Information sidebox
+ * (subject only to the master SCHEDULED_EVENTS_STATUS switch). This is
+ * independent of SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX, which optionally adds a
+ * second, separate promotional listing - the plugin's own scrolling carousel
+ * box - see catalog/includes/modules/sideboxes/eventz.php.
  */
 class EventzObserver extends base
 {
@@ -28,11 +29,6 @@ class EventzObserver extends base
         }
 
         if (defined('SCHEDULED_EVENTS_STATUS') && SCHEDULED_EVENTS_STATUS === 'False') {
-            return;
-        }
-
-        $eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'Information Listing';
-        if ($eventzSideboxMode !== 'Information Listing') {
             return;
         }
 

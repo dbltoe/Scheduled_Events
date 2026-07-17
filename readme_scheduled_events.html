@@ -13,16 +13,29 @@
 <p>
 Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos,
 appearances, etc.) and display them on their own storefront page. Events are managed from Catalog
-&gt; Scheduled Events in the admin, and a link to the events page is added into the current
-template's existing Information sidebox. That link's styling is set to match
-<code>responsive_classic</code> and ZCA Bootstrap out of the box; using any other template may
-require adjusting its styling to match that template's own conventions.
+&gt; Scheduled Events in the admin. A link to the events page is always added into the current
+template's existing Information sidebox, styled to match <code>responsive_classic</code> and ZCA
+Bootstrap out of the box (using any other template may require adjusting its styling to match that
+template's own conventions).
+</p>
+<p>
+"Enable Additional Bootstrap Sidebox" (Configuration &gt; Scheduled Events, off by default) adds a
+second, separate promotional listing alongside that link: the plugin's own auto-scrolling carousel
+box, placed via Design &gt; Layout Boxes Controller. <strong>Only turn this on if the store's template
+is Bootstrap-based (e.g. ZCA Bootstrap or a clone) and a second listing location is wanted</strong> -
+it has no effect on other templates.
+</p>
+<p>
+Bootstrap-based templates typically hide the entire sidebar column on phones/tablets. Rather than
+disappear along with it, the additional Bootstrap sidebox (if enabled) automatically relocates itself
+into the main content area as a full-width block below that breakpoint, then moves back to its normal
+sidebar position on larger screens - no configuration needed.
 </p>
 <p>
 The storefront page heading, all field labels, the "no events scheduled" message, the display time
 window (how many days before an event's start date it becomes visible), and the sidebox link text are
 all configurable under Configuration &gt; Scheduled Events. A master "Enable Scheduled Events
-Display" switch there can fully hide the storefront page and sidebox link at any time, without
+Display" switch there can fully hide the storefront page and all of its promotion at any time, without
 uninstalling the plugin.
 </p>
 
@@ -79,9 +92,9 @@ adds the Configuration &gt; Scheduled Events settings group, and adds the Catalo
 Events admin menu entry.
 </p>
 <p>
-If Sidebox Display Mode (Configuration &gt; Scheduled Events) is set to "Bootstrap Sidebox", the box
-will need to be (re-)placed in a column via Design &gt; Layout Boxes Controller after installing -
-its placement does not survive an uninstall (see below), so this is also needed again after any
+If "Enable Additional Bootstrap Sidebox" (Configuration &gt; Scheduled Events) is turned on, the box
+will need to be placed in a column via Design &gt; Layout Boxes Controller after installing - its
+placement does not survive an uninstall (see below), so this is also needed again after any
 uninstall/reinstall cycle.
 </p>
 
@@ -89,16 +102,16 @@ uninstall/reinstall cycle.
 <p>
 In the admin, go to Tools &gt; Install/Update Plugins, locate Scheduled Events, and click Uninstall.
 This removes the <code>eventz</code> table and all of its data, the plugin's configuration settings,
-the admin menu entry, <strong>and the "Bootstrap Sidebox" box's placement/position in Design &gt;
+the admin menu entry, <strong>and the additional Bootstrap sidebox's placement/position in Design &gt;
 Layout Boxes Controller, if it had been placed in a column</strong>. Removing the plugin's files from
 the server afterward is optional but recommended.
 </p>
 <p>
 <strong>Reinstalling after an uninstall resets every Configuration &gt; Scheduled Events setting back
-to its default value</strong> (page heading, field labels, no-events message, display window, Sidebox
-Display Mode/title/max items, etc.) - any customization made there will need to be re-entered. This is
-separate from the event data itself: exporting/restoring the <code>eventz</code> table (e.g. via a SQL
-dump) preserves your events, but not your Configuration choices.
+to its default value</strong> (page heading, field labels, no-events message, display window, the
+Additional Bootstrap Sidebox toggle/title/max items, etc.) - any customization made there will need to
+be re-entered. This is separate from the event data itself: exporting/restoring the <code>eventz</code>
+table (e.g. via a SQL dump) preserves your events, but not your Configuration choices.
 </p>
 
 <h2>Change History</h2>

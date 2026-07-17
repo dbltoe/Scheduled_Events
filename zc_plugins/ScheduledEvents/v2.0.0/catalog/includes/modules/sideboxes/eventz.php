@@ -11,17 +11,17 @@ use Zencart\Plugins\Catalog\ScheduledEvents\EventzService;
 
 global $current_page_base;
 
-$eventzSideboxMode = defined('SCHEDULED_EVENTS_SIDEBOX_MODE') ? SCHEDULED_EVENTS_SIDEBOX_MODE : 'Information Listing';
+$eventzAdditionalSideboxEnabled = defined('SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX') && SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX === 'True';
 $eventzStatusEnabled = !defined('SCHEDULED_EVENTS_STATUS') || SCHEDULED_EVENTS_STATUS !== 'False';
 
-// This box only renders itself for mode 'Bootstrap Sidebox' (a scrolling
-// carousel - requires a Bootstrap-based template, e.g. ZCA Bootstrap or a
-// clone). Mode 'Information Listing' is handled separately by
-// EventzObserver, which injects a link into the core Information sidebox
-// instead. The master SCHEDULED_EVENTS_STATUS switch overrides both when
-// set to False. Also suppressed on the events page itself - pointless to
-// promote a page while already viewing it.
-if ($eventzStatusEnabled && $eventzSideboxMode === 'Bootstrap Sidebox' && $current_page_base !== 'events') {
+// This box only renders itself when SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX is
+// enabled - a second, separate promotional listing (a scrolling carousel -
+// requires a Bootstrap-based template, e.g. ZCA Bootstrap or a clone) in
+// addition to the Information sidebox link that EventzObserver always adds.
+// The master SCHEDULED_EVENTS_STATUS switch overrides both when set to
+// False. Also suppressed on the events page itself - pointless to promote a
+// page while already viewing it.
+if ($eventzStatusEnabled && $eventzAdditionalSideboxEnabled && $current_page_base !== 'events') {
     $eventzWindowDays = defined('SCHEDULED_EVENTS_WINDOW_DAYS') ? (int)SCHEDULED_EVENTS_WINDOW_DAYS : 30;
     $eventzMaxItems = defined('SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS') ? (int)SCHEDULED_EVENTS_SIDEBOX_MAX_ITEMS : 5;
     $eventzSideboxEvents = EventzService::getQualifyingEvents($eventzWindowDays, $eventzMaxItems);
@@ -35,6 +35,12 @@ if ($eventzStatusEnabled && $eventzSideboxMode === 'Bootstrap Sidebox' && $curre
     require __DIR__ . '/../../templates/default/sideboxes/tpl_eventz.php';
     $content = ob_get_clean();
 
+    // This box can appear on any storefront page, but eventz.css is only
+    // otherwise linked from tpl_events_default.php - echo it here too so its
+    // styling (and the relocation script below) works wherever the box
+    // actually renders.
+    echo '<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.0/catalog/includes/templates/default/css/eventz.css">';
+
     // Deliberately not requiring core's tpl_box.php generic box wrapper: on
     // this store, its fallback path (a "template_default" directory) doesn't
     // exist for the active Bootstrap-based template, causing a fatal error.
@@ -44,4 +50,43 @@ if ($eventzStatusEnabled && $eventzSideboxMode === 'Bootstrap Sidebox' && $curre
     echo '<h3 class="eventzSideboxHeading">' . zen_output_string_protected($title) . '</h3>';
     echo '<div class="eventzSideboxContent">' . $content . '</div>';
     echo '</div>';
+
+    // The column this box lives in (placed via Layout Boxes Controller) is
+    // typically hidden below the "lg" breakpoint on Bootstrap-based
+    // templates (e.g. class "d-none d-lg-block"), which hides this box along
+    // with everything else in that column on phones/tablets. Rather than
+    // touch the template's own column markup (which varies by template and
+    // isn't something this plugin controls), relocate just this box into the
+    // same Bootstrap ".row" as a full-width column on narrow viewports, and
+    // move it back to its original spot above the "lg" breakpoint.
+    echo '<script>
+(function () {
+    var eventzBox = document.querySelector(".eventzSideboxContainer");
+    if (!eventzBox) { return; }
+
+    var eventzOriginalParent = eventzBox.parentNode;
+    var eventzOriginalNext = eventzBox.nextSibling;
+    var eventzRow = eventzBox.closest(".row");
+    if (!eventzRow) { return; }
+
+    var eventzMobileQuery = window.matchMedia("(max-width: 991.98px)");
+
+    function eventzPlaceSidebox(query) {
+        if (query.matches) {
+            eventzBox.classList.add("col-12", "eventzSideboxMobile");
+            eventzRow.appendChild(eventzBox);
+        } else {
+            eventzBox.classList.remove("col-12", "eventzSideboxMobile");
+            eventzOriginalParent.insertBefore(eventzBox, eventzOriginalNext);
+        }
+    }
+
+    eventzPlaceSidebox(eventzMobileQuery);
+    if (eventzMobileQuery.addEventListener) {
+        eventzMobileQuery.addEventListener("change", eventzPlaceSidebox);
+    } else {
+        eventzMobileQuery.addListener(eventzPlaceSidebox);
+    }
+})();
+</script>';
 }
