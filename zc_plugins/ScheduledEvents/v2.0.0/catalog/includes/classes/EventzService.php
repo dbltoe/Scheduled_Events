@@ -92,6 +92,14 @@ class EventzService
 
     private static function isValidUrl(string $url): bool
     {
+        // A root-relative path (e.g. /images/foo.jpg) always resolves against
+        // this store's own domain, but FILTER_VALIDATE_URL requires a host
+        // and rejects it - accept it directly instead of forcing store
+        // owners into absolute URLs just to pass validation.
+        if (stripos($url, '/') === 0 && stripos($url, '//') !== 0) {
+            return preg_match('#^/[A-Za-z0-9\-._~!$&\'()*+,;=:@%/]*$#', $url) === 1;
+        }
+
         // filter_var() doesn't accept protocol-relative URLs (//example.com/x)
         // on their own, so give it a scheme to validate against first.
         $candidate = (stripos($url, '//') === 0) ? 'https:' . $url : $url;

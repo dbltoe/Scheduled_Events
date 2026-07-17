@@ -16,7 +16,12 @@ Highlights:
   location, event information, and driving directions.
 - Booth Location and Event Information are each a plain-text description with a separate, optional
   URL — the description becomes a clickable link only when a valid URL is given, so the store owner
-  never has to write HTML or worry about a bad link breaking the page.
+  never has to write HTML or worry about a bad link breaking the page. The URL may be a full external
+  address or a root-relative path to an asset already on the store, so a locally-hosted booth-location
+  map image doesn't require an absolute URL — use `/images/mapName.jpg` if it was uploaded via the
+  admin Image Manager, or `/includes/templates/your_template/images/mapName.jpg` if it was placed
+  directly in the current template's own images folder. Test any such path by opening it in a browser
+  first, since a bad path is silently ignored rather than shown as an error.
 - Driving Directions accepts either a plain address/URL (opens Google Maps in a new tab) or a Google
   Maps "Embed a map" `<iframe>` code (opens as a self-contained on-page pop-up map instead — no page
   navigation, full-screen on phones/tablets, closed via an X, clicking outside, or Escape). The map is

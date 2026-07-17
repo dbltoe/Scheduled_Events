@@ -12,7 +12,10 @@ v2.0.0
 - Booth Location (required) and Event Information (optional) are each a
   plain-text description with a separate, optional URL; the description
   becomes a link only when a valid URL is given, otherwise it displays as
-  plain text - no HTML authoring required from the store owner.
+  plain text - no HTML authoring required from the store owner. The URL
+  accepts a full external address or a root-relative path to an asset
+  already on the store (e.g. /images/mapName.jpg), so a locally-hosted
+  map image doesn't require an absolute URL.
 - Driving Directions accepts a plain address/URL (opens Google Maps in a new
   tab) or a Google Maps "Embed a map" <iframe> code (opens as a self-contained,
   on-page pop-up map instead - no page navigation, full-screen on phones/

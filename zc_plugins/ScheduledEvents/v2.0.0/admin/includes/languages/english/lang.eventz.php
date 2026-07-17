@@ -46,7 +46,7 @@ return [
     'ENTRY_EVENTZ_ACTIVE' => 'Active:',
 
     'TEXT_EVENTZ_BOOTH_LOCATION_HELP' => 'Plain text describing the booth location (e.g. "Space #16"). This text becomes a link if a Map URL is also given below.',
-    'TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP' => 'Optional. A URL to a map/floor plan. If valid, the Booth Location text above becomes a link to it (opens in a new tab); otherwise it\'s ignored and the text displays as-is.',
+    'TEXT_EVENTZ_BOOTH_LOCATION_URL_HELP' => 'Optional. A URL to a map/floor plan, or a path to an image already on this store. If uploaded via the admin Image Manager, use /images/mapName.jpg; if placed directly in your template\'s own images folder, use /includes/templates/your_template/images/mapName.jpg instead. Test the path by opening it in a browser first (yourdomain.com/images/mapName.jpg) - a bad path is silently ignored, not shown as an error. If valid, the Booth Location text above becomes a link to it (opens in a new tab); otherwise it\'s ignored and the text displays as-is.',
     'TEXT_EVENTZ_ACTIVE_HELP' => 'Uncheck to pause this event - it will be hidden from the storefront page and sidebox, without deleting it or changing its dates. Paused events remain visible here via "Show All".',
     'TEXT_EVENTZ_NO_EVENTS' => 'No Events Have Been Added Yet.',
     'TEXT_EVENTZ_NO_ACTIVE_EVENTS' => 'No Active Events Have Been Added Yet.',

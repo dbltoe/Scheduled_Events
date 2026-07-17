@@ -35,7 +35,16 @@ uninstalling the plugin.
 &mdash; each is a plain-text description with a separate, optional URL field. If a valid URL is
 given, the description becomes a link (opened in a new tab); if the URL is missing or doesn't
 validate, it's silently ignored and the description just displays as plain text. The store owner
-never has to author HTML.</li>
+never has to author HTML. The URL field accepts either a full external address or a root-relative
+path to an asset already on the store &mdash; handy for a Booth Location map image hosted locally
+rather than linked externally (Event Information is meant for an external event website, so this is
+unlikely to come up there in practice, though the field works the same way). Use
+<code>/images/mapName.jpg</code> if the image was uploaded via the admin Image Manager (the site
+root's <code>images</code> folder), or
+<code>/includes/templates/your_template/images/mapName.jpg</code> if it was placed directly in the
+current template's own images folder instead. Since a bad path is silently ignored rather than shown
+as an error, test it first by opening the path directly in a browser (e.g.
+<code>yourdomain.com/images/mapName.jpg</code>).</li>
 <li><strong>Driving Directions</strong> &mdash; accepts either a plain address or URL (the
 storefront link opens Google Maps in a new tab), or a Google Maps "Embed a map" <code>&lt;iframe&gt;</code>
 code (the storefront link instead opens the map as a self-contained pop-up over the page &mdash; no
