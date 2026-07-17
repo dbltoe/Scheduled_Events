@@ -2,6 +2,8 @@ v2.0.0
 - Rebuilt as an encapsulated plugin, replacing the older non-encapsulated version
   of Scheduled Events. Requires Zen Cart 2.0.0 or later; not compatible with
   pre-2.0.0 installations. Developed and tested against Zen Cart v2.2.2/v2.2.3.
+  No core Zen Cart files are ever modified - install/uninstall only touches this
+  plugin's own database table, configuration entries, and admin menu registration.
 - Storefront Scheduled Events page (main_page=events): lists every event whose
   display window currently qualifies, each as a name (H2) followed by place,
   start/stop dates, and optional comments, booth location, event information,
@@ -15,15 +17,23 @@ v2.0.0
   plain text - no HTML authoring required from the store owner. The URL
   accepts a full external address or a root-relative path to an asset
   already on the store (e.g. /images/mapName.jpg), so a locally-hosted
-  map image doesn't require an absolute URL.
+  map image doesn't require an absolute URL. Any common image format works
+  (JPG, PNG, GIF, WebP, SVG, etc.), since this is just a link rather than a
+  processed product image - though WebP is known to convert slowly through
+  Zen Cart's Image Manager on Image Handler 5, and images are displayed
+  exactly as uploaded with no resizing, so size/optimize them beforehand.
 - Driving Directions accepts a plain address/URL (opens Google Maps in a new
   tab) or a Google Maps "Embed a map" <iframe> code (opens as a self-contained,
   on-page pop-up map instead - no page navigation, full-screen on phones/
   tablets, closed via an X button, clicking outside, or Escape). The embedded
   map is lazy-loaded and never fetched unless the pop-up is actually opened.
 - A link to the events page is always added into the current template's
-  existing Information sidebox (styled to match responsive_classic and ZCA
-  Bootstrap out of the box). "Enable Additional Bootstrap Sidebox"
+  existing Information sidebox, using the exact same classes responsive_classic
+  and ZCA Bootstrap already use for their own sidebox links/cards, so a
+  template color/theme customization flows through automatically. The main
+  events page itself uses this plugin's own dedicated stylesheet instead, and
+  does not follow template theme customizations the same way. "Enable
+  Additional Bootstrap Sidebox"
   (Configuration > Scheduled Events, off by default) adds a second, separate
   promotional listing alongside that link: the plugin's own auto-scrolling
   carousel box, placed via Design > Layout Boxes Controller - intended only

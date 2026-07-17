@@ -11,12 +11,22 @@
 
 <h2>Overview</h2>
 <p>
+Scheduled Events installs as a fully self-contained (encapsulated) plugin &mdash; no core Zen Cart
+files are ever modified. Install/uninstall only touches this plugin's own database table, its own
+configuration entries, and its own admin menu registration.
+</p>
+<p>
 Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos,
 appearances, etc.) and display them on their own storefront page. Events are managed from Extras
 &gt; Scheduled Events in the admin. A link to the events page is always added into the current
-template's existing Information sidebox, styled to match <code>responsive_classic</code> and ZCA
-Bootstrap out of the box (using any other template may require adjusting its styling to match that
-template's own conventions).
+template's existing Information sidebox, using the exact same classes <code>responsive_classic</code>
+and ZCA Bootstrap already use for their own sidebox links and cards &mdash; so if you customize either
+template's own colors/fonts (e.g. via the ZCA Bootstrap color theme editor), the sidebox link/box
+follows along automatically, with no separate update needed. Using any other template may require
+adjusting its styling to match that template's own conventions. The main events page itself, by
+contrast, uses this plugin's own dedicated stylesheet rather than the template's classes &mdash; it's
+designed to read cleanly on both templates by default, but won't pick up template color/theme
+customizations the way the sidebox does.
 </p>
 <p>
 "Enable Additional Bootstrap Sidebox" (Configuration &gt; Scheduled Events, off by default) adds a
@@ -58,12 +68,17 @@ Information is meant for an external event website, so this is unlikely to come 
 practice, though the field works the same way). Use <code>/images/mapName.jpg</code> if the image
 was uploaded via the admin Image Manager (the site root's <code>images</code> folder), or
 <code>/includes/templates/your_template/images/mapName.jpg</code> if it was placed directly in the
-current template's own images folder instead. Since a bad path is silently ignored rather than shown
-as an error, test it first by opening the path directly in a browser (e.g.
-<code>yourdomain.com/images/mapName.jpg</code>). Some hosts also block direct access to non-image
-files like PDFs even when the path is correct (a "403 Forbidden"), regardless of what this plugin
-does &mdash; if that happens, try a folder your host does allow direct access to rather than the
-images folder.</li>
+current template's own images folder instead. Any common image format works (JPG, PNG, GIF, WebP,
+SVG, etc.) &mdash; this is just a link to an existing file, not a processed product image, so the
+format doesn't matter to the plugin. If uploading via Zen Cart's Image Manager on a store running
+Image Handler 5, note that WebP files are known to convert slowly there; JPG/PNG avoid that entirely.
+Also size/optimize the image yourself before uploading &mdash; unlike product images, this file is
+displayed exactly as uploaded, with no resizing by Zen Cart or Image Handler 5. Since a bad path is
+silently ignored rather than shown as an error, test it first by opening the path directly in a
+browser (e.g. <code>yourdomain.com/images/mapName.jpg</code>). Some hosts also block direct access to
+non-image files like PDFs even when the path is correct (a "403 Forbidden"), regardless of what this
+plugin does &mdash; if that happens, try a folder your host does allow direct access to rather than
+the images folder.</li>
 <li><strong>Driving Directions</strong> &mdash; accepts either a plain address or URL (the
 storefront link opens Google Maps in a new tab), or a Google Maps "Embed a map" <code>&lt;iframe&gt;</code>
 code (the storefront link instead opens the map as a self-contained pop-up over the page &mdash; no
