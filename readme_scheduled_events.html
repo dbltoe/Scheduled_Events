@@ -84,6 +84,13 @@ the admin menu entry, <strong>and the "Bootstrap Sidebox" box's placement/positi
 Layout Boxes Controller, if it had been placed in a column</strong>. Removing the plugin's files from
 the server afterward is optional but recommended.
 </p>
+<p>
+<strong>Reinstalling after an uninstall resets every Configuration &gt; Scheduled Events setting back
+to its default value</strong> (page heading, field labels, no-events message, display window, Sidebox
+Display Mode/title/max items, etc.) - any customization made there will need to be re-entered. This is
+separate from the event data itself: exporting/restoring the <code>eventz</code> table (e.g. via a SQL
+dump) preserves your events, but not your Configuration choices.
+</p>
 
 <h2>Change History</h2>
 <p>See <a href="zc_plugins/ScheduledEvents/v2.0.0/changelog.txt">changelog.txt</a>.</p>

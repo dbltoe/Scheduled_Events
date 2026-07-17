@@ -35,6 +35,9 @@ Highlights:
   link above) and "Bootstrap Sidebox" (the plugin's own scrolling box, placed via Design > Layout
   Boxes Controller — requires a Bootstrap-based template). That box's placement doesn't survive an
   uninstall, so it needs to be re-placed via Layout Boxes Controller after any uninstall/reinstall.
+- Reinstalling after an uninstall resets every Configuration > Scheduled Events setting back to its
+  default value — that's separate from the event data itself, which a SQL dump/restore of the
+  `eventz` table preserves independently.
 
 Author: dbltoe
 
