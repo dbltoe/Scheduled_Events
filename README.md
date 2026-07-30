@@ -64,6 +64,10 @@ Highlights:
   Bootstrap-based templates typically hide the entire sidebar column on phones/tablets; this sidebox
   automatically relocates itself into the main content area as a full-width block below that breakpoint
   instead of disappearing, then moves back to the sidebar on larger screens.
+- The two promotional listings link slightly differently, by design: the Information sidebox link opens
+  the events page at the top, while clicking an event in the carousel jumps straight to that specific
+  event further down the page. If your template has a fixed/sticky navbar, the plugin offsets that jump
+  so the event heading isn't hidden underneath it.
 - Reinstalling after an uninstall resets every Configuration > Scheduled Events setting back to its
   default value — that's separate from the event data itself, which a SQL dump/restore of the
   `eventz` table preserves independently.
