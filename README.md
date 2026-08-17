@@ -74,5 +74,5 @@ Highlights:
 
 Author: dbltoe
 
-See [readme_scheduled_events.html](readme_scheduled_events.html) for installation/upgrade/uninstall
+See [readme.html](zc_plugins/ScheduledEvents/v2.0.0/readme.html) for installation/upgrade/uninstall
 instructions and change history.
