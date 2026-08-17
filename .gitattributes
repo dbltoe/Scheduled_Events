@@ -1,5 +1,13 @@
 /.gitattributes   export-ignore
 README.md         export-ignore
 
+# The repo-root screenshots are kept for working reference only - nothing in
+# the repo links to them. readme.html reads its images from the identical set
+# inside zc_plugins/ScheduledEvents/<version>/screenshots/, which is the copy
+# that has to reach a store, so shipping both doubled the download for
+# nothing. The leading slash anchors this to the root directory, leaving the
+# plugin's own copy in the archive.
+/screenshots/     export-ignore
+
 # Auto detect text files and perform LF normalization
 * text=auto
