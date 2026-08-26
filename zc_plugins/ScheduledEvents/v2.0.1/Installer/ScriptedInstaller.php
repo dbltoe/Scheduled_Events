@@ -32,13 +32,76 @@ class ScriptedInstaller extends ScriptedInstallBase
 
     protected function executeUpgrade($oldVersion): bool
     {
-        // No prior released versions yet; upgrades to the table/config/admin
-        // page structure will be handled here as new versions are shipped.
+        // Written to be self-healing rather than to assume what a given
+        // v2.0.0 install actually contains. installEventzTable() below only
+        // creates the table when it is missing, so on an upgrade it is a
+        // no-op - anything that changed *inside* an existing table or in the
+        // configuration/admin-page rows has to be reconciled explicitly here.
+        // Each step checks current state first, so running this against an
+        // install that is already current changes nothing.
         $this->installEventzTable();
+        $this->upgradeEventzTableColumns();
         $this->installConfiguration();
+        $this->removeRetiredConfigurationKeys();
         $this->installAdminPage();
 
         return !$this->errorContainer->hasErrors();
+    }
+
+    /**
+     * Bring an existing eventz table up to the current column set.
+     *
+     * The `active` field (pause an event without deleting it) was added after
+     * the first packaged release, and CREATE TABLE IF NOT EXISTS will not add
+     * a column to a table that already exists - so without this, upgrading
+     * such an install leaves the storefront querying a column that isn't
+     * there.
+     */
+    protected function upgradeEventzTableColumns(): void
+    {
+        global $sniffer;
+
+        if (!defined('TABLE_EVENTZ')) {
+            define('TABLE_EVENTZ', DB_PREFIX . 'eventz');
+        }
+
+        if ($sniffer->table_exists(TABLE_EVENTZ) !== true) {
+            return;
+        }
+
+        if ($sniffer->field_exists(TABLE_EVENTZ, 'active') !== true) {
+            $this->executeInstallerSql(
+                "ALTER TABLE " . TABLE_EVENTZ . "
+                 ADD COLUMN active tinyint(1) NOT NULL DEFAULT 1"
+            );
+        }
+    }
+
+    /**
+     * Drop configuration keys that earlier versions created and this one no
+     * longer uses, so they don't linger as dead rows in the settings group.
+     *
+     * SCHEDULED_EVENTS_SIDEBOX_MODE was an either/or dropdown (Information
+     * Listing vs Bootstrap Sidebox); it was replaced by the additive
+     * SCHEDULED_EVENTS_ADDITIONAL_SIDEBOX switch, with the Information
+     * listing now always on.
+     */
+    protected function removeRetiredConfigurationKeys(): void
+    {
+        if (!defined('TABLE_CONFIGURATION')) {
+            return;
+        }
+
+        $retiredKeys = [
+            'SCHEDULED_EVENTS_SIDEBOX_MODE',
+        ];
+
+        foreach ($retiredKeys as $retiredKey) {
+            $this->executeInstallerSql(
+                "DELETE FROM " . TABLE_CONFIGURATION . "
+                  WHERE configuration_key = '" . zen_db_input($retiredKey) . "'"
+            );
+        }
     }
 
     protected function installEventzTable(): void
@@ -249,6 +312,13 @@ class ScriptedInstaller extends ScriptedInstallBase
         if (!defined('BOX_EXTRAS_EVENTZ')) {
             define('BOX_EXTRAS_EVENTZ', 'Scheduled Events');
         }
+
+        // Deregister before registering so this is idempotent. It matters on
+        // upgrade: this page used to live under Catalog, and re-registering
+        // over an existing row would otherwise leave the old menu placement
+        // (and its now-wrong BOX_CATALOG_EVENTZ language key) in place. On a
+        // fresh install there is nothing to remove and this is a no-op.
+        zen_deregister_admin_pages(['eventzList']);
 
         zen_register_admin_page('eventzList', 'BOX_EXTRAS_EVENTZ', 'FILENAME_EVENTZ', '', 'extras', 'Y');
     }

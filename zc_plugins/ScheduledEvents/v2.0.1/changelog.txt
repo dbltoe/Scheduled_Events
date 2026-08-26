@@ -1,3 +1,29 @@
+v2.0.1
+- Security hardening, run as a pre-release pass rather than in response to a
+  reported problem:
+  * The admin page now refuses to run unless IS_ADMIN_FLAG is set. Reached
+    normally (admin/index.php?cmd=eventz) the bootstrap has already defined
+    it, so this costs nothing; it matters because zc_plugins/ stays
+    web-reachable wherever the shipped .htaccess isn't honoured (nginx reads
+    none; Apache under AllowOverride None), where a direct request previously
+    produced a fatal that disclosed the server path.
+  * The language directory used to build the fallback language-file include
+    path is now constrained to a bare [a-zA-Z0-9_-] name, falling back to
+    english. Core validates it before this point, so it was not exploitable
+    as shipped, but it was a variable in an include path.
+- Clicking an event in the scrolling sidebox now offsets its jump so the event
+  heading isn't hidden beneath a fixed/sticky navbar (e.g. ZCA Bootstrap's).
+- Long event names no longer wrap mid-word at a hyphen on narrow screens
+  ("Elkhart County 4-H Fair" stays intact); a spaced dash used to separate
+  phrases still wraps normally.
+- readme.html now ships inside the plugin folder, with its screenshots, and
+  its changelog link points at the right place.
+- Upgrading from v2.0.0 now reconciles an existing install rather than
+  assuming its state: the `active` column is added if missing, the retired
+  SCHEDULED_EVENTS_SIDEBOX_MODE setting is removed, and the admin menu entry
+  is re-registered so it lands under Extras even if it was previously under
+  Catalog.
+
 v2.0.0
 - Rebuilt as an encapsulated plugin, replacing the older non-encapsulated version
   of Scheduled Events. Requires Zen Cart 2.0.0 or later; not compatible with

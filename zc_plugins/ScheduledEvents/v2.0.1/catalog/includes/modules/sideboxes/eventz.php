@@ -39,7 +39,7 @@ if ($eventzStatusEnabled && $eventzAdditionalSideboxEnabled && $current_page_bas
     // otherwise linked from tpl_events_default.php - echo it here too so its
     // styling (and the relocation script below) works wherever the box
     // actually renders.
-    echo '<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.0/catalog/includes/templates/default/css/eventz.css">';
+    echo '<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.1/catalog/includes/templates/default/css/eventz.css">';
 
     // Deliberately not requiring core's tpl_box.php generic box wrapper: on
     // this store, its fallback path (a "template_default" directory) doesn't

@@ -195,7 +195,7 @@ if ($action === 'new') {
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <?php require(DIR_WS_INCLUDES . 'admin_html_head.php'); ?>
-<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.0/admin/includes/css/eventz.css">
+<link rel="stylesheet" href="/zc_plugins/ScheduledEvents/v2.0.1/admin/includes/css/eventz.css">
 <title><?php echo TITLE; ?></title>
 </head>
 <body>
