@@ -11,6 +11,19 @@
 /**
  * Scheduled Events - admin CRUD page for the eventz table
  */
+
+// This page is only ever reached as admin/index.php?cmd=eventz, and index.php
+// loads application_bootstrap.php (which defines IS_ADMIN_FLAG) before routing
+// here - so on the legitimate path this guard always passes and costs nothing.
+// It matters because zc_plugins/ is web-reachable wherever the shipped
+// .htaccess isn't honoured (nginx reads none; Apache under AllowOverride None).
+// Without it, a direct request for this file falls into the relative require
+// below, which fails and emits a fatal that discloses the full server path.
+if (!defined('IS_ADMIN_FLAG') || IS_ADMIN_FLAG !== true) {
+    http_response_code(404);
+    exit;
+}
+
 require('includes/application_top.php');
 
 // Defensive fallback: this page's own lang.eventz.php should auto-load via
@@ -21,7 +34,14 @@ require('includes/application_top.php');
 // this file's own real location - is used instead of any of Zen Cart's
 // DIR_FS_*/DIR_WS_* constants, which proved unreliable on the catalog side.
 if (!defined('HEADING_TITLE_EVENTZ')) {
+    // Core validates $language against the languages table before setting it,
+    // so this isn't attacker-controlled in practice - but it still ends up in
+    // an include path, so constrain it to a bare directory name rather than
+    // leave that to be taken on trust.
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
+    if (!is_string($eventzLanguageDir) || preg_match('/^[a-zA-Z0-9_-]+$/', $eventzLanguageDir) !== 1) {
+        $eventzLanguageDir = 'english';
+    }
     $eventzLangFile = __DIR__ . '/includes/languages/' . $eventzLanguageDir . '/lang.eventz.php';
     if (is_file($eventzLangFile)) {
         $eventzDefines = require $eventzLangFile;

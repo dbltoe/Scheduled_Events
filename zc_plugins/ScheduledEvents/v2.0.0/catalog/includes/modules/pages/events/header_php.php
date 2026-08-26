@@ -19,7 +19,14 @@ global $breadcrumb, $zco_notifier, $eventzEvents, $eventzWindowRange, $eventzWin
 // file's own real location - is used instead of any of Zen Cart's
 // DIR_FS_*/DIR_WS_* constants, which proved unreliable here.
 if (!defined('NAVBAR_TITLE')) {
+    // Core validates $language against the languages table before setting it,
+    // so this isn't attacker-controlled in practice - but it still ends up in
+    // an include path, so constrain it to a bare directory name rather than
+    // leave that to be taken on trust.
     $eventzLanguageDir = $language ?? ($_SESSION['language'] ?? 'english');
+    if (!is_string($eventzLanguageDir) || preg_match('/^[a-zA-Z0-9_-]+$/', $eventzLanguageDir) !== 1) {
+        $eventzLanguageDir = 'english';
+    }
     $eventzLangFile = __DIR__ . '/../../../languages/' . $eventzLanguageDir . '/lang.events.php';
 
     if (is_file($eventzLangFile)) {
