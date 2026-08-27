@@ -16,7 +16,7 @@
 // loads application_bootstrap.php (which defines IS_ADMIN_FLAG) before routing
 // here - so on the legitimate path this guard always passes and costs nothing.
 // It matters because zc_plugins/ is web-reachable wherever the shipped
-// .htaccess isn't honoured (nginx reads none; Apache under AllowOverride None).
+// .htaccess isn't honored (nginx reads none; Apache under AllowOverride None).
 // Without it, a direct request for this file falls into the relative require
 // below, which fails and emits a fatal that discloses the full server path.
 if (!defined('IS_ADMIN_FLAG') || IS_ADMIN_FLAG !== true) {

@@ -1,92 +1,46 @@
 v2.0.1
-- Security hardening, run as a pre-release pass rather than in response to a
-  reported problem:
-  * The admin page now refuses to run unless IS_ADMIN_FLAG is set. Reached
-    normally (admin/index.php?cmd=eventz) the bootstrap has already defined
-    it, so this costs nothing; it matters because zc_plugins/ stays
-    web-reachable wherever the shipped .htaccess isn't honoured (nginx reads
-    none; Apache under AllowOverride None), where a direct request previously
-    produced a fatal that disclosed the server path.
-  * The language directory used to build the fallback language-file include
-    path is now constrained to a bare [a-zA-Z0-9_-] name, falling back to
-    english. Core validates it before this point, so it was not exploitable
-    as shipped, but it was a variable in an include path.
-- Clicking an event in the scrolling sidebox now offsets its jump so the event
-  heading isn't hidden beneath a fixed/sticky navbar (e.g. ZCA Bootstrap's).
-- Long event names no longer wrap mid-word at a hyphen on narrow screens
-  ("Elkhart County 4-H Fair" stays intact); a spaced dash used to separate
-  phrases still wraps normally.
-- readme.html now ships inside the plugin folder, with its screenshots, and
-  its changelog link points at the right place.
-- Upgrading from v2.0.0 now reconciles an existing install rather than
-  assuming its state: the `active` column is added if missing, the retired
-  SCHEDULED_EVENTS_SIDEBOX_MODE setting is removed, and the admin menu entry
-  is re-registered so it lands under Extras even if it was previously under
-  Catalog.
+
+This release is a security hardening pass, run before packaging rather than in response to a reported problem.
+
+The admin page now refuses to run unless IS_ADMIN_FLAG is set. Reached normally, as admin/index.php?cmd=eventz, the bootstrap has already defined it, so the check costs nothing. It matters because the zc_plugins folder stays web-reachable wherever the shipped .htaccess isn't honored, which includes nginx, since it reads none at all, and Apache running under AllowOverride None. On those setups a direct request for the file previously produced a fatal error that disclosed the full server path.
+
+The language directory used to build the fallback language-file include path is now constrained to a plain directory name, falling back to english if it is anything else. Zen Cart validates that value before this point, so it was not exploitable as shipped, but it was still a variable sitting in an include path.
+
+Clicking an event in the scrolling sidebox now offsets its jump so the event heading is not hidden beneath a fixed or sticky navbar, such as the one in ZCA Bootstrap.
+
+The readme now ships inside the plugin folder along with its screenshots, and its changelog link points at the right place.
+
+Upgrading from v2.0.0 reconciles an existing installation rather than assuming its state. The active column is added if it is missing, the retired Sidebox Display Mode setting is removed, and the admin menu entry is re-registered so it lands under Extras even if it was previously under Catalog.
+
 
 v2.0.0
-- Rebuilt as an encapsulated plugin, replacing the older non-encapsulated version
-  of Scheduled Events. Requires Zen Cart 2.0.0 or later; not compatible with
-  pre-2.0.0 installations. Developed and tested against Zen Cart v2.2.2/v2.2.3.
-  No core Zen Cart files are ever modified - install/uninstall only touches this
-  plugin's own database table, configuration entries, and admin menu registration.
-- Storefront Scheduled Events page (main_page=events): lists every event whose
-  display window currently qualifies, each as a name (H2) followed by place,
-  start/stop dates, and optional comments, booth location, event information,
-  and driving directions in a blockquote. A separator <hr> appears between
-  consecutive events (none shows with zero or one event listed). Shows a
-  configurable "no events scheduled" message, naming the current date window,
-  when nothing qualifies.
-- Booth Location (required) and Event Information (optional) are each a
-  plain-text description with a separate, optional URL; the description
-  becomes a link only when a valid URL is given, otherwise it displays as
-  plain text - no HTML authoring required from the store owner. The URL
-  accepts a full external address or a root-relative path to an asset
-  already on the store (e.g. /images/mapName.jpg), so a locally-hosted
-  map image doesn't require an absolute URL. Any common image format works
-  (JPG, PNG, GIF, WebP, SVG, etc.), since this is just a link rather than a
-  processed product image - though WebP is known to convert slowly through
-  Zen Cart's Image Manager on Image Handler 5, and images are displayed
-  exactly as uploaded with no resizing, so size/optimize them beforehand.
-- Driving Directions accepts a plain address/URL (opens Google Maps in a new
-  tab) or a Google Maps "Embed a map" <iframe> code (opens as a self-contained,
-  on-page pop-up map instead - no page navigation, full-screen on phones/
-  tablets, closed via an X button, clicking outside, or Escape). The embedded
-  map is lazy-loaded and never fetched unless the pop-up is actually opened.
-- A link to the events page is always added into the current template's
-  existing Information sidebox, using the exact same classes responsive_classic
-  and ZCA Bootstrap already use for their own sidebox links/cards, so a
-  template color/theme customization flows through automatically. The main
-  events page itself uses this plugin's own dedicated stylesheet instead, and
-  does not follow template theme customizations the same way. "Enable
-  Additional Bootstrap Sidebox"
-  (Configuration > Scheduled Events, off by default) adds a second, separate
-  promotional listing alongside that link: the plugin's own auto-scrolling
-  carousel box, placed via Design > Layout Boxes Controller - intended only
-  for Bootstrap-based templates, and has no effect on others. Since
-  Bootstrap-based templates typically hide the entire sidebar column on
-  phones/tablets, this additional sidebox automatically relocates itself into
-  the main content area as a full-width block below that breakpoint instead
-  of disappearing, then moves back to the sidebar above it - no configuration
-  needed. The two listings link slightly differently, by design: the
-  Information sidebox link opens the events page at the top, while clicking an
-  event in the carousel jumps straight to that specific event further down the
-  page (offset so the heading isn't hidden beneath a fixed/sticky navbar). A
-  master "Enable Scheduled Events Display" configuration switch can fully hide
-  the storefront page and all of its promotion at any time, without
-  uninstalling.
-- Admin event management screen (Extras > Scheduled Events): add/edit/delete
-  events, with required-field markers, a sort-order dropdown for the event
-  list, and a Help button linking to this plugin's GitHub repository. The
-  add/edit form's field/value/description layout matches core's own
-  Configuration screen (field label, input, and a shaded description box side
-  by side), reading larger and clearer than the previous stacked layout.
-- Active field: each event can be paused (unchecked) without deleting it or
-  changing its dates, hiding it from the storefront page and every sidebox.
-  The admin events list shows active events only by default, with a
-  "Show All" link to reveal paused events (shown dimmed, with a Status
-  column) for editing or reactivation.
-- Admin configuration group (Configuration > Scheduled Events) for the page
-  heading, all field labels, the no-events message (and its follow-up line),
-  the 30/60/90-day display window, the Additional Bootstrap Sidebox
-  toggle/title/max items, and the master enable/disable switch.
+
+Rebuilt as an encapsulated plugin, replacing the older non-encapsulated version of Scheduled Events. Requires Zen Cart 2.0.0 or later and is not compatible with earlier installations. Developed and tested against Zen Cart v2.2.2 and v2.2.3.
+
+No core Zen Cart files are ever modified. Installing and uninstalling only touches this plugin's own database table, its configuration entries, and its admin menu registration.
+
+The storefront page, reached as main_page=events, lists every event whose display window currently qualifies. Each one shows its name as a heading, followed by place, start and stop dates, and any comments, booth location, event information, and driving directions. A horizontal rule separates consecutive events, and none appears when only one event is listed. When nothing qualifies, the page shows a configurable message naming the current date window.
+
+Booth Location and Event Information are each a plain-text description with a separate, optional URL. The description becomes a link only when a valid URL is given, and otherwise displays as plain text, so the store owner never has to author HTML or worry about a bad link breaking the page.
+
+That URL accepts a full external address or a path to an asset already on the store, such as /images/mapName.jpg, so a locally hosted map image does not require an absolute URL. Any common image format works, including JPG, PNG, GIF, WebP and SVG, since this is only a link rather than a processed product image.
+
+Two things are worth knowing about those images. WebP is known to convert slowly through Zen Cart's Image Manager on stores running Image Handler 5, and images are displayed exactly as uploaded with no resizing, so size and optimize them beforehand.
+
+Driving Directions accepts a plain address or URL, which opens Google Maps in a new tab, or a Google Maps "Embed a map" iframe code, which instead opens as a self-contained pop-up over the page. The pop-up needs no page navigation, goes full-screen on phones and tablets, and closes with its X button, a click outside, or the Escape key. The embedded map is lazy-loaded and never fetched unless a visitor actually opens it.
+
+A link to the events page is always added into the current template's Information sidebox. It uses the same classes that responsive_classic and ZCA Bootstrap already use for their own sidebox links and cards, so a template color or theme customization flows through to it automatically. The events page itself uses this plugin's own stylesheet instead, and so does not follow template theme customizations the same way.
+
+Enabling the Additional Bootstrap Sidebox, found under Configuration and off by default, adds a second, separate promotional listing alongside that link. It is the plugin's own auto-scrolling carousel box, placed through Design and the Layout Boxes Controller. It is intended only for Bootstrap-based templates and has no effect on others.
+
+Because Bootstrap-based templates typically hide the entire sidebar column on phones and tablets, that additional sidebox relocates itself into the main content area as a full-width block below that breakpoint rather than disappearing, then moves back to the sidebar on larger screens. No configuration is needed.
+
+The two listings link slightly differently, by design. The Information sidebox link opens the events page at the top, while clicking an event in the carousel jumps straight to that specific event further down the page.
+
+A master Enable Scheduled Events Display switch can fully hide the storefront page and all of its promotion at any time, without uninstalling.
+
+Events are managed from Extras, under Scheduled Events, which handles adding, editing and deleting, with required-field markers, a sort-order dropdown for the list, and a Help button linking to the plugin's GitHub repository. The add and edit form uses the same field, value and description layout as Zen Cart's own Configuration screen.
+
+Each event also carries an Active setting, so it can be paused without being deleted and without changing its dates. A paused event disappears from the storefront page and every sidebox. The admin list shows active events only by default, with a Show All link that reveals paused ones, dimmed and marked with a Status column, for editing or reactivation.
+
+The configuration group under Configuration covers the page heading, all field labels, the no-events message and its follow-up line, the 30, 60 or 90-day display window, the Additional Bootstrap Sidebox settings, and the master enable and disable switch.
