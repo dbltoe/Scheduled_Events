@@ -28,9 +28,9 @@ $seLinks =
     . '<a href="' . $seGithubUrl . '" target="_blank" rel="noopener noreferrer"'
     . ' class="btn btn-primary" role="button"'
     . ' style="margin:0 ' . $seButtonGap . ' 0 0">GitHub</a>'
-    . '</div>'
-    . '<div style="margin:6px 0 0;padding:0 0 0 ' . $seButtonGap . '">'
-    . '<a href="' . $seForumUrl . '" target="_blank" rel="noopener noreferrer">Forum Support Thread</a>'
+    . '<a href="' . $seForumUrl . '" target="_blank" rel="noopener noreferrer"'
+    . ' class="btn btn-primary" role="button"'
+    . ' style="margin:0 ' . $seButtonGap . ' 0 0">Forum Support Thread</a>'
     . '</div>';
 
 /**
