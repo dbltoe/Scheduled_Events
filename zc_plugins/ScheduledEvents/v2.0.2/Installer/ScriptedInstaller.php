@@ -11,6 +11,8 @@ use Zencart\PluginSupport\ScriptedInstaller as ScriptedInstallBase;
 
 class ScriptedInstaller extends ScriptedInstallBase
 {
+    protected const CONFIGURATION_GROUP_TITLE = 'Scheduled Events';
+
     protected function executeInstall(): bool
     {
         $this->installEventzTable();
@@ -30,7 +32,11 @@ class ScriptedInstaller extends ScriptedInstallBase
         return !$this->errorContainer->hasErrors();
     }
 
-    protected function executeUpgrade($oldVersion): bool
+    // $oldVersion is optional because ZC 2.0.x declares executeUpgrade() with
+    // no parameters; a required one here is a fatal signature mismatch the
+    // moment the installer class loads, so Install fails there too. 2.1.0+
+    // passes it.
+    protected function executeUpgrade($oldVersion = null): bool
     {
         // Written to be self-healing rather than to assume what a given
         // v2.0.0 install actually contains. installEventzTable() below only
@@ -42,6 +48,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->installEventzTable();
         $this->upgradeEventzTableColumns();
         $this->installConfiguration();
+        $this->removeEmptyDuplicateConfigurationGroups();
         $this->removeRetiredConfigurationKeys();
         $this->installAdminPage();
 
@@ -151,16 +158,106 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->executeInstallerSql("DROP TABLE IF EXISTS " . TABLE_EVENTZ);
     }
 
+    /**
+     * Return the Scheduled Events configuration group's id, creating the
+     * group only when there isn't one.
+     *
+     * Core's addConfigurationGroup() can't be relied on for that: on 2.1.0+
+     * it looks the title up as a configuration KEY, never finds the group,
+     * and inserts a second one on every upgrade; on 2.0.x it takes the title
+     * as a separate first argument and, given no sort order, fails on its
+     * own malformed UPDATE ("WHERE  WHERE"). So the group is written here.
+     */
+    protected function getConfigurationGroupId(): int
+    {
+        $groupId = $this->findConfigurationGroupId();
+        if ($groupId !== 0) {
+            return $groupId;
+        }
+
+        $this->executeInstallerSql(
+            "INSERT INTO " . TABLE_CONFIGURATION_GROUP . "
+                (configuration_group_title, configuration_group_description, sort_order, visible)
+             VALUES
+                ('" . zen_db_input(self::CONFIGURATION_GROUP_TITLE) . "', 'Display options, labels, and time-frame settings for the Scheduled Events plugin.', 0, 1)"
+        );
+        $groupId = $this->findConfigurationGroupId();
+
+        // Same as core when no sort order is given: sort by the new id.
+        if ($groupId !== 0) {
+            $this->executeInstallerSql(
+                "UPDATE " . TABLE_CONFIGURATION_GROUP . " SET sort_order = " . $groupId . " WHERE configuration_group_id = " . $groupId
+            );
+        }
+        return $groupId;
+    }
+
+    /**
+     * Id of the existing Scheduled Events configuration group, or 0. If
+     * earlier failed upgrades left duplicates, the group holding the keys wins.
+     */
+    protected function findConfigurationGroupId(): int
+    {
+        $check = $this->dbConn->Execute(
+            "SELECT g.configuration_group_id
+               FROM " . TABLE_CONFIGURATION_GROUP . " g
+                    LEFT JOIN " . TABLE_CONFIGURATION . " c ON c.configuration_group_id = g.configuration_group_id
+              WHERE g.configuration_group_title = '" . zen_db_input(self::CONFIGURATION_GROUP_TITLE) . "'
+              GROUP BY g.configuration_group_id
+              ORDER BY COUNT(c.configuration_key) DESC, g.configuration_group_id ASC
+              LIMIT 1",
+            null, false, 0, true // bypass the per-request query cache: this is re-read right after the insert
+        );
+        return $check->EOF ? 0 : (int)$check->fields['configuration_group_id'];
+    }
+
+    /**
+     * Ids of every configuration group carrying this plugin's title, so
+     * uninstall also clears any duplicate an earlier failed upgrade left.
+     */
+    protected function getConfigurationGroupIds(): array
+    {
+        $ids = [];
+        $result = $this->dbConn->Execute(
+            "SELECT configuration_group_id
+               FROM " . TABLE_CONFIGURATION_GROUP . "
+              WHERE configuration_group_title = '" . zen_db_input(self::CONFIGURATION_GROUP_TITLE) . "'",
+            null, false, 0, true // bypass the per-request query cache
+        );
+        while (!$result->EOF) {
+            $ids[] = (int)$result->fields['configuration_group_id'];
+            $result->MoveNext();
+        }
+        return $ids;
+    }
+
+    /**
+     * Drop same-titled configuration groups that hold no keys. Upgrading to
+     * v2.0.1 on ZC 2.1.0+ created one and then failed, leaving it behind.
+     */
+    protected function removeEmptyDuplicateConfigurationGroups(): void
+    {
+        $keepId = $this->findConfigurationGroupId();
+        foreach ($this->getConfigurationGroupIds() as $groupId) {
+            if ($groupId === $keepId) {
+                continue;
+            }
+            $this->executeInstallerSql(
+                "DELETE FROM " . TABLE_CONFIGURATION_GROUP . "
+                  WHERE configuration_group_id = " . $groupId . "
+                    AND NOT EXISTS (SELECT 1 FROM " . TABLE_CONFIGURATION . " WHERE configuration_group_id = " . $groupId . ")"
+            );
+        }
+    }
+
     protected function installConfiguration(): void
     {
-        $groupId = $this->addConfigurationGroup([
-            'configuration_group_title' => 'Scheduled Events',
-            'configuration_group_description' => 'Display options, labels, and time-frame settings for the Scheduled Events plugin.',
-            'sort_order' => 0,
-            'visible' => 1,
-        ]);
+        $groupId = $this->getConfigurationGroupId();
 
         // Without this, the group has no clickable link under Admin > Configuration.
+        // zen_register_admin_page() is a plain INSERT on a unique page_key, so
+        // deregister first or an upgrade fails with a duplicate-key error.
+        zen_deregister_admin_pages(['configScheduledEvents']);
         zen_register_admin_page('configScheduledEvents', 'BOX_CONFIGURATION_SCHEDULED_EVENTS', 'FILENAME_CONFIGURATION', "gID=$groupId", 'configuration', 'Y');
 
         $this->addConfigurationKey('SCHEDULED_EVENTS_STATUS', [
@@ -297,8 +394,12 @@ class ScriptedInstaller extends ScriptedInstallBase
 
     protected function uninstallConfiguration(): void
     {
-        // deleteAllKeysInGroup=true removes every key belonging to the group.
-        $this->deleteConfigurationGroup('Scheduled Events', true);
+        // Plain SQL rather than core's deleteConfigurationGroup(), which on
+        // 2.0.x takes only a numeric id and never removes the group's keys.
+        foreach ($this->getConfigurationGroupIds() as $groupId) {
+            $this->executeInstallerSql("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_group_id = " . $groupId);
+            $this->executeInstallerSql("DELETE FROM " . TABLE_CONFIGURATION_GROUP . " WHERE configuration_group_id = " . $groupId);
+        }
     }
 
     protected function installAdminPage(): void
