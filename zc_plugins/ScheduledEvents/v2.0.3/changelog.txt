@@ -1,3 +1,8 @@
+v2.0.3
+
+Zen Cart 2.2.0 is now listed among the supported versions in the plugin's manifest, which skipped it while listing 2.2.1 through 2.2.3. The Plugin Manager does not use that list to decide whether to offer the install, so stores on 2.2.0 could already install and use the plugin; this corrects the record. There are no code changes.
+
+
 v2.0.2
 
 This release fixes faults that kept the plugin from installing on Zen Cart 2.0.x, from working on 2.1.x, and from upgrading. All were found on clean test installs of each Zen Cart version.
