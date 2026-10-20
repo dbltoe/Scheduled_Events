@@ -1,6 +1,6 @@
 v2.0.2
 
-This release fixes faults that kept the plugin from installing on Zen Cart 2.0.x, from working on 2.1.x, and and from upgrading. All were found on clean test installs of each Zen Cart version.
+This release fixes faults that kept the plugin from installing on Zen Cart 2.0.x, from working on 2.1.x, and from upgrading. All were found on clean test installs of each Zen Cart version.
 
 On Zen Cart 2.0.x the install failed with a fatal error and a blank page. The installer declared its upgrade step in a way 2.0.x does not accept, and it set up and removed its Configuration group with calls whose arguments differ on 2.0.x. Once installed, the storefront events page also failed with "Class EventzService not found", because 2.0.x looks for a plugin's storefront classes in a different folder. All of these now work on every supported version.
 
