@@ -1,3 +1,8 @@
+v2.0.4
+
+Zen Cart 2.3.0 and 3.0.0 are now listed among the supported versions in the plugin's manifest. Version 2.0.3 was run on clean Zen Cart 2.3 and 3.0.0 test installs, on every PHP version each supports (8.2 through 8.5 on 2.3, 8.3 through 8.5 on 3.0.0): it installed and uninstalled cleanly, and the admin event list, its add and show-all views and the storefront events page all worked, signed in and out, with nothing logged. There are no code changes.
+
+
 v2.0.3
 
 Zen Cart 2.2.0 is now listed among the supported versions in the plugin's manifest, which skipped it while listing 2.2.1 through 2.2.3. The Plugin Manager does not use that list to decide whether to offer the install, so stores on 2.2.0 could already install and use the plugin; this corrects the record. There are no code changes.
