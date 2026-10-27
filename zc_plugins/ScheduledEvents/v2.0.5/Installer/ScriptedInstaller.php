@@ -13,11 +13,15 @@ class ScriptedInstaller extends ScriptedInstallBase
 {
     protected const CONFIGURATION_GROUP_TITLE = 'Scheduled Events';
 
+    // plugin_control.unique_key for this plugin: its zc_plugins folder name.
+    protected const PLUGIN_KEY = 'ScheduledEvents';
+
     protected function executeInstall(): bool
     {
         $this->installEventzTable();
         $this->installConfiguration();
         $this->installAdminPage();
+        $this->seRefreshPluginDescription();
 
         return !$this->errorContainer->hasErrors();
     }
@@ -28,6 +32,7 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->uninstallConfiguration();
         $this->uninstallEventzTable();
         $this->uninstallLayoutBox();
+        $this->seRefreshPluginDescription();
 
         return !$this->errorContainer->hasErrors();
     }
@@ -51,8 +56,41 @@ class ScriptedInstaller extends ScriptedInstallBase
         $this->removeEmptyDuplicateConfigurationGroups();
         $this->removeRetiredConfigurationKeys();
         $this->installAdminPage();
+        $this->seRefreshPluginDescription();
 
         return !$this->errorContainer->hasErrors();
+    }
+
+    /**
+     * Save the manifest's description again, now that the Settings page has
+     * been registered (install, upgrade) or removed (uninstall).
+     *
+     * Needed on v2.0 and v2.1, which store plugin_control.description only
+     * when Plugin Manager first sees the plugin, before Install, so the
+     * Settings button (built in manifest.php from the registered admin page)
+     * would never appear there. v2.2 and later rewrite the description from
+     * the manifest on every Plugin Manager visit, so this is a no-op there in
+     * effect. Core's own install/uninstall step changes only status and
+     * version, so this description stays.
+     *
+     * @return bool
+     */
+    protected function seRefreshPluginDescription()
+    {
+        if (!defined('TABLE_PLUGIN_CONTROL')) {
+            return true;
+        }
+        $manifest = require dirname(__DIR__) . '/manifest.php';
+        if (!is_array($manifest) || !isset($manifest['pluginDescription'])) {
+            return true;
+        }
+
+        return $this->executeInstallerSql(
+            "UPDATE " . TABLE_PLUGIN_CONTROL . "
+                SET description = '" . $this->dbConn->prepare_input($manifest['pluginDescription']) . "'
+              WHERE unique_key = '" . $this->dbConn->prepare_input(self::PLUGIN_KEY) . "'
+              LIMIT 1"
+        );
     }
 
     /**

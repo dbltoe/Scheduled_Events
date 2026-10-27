@@ -1,6 +1,6 @@
 # Scheduled Events for Zen Cart
 
-Current version: v2.0.4 — requires Zen Cart v2.0.0 or later (developed against v2.2.2/v2.2.3,
+Current version: v2.0.5 — requires Zen Cart v2.0.0 or later (developed against v2.2.2/v2.2.3,
 tested on Zen Cart 2.0, 2.1, 2.2, 2.3 and 3.0.0).
 
 Displays upcoming scheduled events (shows, fairs, expos, appearances, etc.) on their own storefront
@@ -74,5 +74,5 @@ Highlights:
 
 Author: dbltoe
 
-See [readme.html](zc_plugins/ScheduledEvents/v2.0.4/readme.html) for installation/upgrade/uninstall
+See [readme.html](zc_plugins/ScheduledEvents/v2.0.5/readme.html) for installation/upgrade/uninstall
 instructions and change history.
