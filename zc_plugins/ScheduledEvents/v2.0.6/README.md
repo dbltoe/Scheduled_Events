@@ -48,7 +48,9 @@ This guide shows no images. The screenshots ship with the plugin, in the `screen
 
 ### Initial Installation or Upgrade
 
-Copy the contents of the `zc_plugins/ScheduledEvents/v2.0.6` folder into your Zen Cart store's root directory, preserving the folder structure. Then, in the admin, go to Tools > Install/Update Plugins, locate Scheduled Events, and click Install (or Update, if upgrading from a prior version).
+Upload the `zc_plugins/ScheduledEvents` folder from the download into your store's `zc_plugins` folder, so that it lands at `zc_plugins/ScheduledEvents/v2.0.6`. Nothing goes anywhere else. Then, in the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Install**.
+
+To upgrade, upload the new version's folder beside the old one, select Scheduled Events in Plugin Manager, and click **Upgrade**. Your events and settings are kept. The old version folder can be deleted afterward.
 
 This creates the `eventz` database table (respecting your store's table prefix, if any), adds the Configuration > Scheduled Events settings group, and adds the Extras > Scheduled Events admin menu entry.
 
@@ -58,7 +60,7 @@ Once it's installed, a superuser can open this guide from the **ReadMe** button 
 
 ### Uninstalling
 
-In the admin, go to Tools > Install/Update Plugins, locate Scheduled Events, and click Uninstall. This removes the `eventz` table and all of its data, the plugin's configuration settings, the admin menu entry, **and the additional Bootstrap sidebox's placement/position in Design > Layout Boxes Controller, if it had been placed in a column**. Removing the plugin's files from the server afterward is optional but recommended.
+In the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Un-Install**. This removes the `eventz` table and all of its data, the plugin's configuration settings, the admin menu entry, **and the additional Bootstrap sidebox's placement/position in Design > Layout Boxes Controller, if it had been placed in a column**. Removing the plugin's files from the server afterward is optional but recommended.
 
 **Reinstalling after an uninstall resets every Configuration > Scheduled Events setting back to its default value** (page heading, field labels, no-events message, display window, the Additional Bootstrap Sidebox toggle/title/max items, etc.) - any customization made there will need to be re-entered. This is separate from the event data itself: exporting/restoring the `eventz` table (e.g. via a SQL dump) preserves your events, but not your Configuration choices.
 
