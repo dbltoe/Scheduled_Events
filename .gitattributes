@@ -1,13 +1,16 @@
 /.gitattributes   export-ignore
 /.gitignore       export-ignore
-README.md         export-ignore
+
+# README.md is NOT export-ignored: it is the guide, and the archive carries it
+# twice, byte-identical - at the root (readable before install) and inside the
+# plugin's version folder (shown by the ReadMe button in Plugin Manager).
 
 # The repo-root screenshots are kept for working reference only - nothing in
-# the repo links to them. readme.html reads its images from the identical set
-# inside zc_plugins/ScheduledEvents/<version>/screenshots/, which is the copy
-# that has to reach a store, so shipping both doubled the download for
-# nothing. The leading slash anchors this to the root directory, leaving the
-# plugin's own copy in the archive.
+# the repo links to them. README.md points at the identical set inside
+# zc_plugins/ScheduledEvents/<version>/screenshots/, which is the copy that
+# has to reach a store, so shipping both doubled the download for nothing.
+# The leading slash anchors this to the root directory, leaving the plugin's
+# own copy in the archive.
 /screenshots/     export-ignore
 
 # Auto detect text files and perform LF normalization
