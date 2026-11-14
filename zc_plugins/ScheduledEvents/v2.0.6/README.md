@@ -1,6 +1,6 @@
 # Scheduled Events
 
-Version 2.0.6 · Zen Cart 2.0.0 through 3.0.0 · PHP 8.0 through 8.5 · GPL v3 · by My Zen Cart Host (dbltoe)
+Version 2.0.6 · Zen Cart 2.0.0 through 3.0.0 · PHP 8.0 through 8.5 · GPL v2 · by My Zen Cart Host (dbltoe)
 
 Upcoming shows, fairs, expos and appearances on their own storefront page, managed from the admin.
 
@@ -70,8 +70,8 @@ Source, issues and releases are on GitHub (https://github.com/dbltoe/Scheduled_E
 
 ## Changelog
 
-See `changelog.txt`. Version 2.0.6 moves the plugin to the GNU General Public License, version 3, and replaces the old HTML readme with this guide, opened from the ReadMe button in Plugin Manager.
+See `changelog.txt`. Version 2.0.6 replaces the old HTML readme with this guide, opened from the ReadMe button in Plugin Manager.
 
 ## License
 
-Scheduled Events is free software under the GNU General Public License, version 3 (https://www.gnu.org/licenses/gpl-3.0.html); the full text is in `LICENSE`. Copyright © 2026 My Zen Cart Host (dbltoe).
+Scheduled Events is free software under the GNU General Public License, version 2 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html); the full text is in `LICENSE`. Copyright © 2026 My Zen Cart Host (dbltoe).

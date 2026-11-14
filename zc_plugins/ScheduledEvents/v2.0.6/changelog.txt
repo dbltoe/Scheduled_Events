@@ -2,8 +2,6 @@ v2.0.6
 
 Released 2026-11-11. Nothing changes on the storefront, in the admin event screens or in the settings.
 
-The license is now the GNU General Public License, version 3 (it was version 2).
-
 readme.html is replaced by README.md. The ReadMe button in Plugin Manager opens it inside the admin, for superusers only, in its own window; it is no longer a public file under zc_plugins/. The same README.md is at the root of the download.
 
 Upgrading: put the v2.0.6 folder beside the old one and click Upgrade in Admin > Modules > Plugin Manager. Your events and settings are kept.
