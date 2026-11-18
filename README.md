@@ -1,6 +1,6 @@
 # Scheduled Events
 
-Version 2.1.0 · Zen Cart 1.5.8 through 3.0.0 · PHP 7.4 through 8.5 · GPL v2 · by My Zen Cart Host (dbltoe)
+Version 2.1.1 · Zen Cart 1.5.8 through 3.0.0 · PHP 7.4 through 8.5 · GPL v2 · by My Zen Cart Host (dbltoe)
 
 Upcoming shows, fairs, expos and appearances on their own storefront page, managed from the admin.
 
@@ -50,7 +50,7 @@ This guide shows no images. The screenshots ship with the plugin, in the `screen
 
 ### Initial Installation or Upgrade
 
-Upload the `zc_plugins/ScheduledEvents` folder from the download into your store's `zc_plugins` folder, so that it lands at `zc_plugins/ScheduledEvents/v2.1.0`. Nothing goes anywhere else. Then, in the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Install**.
+Upload the `zc_plugins/ScheduledEvents` folder from the download into your store's `zc_plugins` folder, so that it lands at `zc_plugins/ScheduledEvents/v2.1.1`. Nothing goes anywhere else. Then, in the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Install**.
 
 To upgrade, upload the new version's folder beside the old one, select Scheduled Events in Plugin Manager, and click **Upgrade**. Your events and settings are kept. The old version folder can be deleted afterward.
 
@@ -92,7 +92,7 @@ Source, issues and releases are on GitHub (https://github.com/dbltoe/Scheduled_E
 
 ## Changelog
 
-See `changelog.txt`. Version 2.1.0 adds Zen Cart 1.5.8 and PHP 7.4 support, makes the Events sidebox work on every template, and keeps text such as "Smith & Sons" as typed.
+See `changelog.txt`. Version 2.1.1 stops the admin page loading its stylesheet twice, where the second copy could be a stale one from the browser's cache. Version 2.1.0 adds Zen Cart 1.5.8 and PHP 7.4 support, makes the Events sidebox work on every template, and keeps text such as "Smith & Sons" as typed.
 
 ## License
 

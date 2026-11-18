@@ -1,0 +1,50 @@
+/* Scheduled Events plugin - admin eventz.php styles */
+
+.eventzContent {
+    text-align: center;
+}
+
+.eventzContent table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.eventzContent .row {
+    text-align: left;
+}
+
+.eventzContent .bg-info {
+    font-size: 1.2em;
+}
+
+.eventzFieldLabel {
+    font-size: 1.2em;
+}
+
+.eventzNoEventsAdmin {
+    font-weight: normal;
+}
+
+.eventzRequiredNotice {
+    color: #8b0000;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.eventzRequired {
+    color: #8b0000;
+    margin-left: 0.25rem;
+}
+
+.eventzContent .btn.btn-primary,
+.eventzContent .btn.btn-secondary,
+.eventzContent .btn.btn-danger {
+    font-size: 130%;
+    padding: 12px 20px;
+}
+
+.eventzInactiveRow {
+    opacity: 0.6;
+    font-style: italic;
+}

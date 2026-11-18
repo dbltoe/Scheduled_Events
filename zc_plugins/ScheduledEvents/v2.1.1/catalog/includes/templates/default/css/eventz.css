@@ -1,0 +1,205 @@
+/* Scheduled Events plugin styles - all selectors are prefixed "eventz" to stay isolated from core Zen Cart styles */
+
+.eventzPage {
+    margin-bottom: 2rem;
+}
+
+.eventzPageTitle {
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.eventzHr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.eventzHeader {
+    margin-bottom: 0;
+    margin-left: 1rem;
+    /* The sidebox carousel deep-links to a specific event (#eventz-event-N).
+       Without this, the browser scrolls that heading flush to the very top of
+       the viewport, putting it underneath any fixed/sticky navbar the template
+       has (e.g. ZCA Bootstrap's "fixed-top" navbar) and leaving no context
+       above it. Templates with no fixed header simply get some breathing room
+       above the heading instead, so this is safe either way. */
+    scroll-margin-top: 5rem;
+}
+
+.eventzNoEvents {
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.eventzNoEventsSubtext {
+    margin-top: 0.75rem;
+}
+
+.eventzDetails {
+    margin: 0 0 2rem 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid #ddd;
+}
+
+.eventzField {
+    margin-bottom: 0.5rem;
+}
+
+.eventzField strong {
+    margin-right: 0.35rem;
+}
+
+.eventzEventInformation a,
+.eventzDrivingDirections a {
+    white-space: nowrap;
+}
+
+.eventzDirectionsTrigger {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: #0056b3;
+    text-decoration: underline;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.eventzDirectionsTrigger:hover {
+    color: #003d80;
+}
+
+/* Driving directions map popup */
+.eventzModalOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.eventzModalOverlay.eventzModalOpen {
+    display: flex;
+}
+
+.eventzModalContent {
+    position: relative;
+    background: #fff;
+    width: 640px;
+    max-width: 90vw;
+    padding: 2rem 1rem 1rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.eventzModalIframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    max-height: 70vh;
+    border: 0;
+}
+
+.eventzModalClose {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #333;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Full-screen popup on phones/tablets, per plugin requirements */
+@media (max-width: 1024px) {
+    .eventzModalContent {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        padding: 2.5rem 0.5rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+
+    .eventzModalIframe {
+        flex: 1 1 auto;
+        height: auto;
+        max-height: none;
+    }
+}
+
+/* Sidebox: scrolling mode (requires a Bootstrap-based template). Spacing and
+   header theming are left to Bootstrap's own "mb-3"/"card-header" classes
+   and this template's stylesheet_zca_colors.css (see sideboxes/eventz.php)
+   rather than set here, so the box matches core sideboxes (e.g. Information,
+   Bestsellers) and reacts the same way to this store's color theme. */
+
+/* Applied by the relocation script (sideboxes/eventz.php) when the box is
+   moved out of its normally-hidden-on-mobile column into the main content
+   row as a full-width column. */
+.eventzSideboxMobile {
+    margin-top: 1rem;
+}
+
+.eventzCarouselEmpty {
+    padding: 0.75rem 1rem;
+}
+
+.eventzCarouselItem {
+    padding: 0.75rem 1rem;
+}
+
+.eventzCarouselLink {
+    width: 100%;
+    text-decoration: none;
+    display: block;
+}
+
+.eventzCarouselName {
+    width: 100%;
+    font-weight: bold;
+}
+
+/* Full link color, no fading: at this size a faded date fell below 4.5:1
+   contrast on responsive_classic. The bold name already sets it apart. */
+.eventzCarouselStartDate,
+.eventzCarouselStopDate {
+    width: 100%;
+    font-size: 0.85em;
+}
+
+/* List mode: added by the sidebox's script when the template has no
+   Bootstrap carousel (e.g. responsive_classic). Every event shows, one under
+   another, and the Previous/Next buttons are hidden. The extra class keeps
+   these rules ahead of Bootstrap's own .carousel-item/.carousel-fade rules
+   when its stylesheet is present without its script. */
+.eventzNoCarousel .eventzCarousel .eventzCarouselItem {
+    display: block;
+    float: none;
+    margin-right: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+.eventzNoCarousel .eventzCarousel .eventzCarouselItem + .eventzCarouselItem {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.eventzNoCarousel .eventzCarouselPrev,
+.eventzNoCarousel .eventzCarouselNext {
+    display: none;
+}
