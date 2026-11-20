@@ -32,3 +32,11 @@ $autoLoadConfig[200][] = [
     'autoType' => 'init_script',
     'loadFile' => 'init_eventz_language_fallback.php',
 ];
+
+/**
+ * The color fields under Configuration > Scheduled Events (eventz_cfg_color).
+ */
+$autoLoadConfig[200][] = [
+    'autoType' => 'init_script',
+    'loadFile' => 'init_eventz_color_field.php',
+];

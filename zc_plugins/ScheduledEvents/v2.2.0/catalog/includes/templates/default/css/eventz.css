@@ -55,20 +55,76 @@
     white-space: nowrap;
 }
 
+/* Get Directions (when it opens a map pop-up) is a link like the event's others, so
+   the template's link colors and hover effects reach it too. */
 .eventzDirectionsTrigger {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    color: #0056b3;
     text-decoration: underline;
     white-space: nowrap;
     cursor: pointer;
 }
 
-.eventzDirectionsTrigger:hover {
-    color: #003d80;
+/* One look for the plugin's own areas, whatever the template or a site stylesheet
+   adds: every link in an event's lines (Booth Location, Event Information, Get
+   Directions, and add-ons' lines) keeps the same weight, size and underline at rest
+   and on hover, so none of them changes width or looks different from the others,
+   and the labels stay bold. The selectors start at .eventzPage so they outrank both
+   template-wide rules (a:hover) and rules written for the plugin's own class names.
+   Colors are not set here: the store's choices under Configuration > Scheduled
+   Events are added to the page (EventzService::colorCss), and a blank choice leaves
+   the template's own color. */
+.eventzPage .eventzDetails .eventzField {
+    margin-bottom: 0.5rem;
+}
+
+/* Weights carry !important throughout: a site rule such as
+   a:hover {font-weight: normal !important} can be outranked no other way. */
+.eventzPage .eventzDetails .eventzField > strong {
+    font-weight: 700 !important;
+    margin-right: 0.35rem;
+}
+
+.eventzPage .eventzDetails .eventzField a,
+.eventzPage .eventzDetails .eventzField a:hover,
+.eventzPage .eventzDetails .eventzField a:focus,
+.eventzPage .eventzDetails .eventzDirectionsTrigger,
+.eventzPage .eventzDetails .eventzDirectionsTrigger:hover,
+.eventzPage .eventzDetails .eventzDirectionsTrigger:focus {
+    font-weight: inherit !important;
+    font-style: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-decoration: underline;
+}
+
+/* Events sidebox: the same weight at rest and on hover (the name stays bold), and no
+   text shadow: a template's hover shadow (a:hover {text-shadow: ...}) makes the bold
+   names in a narrow column look as if they jump. The color still changes on hover.
+   !important on the weight and shadow: a site rule such as
+   a:hover {text-shadow: ... !important} can be outranked no other way. */
+.eventzCarousel .eventzCarouselLink,
+.eventzCarousel .eventzCarouselLink:hover,
+.eventzCarousel .eventzCarouselLink:focus {
+    font-weight: inherit !important;
+    letter-spacing: inherit;
+    text-shadow: none !important;
+}
+
+.eventzCarousel .eventzCarouselLink .eventzCarouselName {
+    font-weight: 700 !important;
+}
+
+/* The Events sidebox's heading link (drawn by the template's box frame, with the
+   id eventz-leftBoxHeading or eventz-rightBoxHeading): the heading's own weight at
+   rest and on hover, so a template rule like a:hover {font-weight: normal} can't
+   shrink it. */
+#eventz-leftBoxHeading a,
+#eventz-leftBoxHeading a:hover,
+#eventz-leftBoxHeading a:focus,
+#eventz-rightBoxHeading a,
+#eventz-rightBoxHeading a:hover,
+#eventz-rightBoxHeading a:focus {
+    font-weight: inherit !important;
+    letter-spacing: inherit;
 }
 
 /* Driving directions map popup */

@@ -1,3 +1,16 @@
+v2.2.0
+
+(In testing, not released.) The plugin now keeps one look in its own areas, the events page and the Events sidebox, whatever the template or a site stylesheet adds. Every link in an event's lines (Booth Location, Event Information, Get Directions) keeps the same weight, size and underline at rest and on hover, so no link changes width or looks different from the others, and the labels stay bold. In the Events sidebox, the heading and the event names keep their bold on hover, and the names get no hover shadow (on a narrow column a template's 1px hover shadow made them look as if they jumped). These hold even against a site rule marked !important, such as a:hover {font-weight: normal !important}.
+
+Get Directions, when it opens the map in a pop-up, is now a real link like the event's other links instead of a button made to look like one, so a template's link styles (color, hover effects, focus outline) reach it the same way, and without the pop-up script it opens the map. Its own fixed blue is gone; it takes the site's link colors.
+
+Three new settings under Configuration > Scheduled Events set the colors instead: Link Color, Link Hover Color and Label Color. Each offers Use Site Colors (the template's own color, the default) or Enter Code, a hex color typed or picked with the color box beside it. A chosen color wins over any template or site rule. Add-ons such as Scheduled Events Pro can use the same colors.
+
+The storefront stylesheet link now carries the file's time, so browsers fetch it again after an update instead of showing a cached older copy.
+
+Upgrading adds the three color settings, set to Use Site Colors, and leaves every event and setting as it was.
+
+
 v2.1.1
 
 2026-11-17. The admin Scheduled Events page loaded its stylesheet twice, and the second copy could be a stale one.

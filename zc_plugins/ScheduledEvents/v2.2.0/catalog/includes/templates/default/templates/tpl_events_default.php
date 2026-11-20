@@ -25,7 +25,7 @@ $eventzNotify = static function ($eventId, array $params) use ($zco_notifier) {
     return is_string($html) ? $html : '';
 };
 ?>
-<link rel="stylesheet" href="<?php echo zen_output_string_protected(EventzService::assetUrl('includes/templates/default/css/eventz.css')); ?>">
+<?php echo EventzService::styles(); ?>
 <div id="eventzPage" class="eventzPage">
   <h1 class="eventzPageTitle"><?php echo SCHEDULED_EVENTS_PAGE_TITLE; ?></h1>
   <hr class="eventzHr eventzHrTop">
@@ -72,7 +72,8 @@ $eventzNotify = static function ($eventId, array $params) use ($zco_notifier) {
     <div class="eventzField eventzDrivingDirections">
       <strong><?php echo SCHEDULED_EVENTS_DRIVING_DIRECTIONS_LABEL; ?></strong>
 <?php if ($eventzMapEmbedUrl !== null) { ?>
-      <button type="button" class="eventzDirectionsTrigger" data-eventz-modal="eventz-directions-modal-<?php echo (int)$eventzEvent['id']; ?>"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></button>
+<?php // A real link, so it looks and behaves like the event's other links on any template; the script below opens the map in a pop-up instead, and without the script the link opens the map. ?>
+      <a href="<?php echo zen_output_string_protected($eventzMapEmbedUrl); ?>" class="eventzDirectionsTrigger" data-eventz-modal="eventz-directions-modal-<?php echo (int)$eventzEvent['id']; ?>" target="_blank" rel="noopener noreferrer"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></a>
 <?php } else { ?>
       <a href="<?php echo zen_output_string_protected(EventzService::buildDrivingDirectionsUrl($eventzEvent['drivingDirections'])); ?>" target="_blank" rel="noopener noreferrer"><?php echo TEXT_EVENTZ_DIRECTIONS_LINK; ?></a>
 <?php } ?>

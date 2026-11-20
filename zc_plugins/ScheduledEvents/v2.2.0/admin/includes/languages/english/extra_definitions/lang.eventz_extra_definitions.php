@@ -28,4 +28,9 @@ return [
     'BOX_HEADING_EVENTZ' => 'Scheduled Events',
     'BOX_EXTRAS_EVENTZ' => 'Scheduled Events',
     'BOX_CONFIGURATION_SCHEDULED_EVENTS' => 'Scheduled Events',
+    'TEXT_EVENTZ_PICK_COLOR' => 'Pick a Color',
+    'TEXT_EVENTZ_COLOR_USE_SITE' => 'Use Site Colors',
+    'TEXT_EVENTZ_COLOR_ENTER_CODE' => 'Enter Code',
+    'TEXT_EVENTZ_COLOR_CODE' => 'Color Code',
+    'TEXT_EVENTZ_COLOR_HINT' => 'A hex color such as #9a044f.',
 ];

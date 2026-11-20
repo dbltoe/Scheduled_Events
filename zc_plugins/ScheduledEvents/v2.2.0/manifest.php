@@ -84,7 +84,7 @@ $seLinks =
  * Scheduled Events plugin manifest
  */
 return [
-    'pluginVersion' => 'v2.1.1',
+    'pluginVersion' => 'v2.2.0',
     'pluginName' => 'Scheduled Events',
     'pluginDescription' => 'Displays upcoming scheduled events (shows, fairs, expos, etc.) on their own storefront page, with a link in the Information sidebox (Zen Cart 2.0.0 and later) and an optional Events sidebox placed via the Layout Boxes Controller (a slider on Bootstrap templates, a list on others). Events are managed from a dedicated admin screen. Replaces the older, non-encapsulated version of this plugin; requires Zen Cart 1.5.8 or later and PHP 7.4 or later.' . $seLinks,
     'pluginAuthor' => 'My Zen Cart Host (dbltoe)',

@@ -430,6 +430,37 @@ class ScriptedInstaller extends ScriptedInstallBase
             'configuration_group_id' => $groupId,
             'sort_order' => 116,
         ]);
+
+        // Colors for the plugin's own areas (the events page, the Events sidebox and
+        // add-ons' event pages). Everything else about their look is fixed by the
+        // plugin, so links and labels behave the same on any template.
+        $colorNote = ' Choose Use Site Colors to keep your template\'s own color, or Enter Code for a hex color such as #9a044f (type it, or pick it with the color box).';
+        $this->seConfigurationKey('SCHEDULED_EVENTS_LINK_COLOR', [
+            'configuration_title' => 'Link Color',
+            'configuration_value' => '',
+            'configuration_description' => 'Color of the links in each event (Booth Location, Event Information, Get Directions) and in the Events sidebox.' . $colorNote,
+            'configuration_group_id' => $groupId,
+            'sort_order' => 120,
+            'set_function' => 'eventz_cfg_color(',
+        ]);
+
+        $this->seConfigurationKey('SCHEDULED_EVENTS_LINK_HOVER_COLOR', [
+            'configuration_title' => 'Link Hover Color',
+            'configuration_value' => '',
+            'configuration_description' => 'Color of those links when the pointer is over them or they have keyboard focus.' . $colorNote,
+            'configuration_group_id' => $groupId,
+            'sort_order' => 121,
+            'set_function' => 'eventz_cfg_color(',
+        ]);
+
+        $this->seConfigurationKey('SCHEDULED_EVENTS_LABEL_COLOR', [
+            'configuration_title' => 'Label Color',
+            'configuration_value' => '',
+            'configuration_description' => 'Color of each event\'s labels (Place:, Start Date:, Booth Location: and the rest).' . $colorNote,
+            'configuration_group_id' => $groupId,
+            'sort_order' => 122,
+            'set_function' => 'eventz_cfg_color(',
+        ]);
     }
 
     /**

@@ -1,6 +1,6 @@
 # Scheduled Events
 
-Version 2.1.1 · Zen Cart 1.5.8 through 3.0.0 · PHP 7.4 through 8.5 · GPL v2 · by My Zen Cart Host (dbltoe)
+Version 2.2.0 · Zen Cart 1.5.8 through 3.0.0 · PHP 7.4 through 8.5 · GPL v2 · by My Zen Cart Host (dbltoe)
 
 Upcoming shows, fairs, expos and appearances on their own storefront page, managed from the admin.
 
@@ -8,7 +8,7 @@ Upcoming shows, fairs, expos and appearances on their own storefront page, manag
 
 Scheduled Events installs as a fully self-contained (encapsulated) plugin — no core Zen Cart files are ever modified. Install/uninstall only touches this plugin's own database table, its own configuration entries, and its own admin menu registration.
 
-Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos, appearances, etc.) and display them on their own storefront page. Events are managed from Extras > Scheduled Events in the admin. On Zen Cart 2.0.0 and later, a link to the events page is always added into the current template's existing Information sidebox, using the exact same classes `responsive_classic` and ZCA Bootstrap already use for their own sidebox links and cards — so if you customize either template's own colors/fonts (e.g. via the ZCA Bootstrap color theme editor), the sidebox link/box follows along automatically, with no separate update needed. Using any other template may require adjusting its styling to match that template's own conventions. The main events page itself, by contrast, uses this plugin's own dedicated stylesheet rather than the template's classes — it's designed to read cleanly on both templates by default, but won't pick up template color/theme customizations the way the sidebox does.
+Scheduled Events lets a store owner maintain a list of upcoming events (shows, fairs, expos, appearances, etc.) and display them on their own storefront page. Events are managed from Extras > Scheduled Events in the admin. On Zen Cart 2.0.0 and later, a link to the events page is always added into the current template's existing Information sidebox, using the exact same classes `responsive_classic` and ZCA Bootstrap already use for their own sidebox links and cards — so if you customize either template's own colors/fonts (e.g. via the ZCA Bootstrap color theme editor), the sidebox link/box follows along automatically, with no separate update needed. Using any other template may require adjusting its styling to match that template's own conventions. The main events page itself, by contrast, uses this plugin's own dedicated stylesheet rather than the template's classes — it's designed to read cleanly on any template by default, and its link and label colors are settings (see Look and Colors below).
 
 "Enable Events Sidebox" (Configuration > Scheduled Events, off by default; called "Enable Additional Bootstrap Sidebox" before version 2.1.0) adds a separate promotional listing: the plugin's own Events sidebox, placed via Design > Layout Boxes Controller. On a Bootstrap-based template (e.g. ZCA Bootstrap or a clone, Bootstrap 4 or 5) it scrolls through the upcoming events; on any other template (e.g. `responsive_classic`) it lists them one under another. Its heading links to the events page.
 
@@ -19,6 +19,20 @@ The two promotional listings link slightly differently, by design: the Informati
 Bootstrap-based templates typically hide the entire sidebar column on phones/tablets. Rather than disappear along with it, the Events sidebox (if enabled) automatically relocates itself into the main content area as a full-width block below that breakpoint, then moves back to its normal sidebar position on larger screens - no configuration needed.
 
 The storefront page heading, all field labels, the "no events scheduled" message, the display time window (how many days before an event's start date it becomes visible), and the sidebox link text are all configurable under Configuration > Scheduled Events. A master "Enable Scheduled Events Display" switch there can fully hide the storefront page and all of its promotion at any time, without uninstalling the plugin.
+
+## Look and Colors
+
+The plugin keeps one look in its own areas, the events page and the Events sidebox, whatever the template or a site stylesheet adds. Every link in an event's lines (Booth Location, Event Information, Get Directions) keeps the same weight, size and underline at rest and on hover, so no link changes width or looks different from the others, and the labels stay bold. In the Events sidebox, the heading and the event names keep their bold on hover, and the event names get no hover shadow. Get Directions is a real link like the others, also when it opens the map pop-up, so a template's link styles reach it too.
+
+Colors are settings instead, under Configuration > Scheduled Events:
+
+| Setting | What it colors |
+| --- | --- |
+| Link Color | The links in each event and in the Events sidebox. |
+| Link Hover Color | Those links under the pointer or with keyboard focus. |
+| Label Color | Each event's labels (Place:, Start Date: and the rest). |
+
+Each offers **Use Site Colors** (the template's own color; the default) or **Enter Code**: a hex color such as `#9a044f`, typed or picked with the color box beside it. A chosen color wins over any template or site rule.
 
 ## Event Fields
 
@@ -50,7 +64,7 @@ This guide shows no images. The screenshots ship with the plugin, in the `screen
 
 ### Initial Installation or Upgrade
 
-Upload the `zc_plugins/ScheduledEvents` folder from the download into your store's `zc_plugins` folder, so that it lands at `zc_plugins/ScheduledEvents/v2.1.1`. Nothing goes anywhere else. Then, in the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Install**.
+Upload the `zc_plugins/ScheduledEvents` folder from the download into your store's `zc_plugins` folder, so that it lands at `zc_plugins/ScheduledEvents/v2.2.0`. Nothing goes anywhere else. Then, in the admin, go to **Modules > Plugin Manager**, select **Scheduled Events**, and click **Install**.
 
 To upgrade, upload the new version's folder beside the old one, select Scheduled Events in Plugin Manager, and click **Upgrade**. Your events and settings are kept. The old version folder can be deleted afterward.
 
@@ -92,7 +106,7 @@ Source, issues and releases are on GitHub (https://github.com/dbltoe/Scheduled_E
 
 ## Changelog
 
-See `changelog.txt`. Version 2.1.1 stops the admin page loading its stylesheet twice, where the second copy could be a stale one from the browser's cache. Version 2.1.0 adds Zen Cart 1.5.8 and PHP 7.4 support, makes the Events sidebox work on every template, and keeps text such as "Smith & Sons" as typed.
+See `changelog.txt`. Version 2.2.0 keeps one look in the plugin's own areas on any template and adds the Link Color, Link Hover Color and Label Color settings. Version 2.1.1 stops the admin page loading its stylesheet twice, where the second copy could be a stale one from the browser's cache. Version 2.1.0 adds Zen Cart 1.5.8 and PHP 7.4 support, makes the Events sidebox work on every template, and keeps text such as "Smith & Sons" as typed.
 
 ## License
 

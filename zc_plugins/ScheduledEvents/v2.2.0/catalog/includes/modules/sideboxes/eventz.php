@@ -43,7 +43,7 @@ if ($eventzStatusEnabled && $eventzAdditionalSideboxEnabled && $current_page_bas
     // otherwise linked from tpl_events_default.php - echo it here too so its
     // styling (and the scripts below) works wherever the box actually
     // renders.
-    echo '<link rel="stylesheet" href="' . zen_output_string_protected(EventzService::assetUrl('includes/templates/default/css/eventz.css')) . '">';
+    echo EventzService::styles();
 
     // The box's frame comes from the active template's own sidebox wrapper
     // (tpl_box_default_left.php or _right.php, whichever column it sits in),

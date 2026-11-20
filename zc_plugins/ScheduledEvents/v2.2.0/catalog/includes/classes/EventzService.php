@@ -144,6 +144,62 @@ class EventzService
         return zen_output_string_protected(html_entity_decode((string)$value, ENT_QUOTES, 'UTF-8'));
     }
 
+    /** @var bool the stylesheet and color rules were already written on this page */
+    private static $stylesDone = false;
+
+    /**
+     * The plugin's stylesheet link (stamped with the file's time, so browsers fetch it
+     * again whenever it changes) and the store's chosen colors, once per page. Every
+     * place the plugin draws (the events page, the Events sidebox, and add-ons' event
+     * pages) calls this, so they all look the same whichever renders first.
+     */
+    public static function styles(): string
+    {
+        if (self::$stylesDone) {
+            return '';
+        }
+        self::$stylesDone = true;
+        $file = dirname(__DIR__) . '/templates/default/css/eventz.css';
+        $stamp = is_file($file) ? '?v=' . filemtime($file) : '';
+        return '<link rel="stylesheet" href="' . zen_output_string_protected(self::assetUrl('includes/templates/default/css/eventz.css') . $stamp) . '">'
+            . self::colorCss();
+    }
+
+    /**
+     * A hex color setting ("#9a044f" or "#fff"), or '' when it's blank or not a color.
+     */
+    public static function color(string $constant): string
+    {
+        $value = defined($constant) ? trim((string)constant($constant)) : '';
+        return preg_match('/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/', $value) === 1 ? strtolower($value) : '';
+    }
+
+    /**
+     * The store's chosen colors (Configuration > Scheduled Events) as rules for the
+     * plugin's own areas: the events page (and add-on pages using its .eventzPage
+     * wrapper) and the Events sidebox. A blank setting adds nothing, so the template's
+     * own color shows. A chosen color is the store owner's explicit choice, so it wins
+     * over any template or site rule (!important).
+     */
+    public static function colorCss(): string
+    {
+        $link = self::color('SCHEDULED_EVENTS_LINK_COLOR');
+        $hover = self::color('SCHEDULED_EVENTS_LINK_HOVER_COLOR');
+        $label = self::color('SCHEDULED_EVENTS_LABEL_COLOR');
+        $css = '';
+        if ($link !== '') {
+            $css .= '.eventzPage a,.eventzPage .eventzDirectionsTrigger,.eventzCarousel a{color:' . $link . '!important}';
+        }
+        if ($hover !== '') {
+            $css .= '.eventzPage a:hover,.eventzPage a:focus,.eventzPage .eventzDirectionsTrigger:hover,.eventzPage .eventzDirectionsTrigger:focus,'
+                . '.eventzCarousel a:hover,.eventzCarousel a:focus{color:' . $hover . '!important}';
+        }
+        if ($label !== '') {
+            $css .= '.eventzPage .eventzField>strong{color:' . $label . '!important}';
+        }
+        return $css === '' ? '' : '<style>' . $css . '</style>';
+    }
+
     /**
      * Address of one of this plugin's own storefront files (stylesheet),
      * built from where this class sits so a new version folder never needs
